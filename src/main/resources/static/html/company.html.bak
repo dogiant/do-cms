@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-cmn-Hans" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-cmn-Hans" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="zh-cmn-Hans"> <!--<![endif]-->  
+<head>
+    <title>星泰国际集团</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='http://fonts.useso.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="assets/plugins/animate.css">
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css"> 
+    <link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen">
+    <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css" type="text/css" media="screen"><![endif]-->
+
+    <!-- CSS Pages Style -->    
+    <link rel="stylesheet" href="assets/css/pages/page_one.css">
+
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="assets/css/theme-colors/blue.css" id="style_color">
+    <link rel="stylesheet" href="assets/css/theme-skins/dark.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    
+
+</head>	
+
+<body data-spy="scroll" data-target="#myScrollspy">
+ 
+
+<div class="wrapper">     
+    <!--=== Header ===-->    
+    <div class="header">
+        <div class="container">
+            <!-- Logo -->
+            <a class="logo" href="index.html">
+                <img src="assets/img/logo_opt.png" alt="Logo" width="252">
+            </a>
+            <!-- End Logo -->
+            
+            <!-- Topbar -->
+            <div class="topbar">
+                <ul class="loginbar pull-right">
+                		<!--
+                    <li class="hoverSelector">
+                        <i class="fa fa-globe"></i>
+                        <a>Languages</a>
+                    </li>
+                    
+                    <li class="topbar-devider"></li>  
+		
+                     --> 
+                    <li><a href="index.html">中文</a></li>  
+                    <li class="topbar-devider"></li>   
+                    <li><a href="index.html">ENGLISH</a></li>   
+                </ul>
+            </div>
+            <!-- End Topbar -->
+
+            <!-- Toggle get grouped for better mobile display -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <!-- End Toggle -->
+        </div><!--/end container-->
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <!-- Home -->
+                    <li>
+                        <a href="index.html">
+                            首页
+                        </a>
+					  </li>
+                    <!-- End Home -->
+
+                    <!-- 星泰国际 -->                        
+                    <li class="dropdown active">
+                        <a href="company.html" class="dropdown-toggle" data-toggle="dropdown">
+                            星泰国际
+                        </a>
+                        <ul class="dropdown-menu">
+                        
+                        	<li>
+                                <a href="company.html">公司简介</a>
+                            </li>
+                        	<li>
+                                <a href="company.html#culture">企业文化</a>
+                            </li>
+                        	<li>
+                                <a href="company.html#structure">企业架构</a>
+                            </li>
+                            <li>
+                                <a href="company.html#development">企业发展</a>
+                            </li>
+                            <li>
+                                <a href="company.html#application">产品应用</a>
+                            </li>
+                            <li>
+                                <a href="company.html#brand">公司品牌</a>
+                            </li>
+                            
+                        	<!--  
+                            <li>
+                                <a href="company.html">企业简介</a>
+                            </li>
+                            <li>
+                                <a href="company.html#strategy">公司战略</a>
+                            </li>
+                            <li>
+                                <a href="company.html#devlop">企业发展</a>
+                            </li>
+                            <li>
+                                <a href="company.html#org">分支机构</a>
+                            </li>
+                            <li>
+                                <a href="company.html#arch">企业架构</a>
+                            </li>
+                            <li>
+                                <a href="company.html#culture">企业文化</a>
+                            </li>
+                            <li>
+                                <a href="company.html#value">核心价值观</a>
+                            </li>
+                            <li>
+                                <a href="company.html#manage">管理理念</a>
+                            </li>
+                            <li>
+                                <a href="company.html#brand01">品牌背景</a>
+                            </li>
+                            <li>
+                                <a href="company.html#brand02">品牌概述</a>
+                            </li>
+                            <li>
+                                <a href="company.html#logo">企业标志</a>
+                            </li>
+                            -->
+                        </ul>
+                    </li>
+                    <!-- End 星泰国际 -->
+
+                    <!-- 业务范围 -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            业务范围
+                        </a>
+                        <ul class="dropdown-menu">
+                        		 <li>
+                                      <a href="product.html#;cat=ic">集成电路</a>
+                                 </li>
+                                 <li>
+                                      <a href="product.html#;cat=mos">场效应管</a>
+                                 </li>
+                                 <li>
+                                      <a href="product.html#;cat=diode">二极管</a>
+                                 </li>
+                                 <li>
+                                      <a href="product.html#;cat=triode">三极管</a>
+                                 </li>
+                                 <li>
+                                      <a href="product.html#;cat=capacitor">电容器</a>
+                                 </li>
+                                 <li>
+                                      <a href="http://mall.jd.com/index-41702.html" target="_blank">LED照明</a>
+                                 </li>
+                        </ul>
+                    </li>
+                    <!-- End 业务范围 -->
+
+                    <!-- 技术支援 -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            技术支援
+                        </a>
+                        <ul class="dropdown-menu">
+                             <li>
+                                <a href="document.html">应用文档</a>
+                            </li>
+                            <li>
+                                <a href="guide.html">应用指南</a>
+                            </li>
+                            <li>
+                                <a href="management.html">工厂管理</a>
+                            </li>
+                            <li>
+                                <a href="hotline.html">服务热线</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End 技术支援 -->
+                    
+                    
+
+
+
+
+                    <!-- 企业社会责任 -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            企业社会责任
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="responsibility.html">理念方针</a>
+                            </li>
+                            <li>
+                                <a href="responsibility.html#quality">产品质量</a>
+                            </li>
+                            <li>
+                                <a href="responsibility.html#environment">环保及社会责任</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End 企业社会责任 -->
+ 
+                    <!-- 新闻中心 -->
+                    <li class="dropdown">
+                        <a href="news.html" class="dropdown-toggle" data-toggle="dropdown">
+                            新闻中心
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="news.html#group">集团新闻</a>
+                            </li>
+                            <li>
+                                <a href="news.html#product">产品新闻</a>
+                            </li>
+                            <li>
+                                <a href="news.html#industry">行业新闻</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End 新闻中心 -->               
+
+                    <!-- 关于我们 -->
+                    <li class="dropdown">
+                        <a href="about.html" class="dropdown-toggle" data-toggle="dropdown">
+                            关于我们
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="about.html">员工团队宣言</a>
+                            </li>
+                            <li>
+                                <a href="about.html#contactus">联系我们</a>
+                            </li>
+                            <li>
+                                <a href="about.html#joinus">诚聘英才</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End 关于我们 -->  
+
+                    <!-- Search Block -->
+                    <li>
+                        <i class="search fa fa-search search-btn"></i>
+                        <div class="search-open">
+                            <div class="input-group animated fadeInDown">
+                                <input type="text" class="form-control" placeholder="产品型号">
+                                <span class="input-group-btn">
+                                    <button class="btn-u" type="button">检索</button>
+                                </span>
+                            </div>
+                        </div>    
+                    </li>
+                    <!-- End Search Block -->
+                </ul>
+            </div><!--/end container-->
+        </div><!--/navbar-collapse-->
+    </div>
+    <!--=== End Header ===-->
+    
+    <!--=== Breadcrumbs ===-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">星泰国际</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="company.html">星泰国际</a></li>
+                <!--
+                <li class="active">企业简介</li>
+                -->
+            </ul>
+        </div>
+    </div><!--/breadcrumbs-->
+    <!--=== End Breadcrumbs ===-->
+
+
+
+    <!--=== Content Part ===-->
+    <div class="container content">
+        <div class="row">
+            <!-- Begin Sidebar Menu -->
+            <div class="col-md-3 md-margin-bottom-20" id="myScrollspy">
+               <ul class="nav nav-tabs nav-stacked" id="sidebar-nav">
+
+                    <!-- 企业简介 -->
+                    <li class="active"><a href="#intro">企业简介</a></li>
+                    <!-- End 企业简介 -->
+
+                    <!-- 公司战略 -->
+                    <li><a href="#strategy">公司战略</a></li>
+                    <!-- End 公司战略 -->
+
+                    <!-- 企业发展 -->
+                    <li><a href="#develop">企业发展</a></li>
+                    <!-- End 企业发展 -->
+                    
+                    <!-- 分支机构-->
+                    <li><a href="#org">分支机构</a></li>
+                    <!-- End 分支机构 --> 
+                    
+                    <!-- 企业架构 -->
+                    <li><a href="#arch">企业架构</a></li>
+                    <!-- End 企业架构-->
+                    
+                    <!-- 企业文化 -->
+                    <li><a href="#culture">企业文化</a></li>
+                    <!-- End 企业文化 -->
+                    
+                    <!-- 企业核心价值观 -->
+                    <li><a href="#value">核心价值观</a></li>
+                    <!-- End 企业核心价值观 -->
+                    
+                    <!-- 管理理念 -->
+                    <li><a href="#manage">管理理念</a></li>
+                    <!-- End 管理理念 -->
+                    
+                    <!-- 品牌背景 -->
+                    <li><a href="#brand01">品牌背景</a></li>
+                    <!-- End 品牌背景 -->
+                    
+                    <!-- 品牌概述 -->
+                    <li><a href="#brand02">品牌概述</a></li>
+                    <!-- End 品牌概述 -->
+                    
+                    <!-- 企业标志 -->
+                    <li><a href="#logo">企业标志</a></li>
+                    <!-- End 企业标志 -->
+                                     
+                </ul>
+
+
+            </div>
+            <!-- End Sidebar Menu -->
+
+            <!-- Begin Content -->
+            <div class="col-md-9">
+            	<img class="img-responsive full-width" src="assets/img/main/company.jpg" alt="星泰国际集团">
+                <div class="tag-box tag-box-v3">
+                    <div class="heading heading-v1">
+                        <h2 id="intro">星泰国际集团</h2>
+                    </div>
+                    
+                
+                    <h2 class="devider devider-dotted"></h2>
+                    
+                    
+                    <p><span class="dropcap dropcap-bg rounded bg-color-dark">企业简介</span>星泰国际集团有限公司是一家以自主研发半导体器件、销售服务为主体的高科技公司，公司总部位于北京，在北京、上海、杭州、南京、济南、东莞、中山设立了研发中心、生产基地及销 售公司，公司拥有“AGERTEH艾吉芯”半导体品牌、与美国GRACE VISION LIMITED 联合经营“GRACE VISION优视朗”和“CORALED 科锐达”LED照明品牌。
+星泰国际由一支强大的管理队伍所引领，我们持续推出新型、改进的元件和LED照明产品，我们不断吸纳国际顶级人才，改进生产技术，注重降低成本的同时提高品质,使公司成为业界的领先者。</p>
+
+                    <h2 class="devider devider-dotted" id="strategy"></h2>
+
+					
+                    <p><span class="dropcap dropcap-bg rounded bg-color-dark">公司战略</span>星泰国际以“诚心服务，达观天下”作为企业的核心理念，“成为本领域行业先锋，为世界增添光明”这一企业愿景，坚持“多一份努力，多一份满意”的服务宗旨，为客户创造价值，为员工创造平台，为社会贡 献价值。星泰国际一如既往地肩负起企业责任和社会使命，为客户提供 更高价值的服务体验，不断创新、不断努力地奉献我们的价值。
+为客户提供满意服务是我们存在的唯一理由；客户需求是我们发展的原动力；品质好、服务好、运作成本低，优先满足客户需求，提升客户竞争力和赢利能力；持续管理变革，实现高效的流程化运作，确保终端的 优质交付；与友商共同发展，共同创造良好的生存空间，共用价值链的利益。</p>
+                    
+                    <h2 class="devider devider-dotted" id="develop"> </h2>
+                    
+                    <p><span class="dropcap dropcap-bg rounded bg-color-dark">企业发展</span>
+                    2014年在香港成立星泰国际集团。<br>
+					集团公司拥有7家子公司，具备完善的销售网络。<br>
+					公司在上海设立了研发中心。<br>
+					拥有“AGERTEH艾吉芯”半导体品牌及与美国GRACE VISION LIMITED联合经营“GRACE VISION优视朗”和“CORALED科锐达”LED照明品牌。<br>
+					公司总部位于北京，在北京、杭州、上海、东莞、南京、济南、长沙等设立了子公司，形成了一个覆盖性广、稳定、高效的专业销售网。<br>
+					代理的产品渗透到各个电子行业：手机、液晶电视、液晶显示器、机顶盒、便携式电子设备、工控、安防、电表、汽车电子等。<br>
+					公司本着打造一站式解决方案的目标，通过高素质的专业人才进行推广工作，给原厂供应商与用户之间建立高效的沟通桥梁，与客户一起成长是公司始终秉承的目标。</p>
+                
+                  <hr class="devider devider-dotted" id="org">
+                    
+                  <div class="row" >
+                        <!-- Unordered Lists -->
+                        <div class="col-md-12">
+                        	<div class="tag-box tag-box-v7">
+                        		 <h2>分支机构</h2>
+                              	<p><img class="img-responsive full-width" src="assets/img/company/org01.jpg"></p>
+                            </div>
+                        	<!-- 
+                        	<div class="tag-box tag-box-v7" style="background: url(assets/img/company/map.png) no-repeat 10px 10px;">
+                           	<h2>下属企业</h2>
+                            <ul>
+                                <li ><a href="javascript:void(0);" style="background-color: #69F">北京思众电子科技有限公司</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">上海吉锝芯微电子有限公司</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">杭州先拓电子科技有限公司</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">南京延科电子科技有限公司</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">济南美源电子科技有限公司</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">东莞市艾吉芯电子科技有限公司</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">GRACE VISION LIMITED</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">北京优视朗光电科技有限公司</a></li>
+                                <li><a href="javascript:void(0);" style="background-color: #69F">中山市优视朗照明有限公司</a></li>
+                            </ul>
+                            </div>
+                             -->
+                        </div>
+                        
+                        <!-- org pic -->
+                        <div class="col-md-12" id="arch">
+                        	<div class="tag-box tag-box-v7">
+                        		 <h2>企业架构</h2>
+                              	<p><img class="img-responsive full-width" src="assets/img/company/structure01.jpg"></p>
+                            </div>
+                        </div>
+                    </div>
+
+               	    <!--Tag Box -->
+                    <div class="row">
+                    
+                        <div class="col-md-12" id="culture">
+                            <!--Tag 企业文化-->
+                            <div class="tag-box tag-box-v7">
+                                <h2>企业文化</h2>
+                                <p><img class="img-responsive full-width" src="assets/img/company/culture_all.jpg"></p>
+                            </div>
+                            <!--End Tag 企业文化-->
+                        </div>       
+    
+                    </div>
+                    <!--End Tag Box -->
+                    
+                    <!--Tag Box -->
+                    <div class="row">
+                    
+                        <div class="col-md-12" id="value">
+                            <!--Tag 企业核心价值观-->
+                            <div class="tag-box tag-box-v7">
+                                <h2>企业核心价值观</h2>
+                                <p><img class="img-responsive full-width" src="assets/img/company/culture_value.jpg"></p>
+                            </div>
+                            <!--End Tag 企业核心价值观-->
+                        </div>
+                        
+                        <div class="col-md-12" id="manage">
+                            <!--Tag 管理理念-->
+                            <div class="tag-box tag-box-v7">
+                                <h2>企业管理理念</h2>
+                                <p><img class="img-responsive full-width" src="assets/img/company/culture_manage.jpg"></p>
+                            </div>
+                            <!--End Tag 管理理念-->
+                        </div>
+                    </div>
+                    <!--End Tag Box--> 
+                    
+                    
+                    <!--Tag Box -->
+                    <div class="row">
+
+                        <div class="col-md-12" id="brand01">
+                            <!--Tag 品牌背景-->
+                            <div class="tag-box tag-box-v7">
+                                <h2>品牌背景</h2>
+                                <p><img class="img-responsive full-width" src="assets/img/company/brand01.jpg"></p></div>
+                            <!--End Tag 品牌背景-->
+                        </div>
+                        
+    
+                    </div>
+                    <!--End Tag Box -->
+                    
+                    <!--Tag Box -->
+                    <div class="row">
+                    
+                        <div class="col-md-12" id="brand02">
+                            <!--Tag 企业文化-->
+                            <div class="tag-box tag-box-v7">
+                                <h2>品牌概述</h2>
+                                <p><img class="img-responsive full-width" src="assets/img/company/brand02.jpg"></p>
+                            </div>
+                            <!--End Tag 企业文化-->
+                        </div>
+                    
+                        <div class="col-md-12" id="logo">
+                            <!--Tag 品牌背景-->
+                            <div class="tag-box tag-box-v7">
+                                <h2>标志释义</h2>
+                                <p><img class="img-responsive full-width" src="assets/img/company/logo01.jpg"></p>
+                            </div>
+                            <!--End Tag 品牌背景-->
+                        </div>
+                        
+    
+                    </div>
+                    <!--End Tag Box -->
+                    
+                    
+
+
+                
+                
+                </div>
+               
+            
+            </div>
+            
+            <!-- End Content -->
+        </div>          
+    </div><!--/container-->     
+    <!--=== End Content Part ===-->
+
+    <!--=== Footer Version 1 ===-->
+    <div class="footer-v1">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+              		<!-- Link List -->
+                    <div class="col-md-3 md-margin-bottom-40">
+                        <div class="headline"><h2>业务范围</h2></div>
+                        <ul class="list-unstyled link-list">
+                            <li><a href="product.html#;cat=ic">集成电路</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="product.html#;cat=diode">二极管</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="product.html#;cat=triode">三极管</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="product.html#;cat=capacitor">电容器</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="http://mall.jd.com/index-41702.html" target="_blank">LED照明</a><i class="fa fa-angle-right"></i></li>
+                        </ul>
+                    </div><!--/col-md-3-->
+                    <!-- End Link List --> 
+                    
+                    <!-- Latest -->
+                    <div class="col-md-3 md-margin-bottom-40">
+                        <div class="posts">
+                            <div class="headline"><h2>技术支援</h2></div>
+                            <ul class="list-unstyled link-list">
+                                <li><a href="document.html">应用文档</a><i class="fa fa-angle-right"></i></li>
+                                <li><a href="guide.html">应用指南</a><i class="fa fa-angle-right"></i></li>
+                                <li><a href="management.html">工厂管理</a><i class="fa fa-angle-right"></i></li>
+                                <li><a href="hotline.html">服务热线</a><i class="fa fa-angle-right"></i></li>
+                            </ul>
+                        </div>
+                    </div><!--/col-md-3-->  
+                    <!-- End Latest --> 
+                    
+                    <!-- Link List -->
+                    <div class="col-md-3 md-margin-bottom-40">
+                        <div class="headline"><h2>企业社会责任</h2></div>
+                        <ul class="list-unstyled link-list">
+                            <li><a href="responsibility.html#idea">理念方针</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="responsibility.html#quality">产品质量</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="responsibility.html#environment">环保及社会责任</a><i class="fa fa-angle-right"></i></li>
+                        </ul>
+                    </div><!--/col-md-3-->
+                    <!-- End Link List -->  
+
+                    <!-- Address -->
+                    <div class="col-md-3 map-img md-margin-bottom-40">
+                        <div class="headline"><h2>联系我们</h2></div>                         
+                        <address class="md-margin-bottom-40">
+                            北京经济技术开发区荣华南路16号1幢C306<br />
+                            公司电话：010-59767096<br />
+                            地铁亦庄线荣昌东街站出站200米<br />
+                            Email: <a href="mailto:2881006218@qq.com" class="">2881006218@qq.com</a>
+                        </address>
+                    </div><!--/col-md-3-->
+                    <!-- End Address -->
+                </div>
+            </div> 
+       </div>
+       <!--/footer-->
+	   <!--/copyright-->
+       <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">                     
+                        <p>
+                            <script>document.write(new Date().getFullYear());</script> &copy; All Rights Reserved. 版权所有 星泰国际集团公司<!--<a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备14016314号-3</a>-->
+                        </p>
+                    </div>
+                </div>
+            </div> 
+        </div><!--/copyright-->
+    </div>     
+    <!--=== End Footer Version 1 ===-->
+</div><!--/wrapper-->
+
+<!-- JS Global Compulsory -->			
+<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<!-- JS Customization -->
+<script type="text/javascript" src="assets/js/custom.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/plugins/fancy-box.js"></script>
+<script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
+<script type="text/javascript" src="assets/js/plugins/revolution-slider.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      	App.init();
+        FancyBox.initFancybox();
+        StyleSwitcher.initStyleSwitcher();        
+        RevolutionSlider.initRSfullWidth();
+        
+        var isMobileAgent = isMobile();
+        if(!isMobileAgent){
+        
+      		$("#sidebar-nav").affix({
+        		offset: { 
+            		top: 125,
+            		bottom:400
+     			}
+    		});
+    	}
+
+    });
+    
+    
+</script>
+<!--[if lt IE 9]>
+    <script src="assets/plugins/respond.js"></script>
+    <script src="assets/plugins/html5shiv.js"></script>
+    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
+<![endif]-->
+
+</body>
+</html>

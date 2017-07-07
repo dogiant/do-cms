@@ -1,0 +1,328 @@
+﻿@charset "utf-8";
+/* CSS Document */
+#col-main-left {
+	width:200px;
+	float:left;
+}
+#product {
+	width:200px;
+	height:411px;
+	margin-top:-10px;
+	float:left;
+}
+.product-list {
+	height: 407px;
+	background-position: 0 182px;
+	width: 196px;
+}
+.product-list-content {
+	width:186px;
+	height:399px;
+	border:2px solid #DFDFDF;
+	background-color:#FFF;
+	position:relative;
+}
+.product-list-content .product-header {
+	padding: 9px 4px 5px 10px;
+}
+.product-header-title {
+	font-weight: bold;
+	font-size: 14px;
+	color: #3E3E3E;
+}
+.product-list-content dl {
+	margin: 0 5px;
+	zoom: 1;
+	display: table;
+}
+.product-list-content dt {
+	font-weight: bold;
+	border-top: 1px solid #DFDFDF;
+	display: block;
+	clear: both;
+	margin-bottom: 4px;
+	padding-top: 6px;
+	height: 18px;
+	float: left;
+	width: 144px;
+	margin-top: 3px;
+	padding-left: 31px;
+	color: #3E3E3E;
+}
+.product-list-content dd {
+	white-space:nowrap;
+	margin: 0 2px 5px 5px;
+	display: inline-block;
+ *display:inline;
+ *zoom:1;
+}
+.product-body-services dt {
+	background-position: 8px 3px;
+	border-top: 1px solid #DFDFDF;
+	margin-top: 0;
+}
+.product-body-live dt {
+	background-position: 8px -28px;
+}
+.product-body-communities dt {
+	background-position: 8px -85px;
+}
+#brands-list {
+	width:190px;
+	height:191px;
+}
+#brands-list ul {
+	list-style-type:none;
+}
+#brands-list li a {
+	float:left;
+	display:block;
+	list-style-type:none;
+	width:85px;
+	height:68px;
+	padding:12px 5px 0px 5px;
+	text-align:center;
+	cursor:pointer;
+}
+#brands-list li a span {
+	line-height:28px;
+	display:block;
+	text-align:center;
+}
+#col-main-right {
+	width: 490px;
+	float: left;
+}
+.mainpromo {
+	width: 490px;
+	height: 170px;
+	overflow: hidden;
+	zoom: 1;
+	float: left;
+}
+.mainpromo slider {
+	position: relative;
+	zoom: 1;
+	border: 1px solid #D8D8D8;
+}
+.slideBox {
+	width:490px;
+	height:170px;
+	overflow:hidden;
+	position:relative;
+}
+.slideBox .hd {
+	height:15px;
+	overflow:hidden;
+	position:absolute;
+	right:10px;
+	bottom:10px;
+	z-index:1;
+}
+.slideBox .hd ul {
+	overflow:hidden;
+	zoom:1;
+	float:left;
+}
+.slideBox .hd ul li {
+	float:left;
+	margin-right:5px;
+	width:15px;
+	height:15px;
+	line-height:14px;
+	text-align:center;
+	background:#fff;
+	cursor:pointer;
+}
+.slideBox .hd ul li.on {
+	background:#f00;
+	color:#fff;
+}
+.slideBox .bd {
+	position:relative;
+	height:100%;
+	z-index:0;
+}
+.slideBox .bd img {
+	width:490px;
+	height:170px;
+}
+#teacher {
+	width: 490px;
+	height: 178px;
+	float: left;
+	margin-top: 10px;
+}
+.teacher-interlayer {
+	position: relative;
+	zoom: 1;
+	padding-top: 5px;
+	height: 22px;
+	border-bottom: 1px solid #EAEAEA;
+}
+#teacher-slide {
+	height: 160px;
+	width: 490px;
+	overflow: hidden;
+}
+.teacher-slide-left, a.teacher-slide-left:hover, .teacher-slide-right, a.teacher-slide-right:hover {
+	background: url(../images/sprite.png) no-repeat;
+}
+.teacher-slide-left, .teacher-slide-right {
+	width: 25px;
+	height: 135px;
+	display: block;
+}
+.teacher-slide-left {
+	background-position: -235px 59px;
+	float: left;
+}
+a.teacher-slide-left:hover {
+	background-position: -235px -34px;
+	float: left;
+}
+.teacher-slide-right {
+	background-position: -210px 59px;
+	float: right;
+}
+a.teacher-slide-right:hover {
+	background-position: -210px -34px;
+	float: right;
+}
+#teacher-slide .slides {
+	width: 440px;
+	height: 160px;
+	overflow: hidden;
+	float: left;
+	position: relative;
+}
+#teacher-slide ul li span, #teacher-slide ul li a {
+	width:110px;
+	float: left;
+}
+#teacher-slide ul li span div a {
+	white-space:nowrap;
+	float: left;
+	width:110px;
+	text-align:center;
+	line-height:20px;
+}
+#teacher-slide img {
+	boder:0px;
+}
+#student {
+	width: 490px;
+	height: 147px;
+	float: left;
+	margin-top: 10px;
+}
+.student-interlayer {
+	position: relative;
+	height: 22px;
+	border-bottom: 1px solid #EAEAEA;
+}
+#students-list {
+	width: 490px;
+	height: 124px;
+	float: left;
+	margin-top: 10px;
+}
+.student-item {
+	float:left;
+	position:relative;
+	width:245px;
+}
+.student-item a.itemimg {
+	display: block;
+	float: left;
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+}
+.student-item ul {
+	width:172px;
+	list-style: none;
+	list-style-type:none;
+	display:block;
+	float:left;
+	padding: 13px 0;
+}
+#classic-review{
+	float:left; width:188px;height:138px; border:1px solid #CCC
+}
+
+.picList .pic {
+	text-align:center;
+	line-height:0px;
+	padding:2px;
+}
+.picList .pic img {
+	width:168px;
+	height:90px;
+	border:1px solid #ccc;
+	margin:5px;
+}
+.picList .pic a:hover img {
+	border-color:#f00;
+}
+.picList .title {
+	line-height:24px;
+}
+.topLoop {
+	width:188px
+	overflow:hidden;
+	position:relative;
+}
+.topLoop h4 {
+	float:left;
+	width:120px;
+	padding:5px 0 0 10px;
+}
+.topLoop .hd {
+	overflow:hidden;
+	height:30px;
+	background:#f4f4f4;
+}
+.topLoop .hd .prev, .topLoop .hd .next {
+	display:block;
+	width:9px;
+	height:10px;
+	line-height:10px;
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+	overflow:hidden;
+	cursor:pointer;
+}
+.topLoop .hd .prev {
+	background:url(../images/icoUp.gif) center no-repeat;
+}
+.topLoop .hd .next {
+	background:url(../images/icoDown.gif) center no-repeat;
+}
+.topLoop .hd ul {
+	float:right;
+	overflow:hidden;
+	zoom:1;
+}
+.topLoop .bd ul li.on {
+	background:#f00;
+}
+.topLoop .bd {
+	height:108px;
+}
+.topLoop .bd ul {
+	overflow:hidden;
+	zoom:1;
+}
+.topLoop .bd li {
+	display:block;
+}
+.topLoop .bd pic {
+	display:block;
+	height:108px;
+}
+.topLoop .bd a {
+	display:block;
+	height:108px;
+}

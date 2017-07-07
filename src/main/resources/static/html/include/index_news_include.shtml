@@ -1,0 +1,64 @@
+		<div class="tab-v1">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="news.html#group">集团新闻</a></li>
+                    <li><a data-toggle="tab" href="news.html#product">产品新闻</a></li>
+                    <li><a data-toggle="tab" href="news.html#industry">行业新闻</a></li>
+                </ul>                
+                <div class="tab-content">
+                
+			
+
+                    <div id="group" class="tab-pane fade in active">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="http://file.agertech.com.cn//201606/12/news/news_1465661079540_0.jpg" class="img-responsive img-tab-space" alt="星泰国际集团在香港成立">                                
+                            </div>
+                            <div class="col-md-8">
+                                <h4><a href="article.html#1" target="_blank">星泰国际集团在香港成立</a></h4>
+                                <p>2014年在香港成立星泰国际集团。
+集团公司拥有7家子公司，具备完善的销售网络。
+公司在上海设立了研发中心。
+拥有“AGERTEH艾吉芯”半导体品牌及与美国GRACE VISION LIMITED联合经营“GRACE VISION优视朗”和“CORALED科锐达”LED照明品牌。
+公司总部位于北京，在北京、杭州、上海、东莞、南京、济南、长沙等设立了子公司，形成了一个覆盖性广、稳定、高效的专业销售网。
+代理的产品渗透到各个电子行业：手机、液晶电视、液晶显示器、机顶盒、便携式电子设备、工控、安防、电表、汽车电子等。</p>                        
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div id="industry" class="tab-pane fade in ">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="http://file.agertech.com.cn//201606/12/news/news_1465661822971_0.jpg" class="img-responsive img-tab-space" alt="国家明确规划重点软件和集成电路设计领域">                                
+                            </div>
+                            <div class="col-md-8">
+                                <h4><a href="article.html#3" target="_blank">国家明确规划重点软件和集成电路设计领域</a></h4>
+                                <p>为贯彻落实《国务院关于印发进一步鼓励软件产业和集成电路产业发展若干政策的通知》（国发[2011]4号），按照财政部、国家税务总局、发展改革委、工业和信息化部《关于软件和集成电路产业企业所得税优惠政策有关问题的通知》（财税[2016]49号）要求，现就国家规划布局内重点软件和集成电路设计领域有关事项通知</p>                        
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div id="product" class="tab-pane fade in ">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="http://file.agertech.com.cn//201606/12/news/news_1465661400523_0.jpg" class="img-responsive img-tab-space" alt="Vishay推出超小外形的新系列卡扣式功率铝电容器">                                
+                            </div>
+                            <div class="col-md-8">
+                                <h4><a href="article.html#2" target="_blank">Vishay推出超小外形的新系列卡扣式功率铝电容器</a></h4>
+                                <p>Vishay Intertechnology, Inc.（NYSE 股市代号：VSH）宣布，推出新系列小型卡扣式功率铝电容器---256 PMG-SI，在只有20mm x 25mm的外形尺寸内可实现820μF～47,000的高电容。256 PMG-SI电容器针对音频应用、行业应用和通用电源而设计，具有长使用寿命、高纹波变流和低ESR。</p>                        
+                            </div>
+                        </div>
+                    </div>
+
+
+                
+                </div>
+		</div>
