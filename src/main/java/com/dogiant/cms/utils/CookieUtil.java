@@ -21,7 +21,7 @@ import com.dogiant.cms.domain.admin.AdminUser;
 
 public class CookieUtil {
 	private static final Logger logger = LoggerFactory.getLogger(CookieUtil.class);
-	private static final String USER_KEY = "CHINESE_M1#!@_1231##@1%@#$@%5345^$%$";
+	private static final String USER_KEY = "CHINESE_SHUFA#!@_1231##@1%@#$@%5345^$%$";
 	public static final String WECHAT_KEY = "BEIJING@JILIN@SHANDONG";
 	public static final String WECHAT_COOKIE_KEY = "WECHATC";
 	public static final String COOKIE_KEY = "AUTH";
@@ -29,7 +29,7 @@ public class CookieUtil {
 	private static final String SPLITER = "#||#";
 	private static final String SPLITER_REGEX = "#\\|\\|#";
 	private static final int COOKIE_LIVE_DAYS = 90;
-	public static final String DOMAIN = ".feilongshiliugongge.com";
+	public static final String DOMAIN = ".admin.feilongshiliugongge.com";
 	public static final int COOKIE_LIVE_ONE_DAY = 60 * 60 * 24;
 	public static final int COOKIE_LIVE_SESSION = -1;
 

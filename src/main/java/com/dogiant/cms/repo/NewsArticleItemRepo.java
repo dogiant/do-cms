@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dogiant.cms.domain.website.NewsArticleItem;
 
-@Transactional(value="mysqlWebdbEM")
 public interface NewsArticleItemRepo extends JpaRepository<NewsArticleItem, Long>, JpaSpecificationExecutor<NewsArticleItem> {
 
 	@Transactional(readOnly = true)

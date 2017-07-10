@@ -30,7 +30,7 @@ import com.dogiant.cms.ticket.util.UniqueTicketIdGenerator;
 import com.dogiant.cms.utils.CookieUtil;
 import com.dogiant.cms.utils.IpAddressUtil;
 
-@RestController("/api")
+@RestController
 public class RestAPIController {
 
 	protected final Log logger = LogFactory.getLog(getClass());
@@ -43,7 +43,7 @@ public class RestAPIController {
 	private UniqueTicketIdGenerator keyGenerator;
 
 	@ResponseBody
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/login", method = RequestMethod.POST)
 	public HttpResult<?> login(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "userName", required = true) String userName,
 			@RequestParam(value = "password", required = true) String password,
