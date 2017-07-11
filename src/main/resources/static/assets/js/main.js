@@ -70,12 +70,12 @@ $(function() {
 退出登录logout
 ---------------------------------------------------------*/
 var logout = function(){
-	var LOGOUT_API = "api/logout.do";
+	var LOGOUT_API = "api/logout";
 	$.getJSON(LOGOUT_API,{
-			returnUrl:"login.do"
+			returnUrl:"login"
 		}).done(function(data) {
 			if(data.success){
-				location.href=data.returnUrl;
+				location.href="login";
 			}
 		});
 }

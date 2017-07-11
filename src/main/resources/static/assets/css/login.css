@@ -1,5 +1,5 @@
 body {
-    background: url("../img/pattern/p27.png") repeat #444;
+    background: url("../img/pattern/argyle.png") repeat #444;
 }
 .tac {
     text-align: center;
@@ -13,7 +13,7 @@ body {
     margin-bottom: 10px;
 }
 .signin {
-    background: url("../img/pattern/p23.png") repeat;
+    background: url("../img/pattern/argyle.png") repeat;
     padding: 13px;
     border-radius: 4px;
 }

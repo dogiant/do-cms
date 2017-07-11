@@ -214,4 +214,14 @@ public class AdminUser implements java.io.Serializable {
 			return false;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "AdminUser [userId=" + userId + ", userName=" + userName + ", password=" + password + ", nickname="
+				+ nickname + ", realName=" + realName + ", email=" + email + ", phone=" + phone + ", mobile=" + mobile
+				+ ", lastLoginTime=" + lastLoginTime + ", lastLoginIp=" + lastLoginIp + ", ctime=" + ctime + ", mtime="
+				+ mtime + ", isValid=" + isValid + ", privileges=" + privileges + ", roles=" + roles + "]";
+	}
+	
+	
 }

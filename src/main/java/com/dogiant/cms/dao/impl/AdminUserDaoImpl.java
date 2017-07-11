@@ -131,13 +131,9 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	}
 
 	@Override
-	public void updateAdminUser(AdminUser adminUser) {
+	public void saveAdminUser(AdminUser adminUser) {
 		adminUserRepo.save(adminUser);
 	}
 
-	@Override
-	public void addAdminUser(AdminUser adminUser) {
-		adminUserRepo.save(adminUser);
-	}
 
 }

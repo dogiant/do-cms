@@ -87,13 +87,16 @@
     		});
 
         });
+        //{"type":"0","code":"4","msg":"No authorization exception","url":"","data":null,"success":false}
         var loginCallBack = function(data) {
         	if(data.success){
-        		if(data.returnUrl && data.returnUrl!=""){
-        			window.location.href=data.returnUrl;
+        		if(data.url && data.url!=""){
+        			window.location.href=data.url;
+        		}else{
+        			window.location.href="index";
         		}
         	}else{
-        		alert("登录失败！提示信息：" + data.info.returnMsg);
+        		alert("登录失败！提示信息：" + data.msg);
         	}
         };
 		var loginSubmit = function (){

@@ -18,8 +18,7 @@ public interface AdminUserDao{
 
 	public AdminUser getAdminUserByUserId(Integer userId);
 
-	public void updateAdminUser(AdminUser adminUser);
+	public void saveAdminUser(AdminUser adminUser);
 
-	public void addAdminUser(AdminUser adminUser);
 
 }

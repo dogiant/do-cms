@@ -12,21 +12,21 @@ public class AdminUserServiceImpl implements AdminUserService {
 	
 	@Autowired
 	private AdminUserDao adminUserDao;
-	
-	@Override
-	public AdminUserDao getAdminUserDao() {
-		return adminUserDao;
-	}
-
-	@Override
-	public void setAdminUserDao(AdminUserDao adminUserDao) {
-		this.adminUserDao = adminUserDao;
-	}
 
 	@Override
 	public AdminUser findUserByUserNameValid(String userName) {
 		AdminUser adminUser = adminUserDao.getAdminUserByUserName(userName);
-		if(adminUser.getIsValid()!=null && adminUser.getIsValid()==1){
+		if(adminUser!=null && adminUser.getIsValid()!=null && adminUser.getIsValid()==1){
+			return adminUser;
+		}else{
+			return null;
+		}
+	}
+	
+	@Override
+	public AdminUser findUserByNicknameValid(String nickname) {
+		AdminUser adminUser = adminUserDao.getAdminUserByNickname(nickname);
+		if(adminUser!=null && adminUser.getIsValid()!=null && adminUser.getIsValid()==1){
 			return adminUser;
 		}else{
 			return null;
@@ -34,8 +34,13 @@ public class AdminUserServiceImpl implements AdminUserService {
 	}
 
 	@Override
-	public void update(AdminUser adminUser) {
-		adminUserDao.updateAdminUser(adminUser);
+	public AdminUser getAdminUserByUserId(Integer userId) {
+		return adminUserDao.getAdminUserByUserId(userId);
+	}
+
+	@Override
+	public void saveOrUpdate(AdminUser adminUser) {
+		adminUserDao.saveAdminUser(adminUser);
 	}
 
 }
