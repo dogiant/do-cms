@@ -61,19 +61,16 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	}
 
 	@Override
-	public QueryResult<AdminUser> getAdminUserQueryResult(Integer page, Integer size, String beginTime,
+	public Page<AdminUser> getAdminUserQueryResult(Integer page, Integer size, String beginTime,
 			String endTime, String userName) {
 		Sort sort = new Sort(Direction.DESC, "ctime");
-
+		page = (page-1)<0?0:(page-1);
 		Pageable pageable = new PageRequest(page, size, sort);
 		Specification<AdminUser> spc = this
 				.getAdminUserSpecification(beginTime, endTime, userName);
 
 		Page<AdminUser> adminUserPage = adminUserRepo.findAll(spc, pageable);
-		QueryResult<AdminUser> queryResult = new QueryResult<AdminUser>();
-		queryResult.setRecordnum(adminUserPage.getTotalElements());
-		queryResult.setResult(adminUserPage.getContent());
-		return queryResult;
+		return adminUserPage;
 	}
 	
 
@@ -86,8 +83,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 
 				List<Predicate> list = new ArrayList<Predicate>();
 
-				list.add(paramCriteriaBuilder.equal(
-						paramRoot.get("isValid").as(Number.class), 1));
+//				list.add(paramCriteriaBuilder.equal(paramRoot.get("isValid").as(Integer.class), 1));
 				Date startDate = null;
 				Date endDate = null;
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

@@ -1,5 +1,7 @@
 package com.dogiant.cms.dao;
 
+import org.springframework.data.domain.Page;
+
 import com.dogiant.cms.domain.admin.AdminUser;
 import com.dogiant.cms.domain.dto.QueryResult;
 
@@ -13,8 +15,8 @@ public interface AdminUserDao{
 	
 	public boolean modifyAdminUserPassword(String userName, String md5Hex);
 
-	public QueryResult<AdminUser> getAdminUserQueryResult(Integer pageNo,
-			Integer pageRows, String beginTime, String endTime, String userName);
+	public Page<AdminUser> getAdminUserQueryResult(Integer page,
+			Integer size, String beginTime, String endTime, String userName);
 
 	public AdminUser getAdminUserByUserId(Integer userId);
 

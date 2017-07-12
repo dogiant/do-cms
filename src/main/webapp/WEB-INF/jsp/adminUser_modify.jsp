@@ -57,38 +57,40 @@
                                         	<div class="form-horizontal">
                                                 <form id="adminUserForm" method="post" action="api/admin/update"> 
                                                 <div class="control-group">
-                                                	<input type="hidden" id="userId" name="adminUser.userId" value="${adminUser.userId}" />
+                                                	<input type="hidden" id="userId" name="userId" value="${adminUser.userId}" />
+                                                	<input type="hidden" id="userName" name="userName" value="${adminUser.userName}" />
+                                                	<input type="hidden" id="nickname" name="nickname" value="${adminUser.nickname}" />
                                                     <label for="userName" class="control-label">用户名</label>
                                                     <div class="controls with-tooltip">
-                                                    	<input type="text" id="userName" name="adminUser.userName" value="${adminUser.userName}" class="span6 input-tooltip"
+                                                    	<input type="text" id="userNameH" name="userNameH" value="${adminUser.userName}" class="span6 input-tooltip"
                                                                data-original-title="请输入管理员用户名" data-placement="bottom"  disabled="disabled"/>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="nickname" class="control-label">昵称</label>
                                                     <div class="controls with-tooltip">
-                                                    	<input type="text" id="nickname" name="adminUser.nickname" value="${adminUser.userName}" class="span6 input-tooltip"
+                                                    	<input type="text" id="nicknameH" name="nicknameH" value="${adminUser.nickname}" class="span6 input-tooltip"
                                                                data-original-title="请输入管理员昵称" data-placement="bottom" disabled="disabled"/>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">初始化密码</label>
+                                                    <label class="control-label">密码</label>
                                                     <div class="controls">
-                                                    	<input type="text" id="password"  name="adminUser.password" value="${adminUser.password}" class="span6 input-tooltip"
-                                                               data-original-title="请输入管理员初始密码" data-placement="bottom" /><span style="color:red"> *保持原密码则无需填写</span>
+                                                    	<input type="text" id="password"  name="password" value="" class="span6 input-tooltip"
+                                                               data-original-title="请输入管理员密码" data-placement="bottom" /><span style="color:red"> *保持原密码则无需填写</span>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label">电子邮箱</label>
                                                     <div class="controls">
-                                                        <input type="text" id="email"  name="adminUser.email" value="${adminUser.email}" class="span6 input-tooltip"
+                                                        <input type="text" id="email"  name="email" value="${adminUser.email}" class="span6 input-tooltip"
                                                                data-original-title="请输入管理员电子邮箱" data-placement="bottom" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
 													<label class="control-label">联系电话</label>
 													<div class="controls">
-														<input type="text" id="phone"  name="adminUser.phone" value="${adminUser.phone}" class="span6 input-tooltip"
+														<input type="text" id="phone"  name="phone" value="${adminUser.phone}" class="span6 input-tooltip"
                                                                data-original-title="请输入管理员联系电话" data-placement="bottom" />
                                                     </div>
                                                </div>
@@ -129,37 +131,37 @@
 		$().ready(function() {
 			 $("#adminUserForm").validate({
 			        rules: {
-			        	"adminUser.userName":  {
+			        	"userName":  {
 							required: true,
 							userNameCheck: true,
 							minlength: 3,
 		    				maxlength: 20
 						},
-						"adminUser.nickname": {
+						"nickname": {
 							required: true,
 	    					minlength: 2,
 	    					nicknameMaxLength: true,
 	    					nicknameCheck: true
 						},
-						"adminUser.password": {
+						"password": {
 					    	regexPassword: true,
 	    					rangelength:[6,18]
 						}
 					},
 					messages: {
-						"adminUser.userName":{
+						"userName":{
 							required: "请输入用户名",
 	    					userNameCheck: "用户名只允许包括小写英文字母、数字和下划线",
 	    					minlength: "用户名至少3位字符",
 	    					maxlength: "用户名不能超过20字符"
 						},
-						"adminUser.nickname": {
+						"nickname": {
 							required: "请输入昵称",
 	    					minlength: "昵称至少2个字",
 	    					maxlength: "昵称不能超过16个字符",
 	    					nicknameCheck: "昵称只能包括中文字、英文字母、数字和下划线"
 						},
-						"adminUser.password": {
+						"password": {
 	    					regexPassword:"6~18个字符(字母，数字，符号均可),区分大小写",
 	    					rangelength:$.validator.format("密码长度必须在{0}-{1}个字符之间")
 						}

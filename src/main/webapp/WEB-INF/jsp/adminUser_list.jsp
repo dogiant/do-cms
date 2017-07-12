@@ -151,7 +151,7 @@
 	            type: 'GET',
 	            url: "api/admin/list",
 	            async: false,
-	            data:{"pageNo":pageNo,"pageRows":pageRows,"beginTime":beginTime,"endTime":endTime,"userName":encodeURIComponent(userName),"apiAccess":true},
+	            data:{"pageNo":pageNo,"pageRows":pageRows,"beginTime":beginTime,"endTime":endTime,"userName":encodeURIComponent(userName)},
 	            contentType: "application/json",
 	            //contentType: "application/x-www-form-urlencoded; charset=utf-8",
 	            dataType:"json",
@@ -159,17 +159,25 @@
 	            success: function(data) {
 	                if(data.success){
 	                	var htmlArray = new Array();
-	                	$.each(data.pagedResult.rs, function(i, obj){      
+	                	$.each(data.data.rs, function(i, obj){      
 	                	      var trHtml = "<tr dataid=\""+obj.userId+"\">";
 	                	      trHtml+="<td>"+obj.userId+"</td>";
 	                	      trHtml+="<td>"+obj.userName+"</td>";
 	                	      trHtml+="<td>"+obj.nickname+"</td>";
-	                	      trHtml+="<td>"+obj.email+"</td>";
-	                	      trHtml+="<td>"+obj.phone+"</td>";
-	                	      if(obj.isValid){
-	                	    	  trHtml+="<td><span class=vaidtag style='color:green'>有效</span></td>";
+	                	      if(obj.email==null){
+	                	    	  trHtml+="<td></td>";
 	                	      }else{
-	                	    	  trHtml+="<td><span class=vaidtag style='color:red'>无效</span></td>";
+	                	    	  trHtml+="<td>"+obj.email+"</td>"; 
+	                	      }
+	                	      if(obj.phone==null){
+	                	    	  trHtml+="<td></td>";
+	                	      }else{
+	                	    	  trHtml+="<td>"+obj.phone+"</td>";
+	                	      }
+	                	      if(obj.isValid){
+	                	    	  trHtml+="<td><span class=validtag style='color:green'>有效</span></td>";
+	                	      }else{
+	                	    	  trHtml+="<td><span class=validtag style='color:red'>无效</span></td>";
 	                	      }
 	                	      trHtml+="<td>"+obj.ctime+"</td>";
 	                	      if(obj.lastLoginTime==null){
@@ -183,7 +191,7 @@
 	                	    	  trHtml+="<td>"+obj.lastLoginIp+"</td>"; 
 	                	      }
 	                	      trHtml+="<td>";
-	                	      trHtml+="<a href=\"admin/modify?userId="+obj.userId+"\" dataid=\""+obj.userId+"\" class=\"btn edit\">编辑</a>";
+	                	      trHtml+="<a href=\"admin_modify?userId="+obj.userId+"\" dataid=\""+obj.userId+"\" class=\"btn edit\">编辑</a>";
 	                	      if(obj.isValid){
 	                	    	  trHtml+="<a href=\"javascript:void(0)\" dataid=\""+obj.userId+"\" class=\"btn btn-danger remove\">删除</a>";
 		                	  }else{
@@ -194,8 +202,8 @@
 	                	      htmlArray.push(trHtml);
 	                	});
 	                	$("#adminUserDataTable tbody").html(htmlArray.join(""));
-	                	initPaginate(data.pagedResult.allPage,data.pagedResult.pageNo);
-	                	$("#resultInfo").html("查询记录共计"+data.pagedResult.allRows+"条。");
+	                	initPaginate(data.data.allPage,data.data.pageNo);
+	                	$("#resultInfo").html("查询记录共计"+data.data.allRows+"条。");
 	                }
 	            },
 	            error: function(e) {
@@ -276,7 +284,7 @@
                     		success:function(data){
                     			if(data.success){
                         			alert("置为无效操作成功!");
-                        			obj.parent().parent().find(".vaidtag").css("color","red").text("无效");
+                        			obj.parent().parent().find(".validtag").css("color","red").text("无效");
                         			obj.removeClass("remove").addClass("recover").text("恢复");
                         		}else{
                         			alert("操作失败");
@@ -306,7 +314,7 @@
                     		success:function(data){
                     			if(data.success){
                         			alert("恢复操作成功!");
-                        			obj.parent().parent().find(".vaidtag").css("color","green").text("有效");
+                        			obj.parent().parent().find(".validtag").css("color","green").text("有效");
                         			//增加dom修改为删除状态
                         			obj.removeClass("recover").addClass("remove").text("删除");
                         		}else{

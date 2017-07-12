@@ -16,7 +16,7 @@ public class CommExceptionHandler {
 	@ResponseBody
 	public HttpResult<String> jsonErrorHandler(HttpServletRequest req, CommException e) throws Exception {
 		HttpResult<String> result = HttpResult.newResult(e.getCode(), e.getMessage());
-		result.setData("Some Data");
+		result.setData(null);
 		return result;
 	}
 }

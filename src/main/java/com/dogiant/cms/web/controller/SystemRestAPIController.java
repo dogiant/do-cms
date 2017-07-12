@@ -2,6 +2,7 @@ package com.dogiant.cms.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
 import java.util.Map;
@@ -21,12 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dogiant.cms.cookie.AdminUserInfo;
 import com.dogiant.cms.cookie.CookieUtil;
 import com.dogiant.cms.domain.admin.AdminUser;
 import com.dogiant.cms.domain.dto.BusinessErrorCode;
 import com.dogiant.cms.domain.dto.HttpResult;
+import com.dogiant.cms.domain.dto.PagedResult;
 import com.dogiant.cms.domain.dto.ServiceResponse;
 import com.dogiant.cms.domain.dto.ServiceResponse2HttpResult;
+import com.dogiant.cms.exception.CommException;
 import com.dogiant.cms.exception.ServiceExInfo;
 import com.dogiant.cms.service.AdminUserService;
 import com.dogiant.cms.ticket.Ticket;
@@ -35,7 +39,7 @@ import com.dogiant.cms.ticket.util.UniqueTicketIdGenerator;
 import com.dogiant.cms.utils.IpAddressUtil;
 
 @RestController
-public class RestAPIController {
+public class SystemRestAPIController {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
@@ -241,7 +245,6 @@ public class RestAPIController {
 	public HttpResult<?> adminUserAdd(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute AdminUser adminUser) {
 
-		logger.info(adminUser);
 		ServiceResponse<?> resp = ServiceResponse.successResponse();
 		if (adminUser != null) {
 			Date now = new Date();
@@ -271,12 +274,28 @@ public class RestAPIController {
 	@ResponseBody
 	@RequestMapping(value = "/api/admin/update", method = { RequestMethod.POST, RequestMethod.GET })
 	public HttpResult<?> adminUserUpdate(HttpServletRequest request, HttpServletResponse response,
-			AdminUser adminUser) {
-
+			@ModelAttribute AdminUser adminUser) throws CommException {
+		
 		ServiceResponse<?> resp = ServiceResponse.successResponse();
+		AdminUser adminFromDB = null;
 		if (adminUser != null && adminUser.getUserId() != null) {
-			Date now = new Date();
-			adminUser.setMtime(now);
+			//权限校验
+			if(CookieUtil.getUserFromCookie(request)!=null){
+				AdminUserInfo userInfo = (AdminUserInfo) CookieUtil.getUserFromCookie(request).get("user");
+				if(!"admin".equals(userInfo.getUserName()) && !userInfo.getUserId().equals(adminUser.getUserId())){
+					throw new CommException(ServiceExInfo.NO_AUTH_EXCEPTION);
+				}
+			}else{
+				throw new CommException(ServiceExInfo.NO_AUTH_EXCEPTION);
+			}
+			
+			adminFromDB = adminUserService.getAdminUserByUserId(adminUser.getUserId());
+			if (adminFromDB == null) {
+				resp = resp.setCode(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getCode());
+				resp = resp.setMsg(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getMessage());
+				HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+				return result;
+			}
 		} else {
 			resp = resp.setCode(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getCode());
 			resp = resp.setMsg(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getMessage());
@@ -285,7 +304,137 @@ public class RestAPIController {
 		}
 
 		try {
+			if(StringUtils.isNotBlank(adminUser.getPassword()) && !adminUser.getPassword().equals(adminFromDB.getPassword())){
+				adminUser.setPassword(DigestUtils.md5DigestAsHex(adminUser.getPassword().getBytes()));
+			}else{
+				adminUser.setPassword(adminFromDB.getPassword());
+			}
+			Date now = new Date();
+			adminUser.setMtime(now);
+			adminUser.setCtime(adminFromDB.getCtime());
+			adminUser.setIsValid(adminFromDB.getIsValid());
+			adminUser.setLastLoginIp(adminFromDB.getLastLoginIp());
+			adminUser.setLastLoginTime(adminFromDB.getLastLoginTime());
+			adminUser.setRoles(adminFromDB.getRoles());
+			adminUser.setPrivileges(adminFromDB.getPrivileges());
 			adminUserService.saveOrUpdate(adminUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp = resp.setCode(ServiceExInfo.SYSTEM_ERROR.getCode());
+			resp = resp.setMsg(ServiceExInfo.SYSTEM_ERROR.getMessage());
+			HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+			return result;
+		}
+		return ServiceResponse2HttpResult.transfer(resp);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/api/admin/list", method = { RequestMethod.POST, RequestMethod.GET })
+	public HttpResult<?> adminUserList(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "userName", required = false) String userName,
+			@RequestParam(value = "beginTime", required = false) String beginTime,
+			@RequestParam(value = "endTime", required = false) String endTime,
+			@RequestParam(value = "pageNo", required = false, defaultValue="1") int pageNo,
+			@RequestParam(value = "pageRows", required = false, defaultValue="15") int pageRows) {
+		
+		ServiceResponse<PagedResult<AdminUser>> resp = ServiceResponse.successResponse();
+		try {
+			userName = URLDecoder.decode(userName, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		try {
+			PagedResult<AdminUser> pagedResult = adminUserService.getAdminUserQueryResult(pageNo, pageRows, beginTime,
+					endTime, userName);
+			resp.setData(pagedResult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ServiceResponse2HttpResult.transfer(resp);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/api/admin/enable", method = { RequestMethod.POST, RequestMethod.GET })
+	public HttpResult<?> adminUserEnable(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute AdminUser adminUser) throws CommException {
+		
+		ServiceResponse<?> resp = ServiceResponse.successResponse();
+		AdminUser adminFromDB = null;
+		if (adminUser != null && adminUser.getUserId() != null) {
+			//权限校验
+			if(CookieUtil.getUserFromCookie(request)!=null){
+				AdminUserInfo userInfo = (AdminUserInfo) CookieUtil.getUserFromCookie(request).get("user");
+				if(!"admin".equals(userInfo.getUserName()) && !userInfo.getUserId().equals(adminUser.getUserId())){
+					throw new CommException(ServiceExInfo.NO_AUTH_EXCEPTION);
+				}
+			}else{
+				throw new CommException(ServiceExInfo.NO_AUTH_EXCEPTION);
+			}
+			
+			adminFromDB = adminUserService.getAdminUserByUserId(adminUser.getUserId());
+			if (adminFromDB == null) {
+				resp = resp.setCode(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getCode());
+				resp = resp.setMsg(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getMessage());
+				HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+				return result;
+			}
+		} else {
+			resp = resp.setCode(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getCode());
+			resp = resp.setMsg(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getMessage());
+			HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+			return result;
+		}
+
+		try {
+			adminFromDB.setIsValid(1);
+			adminFromDB.setMtime(new Date());
+			adminUserService.saveOrUpdate(adminFromDB);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp = resp.setCode(ServiceExInfo.SYSTEM_ERROR.getCode());
+			resp = resp.setMsg(ServiceExInfo.SYSTEM_ERROR.getMessage());
+			HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+			return result;
+		}
+		return ServiceResponse2HttpResult.transfer(resp);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/api/admin/disable", method = { RequestMethod.POST, RequestMethod.GET })
+	public HttpResult<?> adminUserDisable(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute AdminUser adminUser) throws CommException {
+		
+		ServiceResponse<?> resp = ServiceResponse.successResponse();
+		AdminUser adminFromDB = null;
+		if (adminUser != null && adminUser.getUserId() != null) {
+			//权限校验
+			if(CookieUtil.getUserFromCookie(request)!=null){
+				AdminUserInfo userInfo = (AdminUserInfo) CookieUtil.getUserFromCookie(request).get("user");
+				if(!"admin".equals(userInfo.getUserName()) && !userInfo.getUserId().equals(adminUser.getUserId())){
+					throw new CommException(ServiceExInfo.NO_AUTH_EXCEPTION);
+				}
+			}else{
+				throw new CommException(ServiceExInfo.NO_AUTH_EXCEPTION);
+			}
+			
+			adminFromDB = adminUserService.getAdminUserByUserId(adminUser.getUserId());
+			if (adminFromDB == null) {
+				resp = resp.setCode(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getCode());
+				resp = resp.setMsg(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getMessage());
+				HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+				return result;
+			}
+		} else {
+			resp = resp.setCode(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getCode());
+			resp = resp.setMsg(ServiceExInfo.PARAMETER_ERROR_EXCEPTION.getMessage());
+			HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+			return result;
+		}
+
+		try {
+			adminFromDB.setIsValid(0);
+			adminFromDB.setMtime(new Date());
+			adminUserService.saveOrUpdate(adminFromDB);
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp = resp.setCode(ServiceExInfo.SYSTEM_ERROR.getCode());

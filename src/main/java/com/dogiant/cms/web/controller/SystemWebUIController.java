@@ -14,7 +14,7 @@ import com.dogiant.cms.domain.admin.AdminUser;
 import com.dogiant.cms.service.AdminUserService;
 
 @Controller
-public class WebUIController {
+public class SystemWebUIController {
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	

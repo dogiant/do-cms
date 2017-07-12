@@ -157,15 +157,6 @@ public class AdminUser implements java.io.Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	@Column(name = "Mobile", length = 50)
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
 	
 	@Transient
 	public String getLastLoginTimeFormat(String format) {
@@ -222,6 +213,5 @@ public class AdminUser implements java.io.Serializable {
 				+ ", lastLoginTime=" + lastLoginTime + ", lastLoginIp=" + lastLoginIp + ", ctime=" + ctime + ", mtime="
 				+ mtime + ", isValid=" + isValid + ", privileges=" + privileges + ", roles=" + roles + "]";
 	}
-	
-	
+
 }

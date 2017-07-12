@@ -12,6 +12,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.context.ServletContextAware;
 
 import com.dogiant.cms.domain.admin.AdminUser;
+import com.dogiant.cms.domain.admin.Role;
 import com.dogiant.cms.service.AdminUserService;
 
 @Component
@@ -26,9 +27,10 @@ public class InitDataListener implements InitializingBean , ServletContextAware 
 		if(adminUserService.findUserByUserNameValid("admin")==null){
 			AdminUser adminUser = new AdminUser();
 			adminUser.setUserName("admin");
-			adminUser.setNickname("管理员");
+			adminUser.setNickname("超级管理员");
 			adminUser.setEmail("admin@feilongshiliugongge.com");
 			adminUser.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+			adminUser.setPhone("13651277590");
 			adminUser.setCtime(new Date());
 			adminUser.setIsValid(1);
 			adminUser.setMtime(new Date());
