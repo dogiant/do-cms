@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>       <html class="no-js lt-ie9 lt-ie8 lt-ie7">   <![endif]-->
 <!--[if IE 7]>          <html class="no-js lt-ie9 lt-ie8">          <![endif]-->
@@ -33,14 +34,14 @@
                                             <!-- .toolbar -->
                                             <div class="toolbar">
                                                 <ul class="nav">
-                                                    <li><a href="article_cat_list.do">文章栏目管理</a></li>
+                                                    <li><a href="article_cat_list">文章栏目管理</a></li>
                                                     <li class="dropdown">
                                                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                                             <i class="icon-th-large"></i>
                                                         </a>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="article_cat_list.do">文章栏目列表</a></li>
-                                                            <li><a href="article_cat_input.do">文章栏目录入</a></li>
+                                                            <li><a href="article_cat_list">文章栏目列表</a></li>
+                                                            <li><a href="article_cat_input">文章栏目录入</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
@@ -56,86 +57,66 @@
                                         	
                                         				
                                         	<div class="form-horizontal">
-                                                <s:form id="articleCatForm" namespace="/api" action="article_cat_add" method="post" > 
+                                                <form id="articleCatForm" action="api/article/cat/add" method="post" > 
                                                 <div class="control-group">
                                                     <label for="name" class="control-label">上级栏目</label>
                                                     <div class="controls">
-                                                    	<s:select name="articleCat.parent.catId" headerValue="顶级栏目" headerKey="%{null}" list="articleCatList" listKey="catId" listValue="catNameShow" emptyOption="false" ></s:select>
+                                                    	<select name="parent.catId">
+                                                    		<option value="">顶级栏目</option>
+                                                    		<c:forEach items="${articleCats}" var ="obj" varStatus="status">
+																<option value="${obj.catId}">${obj.catNameShow }</option>
+															</c:forEach>
+                                                    	</select>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="control-group">
                                                     <label for="name" class="control-label">栏目名称</label>
                                                     <div class="controls">
-                                                    	<s:textfield id="name" name="articleCat.catName" class="span6 input-tooltip"
-                                                               data-original-title="请输入栏目名称" data-placement="bottom" ></s:textfield>
+                                                    	<input type="text"  id="catName" name="catName" class="span6 input-tooltip"
+                                                               data-original-title="请输入栏目名称" data-placement="bottom"/>
                                                     </div>
                                                 </div>
                                                 <div class="control-group" id="keyControl">
                                                     <label for="key" class="control-label">栏目代码(英文名)</label>
                                                     <div class="controls">
-                                                    	<s:textfield id="key" name="articleCat.catCode" class="span6 input-tooltip"
-                                                               data-original-title="请输入栏目代码(英文名)" data-placement="bottom" ></s:textfield>
+                                                    	<input type="text"  id="catCode" name="catCode" class="span6 input-tooltip"
+                                                               data-original-title="请输入栏目代码(英文名)" data-placement="bottom"/>
                                                     </div>
                                                 </div>
-                                                <!-- 
-                                                <div class="control-group" id="urlControl" style="display: none;">
-                                                    <label for="url" class="control-label">栏目地址</label>
-                                                    <div class="controls">
-                                                    	<s:textfield id="url" name="articleCat.catUrl" class="span6 input-tooltip"
-                                                               data-original-title="请输入栏目地址" data-placement="bottom" ></s:textfield>
-                                                    </div>
-                                                </div>
-                                                 -->
                                                 <div class="control-group">
 														<label class="control-label">栏目类型</label>
 														<div class="controls controls-row">
-																	<input class="uniform" type="radio" name="articleCat.catType" value="0" checked="checked">自由增设 
-																	<input class="uniform" type="radio" name="articleCat.catType" value="1" >系统设定
+															<input type="radio" name="catType" value="0"  checked="checked" class="uniform"/> 自由增设 
+															<input type="radio" name="catType" value="1" class="uniform"/> 系统设定
 														</div>
                                                 </div>
                                                 <div class="control-group">
 														<label class="control-label">是否正文页栏目(非列表)</label>
 														<div class="controls controls-row">
-																	<input class="uniform" type="radio" name="articleCat.isTextCat" value="true" >是 
-																	<input class="uniform" type="radio" name="articleCat.isTextCat" value="false"  checked="checked">否
+															<input type="radio" name="isTextCat" value="true"  class="uniform"/> 是
+															<input type="radio" name="isTextCat" value="false" checked="checked" class="uniform"/> 否
 														</div>
                                                 </div>
-                                                <!-- 
-                                                <div class="control-group">
-														<label class="control-label">是否显示到导航</label>
-														<div class="controls controls-row">
-																	<input class="uniform" type="radio" name="articleCat.showInNav" value="true" checked="checked">是 
-																	<input class="uniform" type="radio" name="articleCat.showInNav" value="false" >否
-														</div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label for="sortOrder" class="control-label">排序字段</label>
-                                                    <div class="controls">
-                                                    	<s:textfield id="sortOrder" name="articleCat.sortOrder" class="span6 input-tooltip"
-                                                               data-original-title="请输入排序字段" data-placement="bottom" ></s:textfield>
-                                                    </div>
-                                                </div>
-                                                 -->
                                                 <div class="control-group">
                                                     <label for="keywords" class="control-label">关键词</label>
                                                     <div class="controls">
-                                                    	<s:textfield id="keywords" name="articleCat.keywords" class="span6 input-tooltip"
-                                                               data-original-title="请输入关键词" data-placement="bottom" ></s:textfield>
+                                                        <input type="text"  id="keywords" name="keywords" class="span6 input-tooltip"
+                                                               data-original-title="请输入关键词" data-placement="bottom"/>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="catDesc" class="control-label">描述</label>
                                                     <div class="controls">
-                                                    	<s:textfield id="catDesc" name="articleCat.catDesc" class="span6 input-tooltip"
-                                                               data-original-title="请输入描述" data-placement="bottom" ></s:textfield>
+                                                    	<input type="text"  id="catDesc" name="catDesc" class="span6 input-tooltip"
+                                                               data-original-title="请输入描述" data-placement="bottom"/>
                                                     </div>
                                                 </div>
 
 												<div class="form-actions">
 														<input type="submit" value="提交" class="btn btn-primary">
                                                 </div>
-                                                </s:form>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -169,24 +150,24 @@
 		$().ready(function() {
 			 $("#articleCatForm").validate({
 			        rules: {
-			        	"articleCat.catName":  {
+			        	"catName":  {
 							required: true
 						},
-						"articleCat.catCode":  {
+						"catCode":  {
 							required: true
 						},
-						"articleCat.sortOrder":  {
+						"sortOrder":  {
 							number: true
 						}
 					},
 					messages: {
-						"articleCat.catName":{
+						"catName":{
 							required:"请输入栏目名称"
 						},
-						"articleCat.catCode":  {
+						"catCode":  {
 							required: "请输入栏目代码(英文名)"
 						},
-						"articleCat.sortOrder":  {
+						"sortOrder":  {
 							number: "请输入一个数字排序值"
 						}
 					},
@@ -219,7 +200,7 @@
 						bootbox.alert('普通栏目成功录入' ,function(){
 							message_box.show('将跳转到普通栏目列表管理界面!','success');
 							var  page_list = function(){
-								location.href="article_cat_list.do";
+								location.href="article_cat_list";
 							}
 							window.setTimeout(page_list, 1000); 
 				 		});

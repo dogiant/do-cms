@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>       <html class="no-js lt-ie9 lt-ie8 lt-ie7">   <![endif]-->
 <!--[if IE 7]>          <html class="no-js lt-ie9 lt-ie8">          <![endif]-->
@@ -67,23 +68,18 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <s:iterator value="%{resultMap.resultList}" id="articleCat"> 
-												    <tr dataid=<s:property value="#articleCat.catId" />>
-												    	<td><img src="assets/img/menu_arrow.gif" width="9" height="9" border="0" style="margin-left:<s:property value="#articleCat.level"/>em" />&nbsp;<s:property value="#articleCat.catName" /></td>
-                                                    	<td><s:property value="#articleCat.catCode" /></td>
-                                                    	<!--
-                                                        <td><s:property value="#articleCat.catUrl" /></td>
-                                                        <td><s:property value="#articleCat.showInNav" /></td>
-                                                        <td><s:property value="#articleCat.sortOrder" /></td>
-                                                         -->
-                                                        <td><s:date name="#articleCat.ctime"  format="yy-MM-dd HH:mm" /></td>
-                                                        <td><s:date name="#articleCat.mtime"  format="yy-MM-dd HH:mm" /></td>
+                                                <c:forEach items="${articleCats}" var="obj" varStatus="status">
+                                                	<tr dataid="${obj.catId}">
+												    	<td><img src="assets/img/menu_arrow.gif" width="9" height="9" border="0" style="margin-left:${obj.level}em" />&nbsp;${obj.catName}</td>
+                                                    	<td>${obj.catCode}</td>
+                                                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.ctime}" /></td>
+                                                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.mtime}" /></td>
                                                         <td>
-                                                        	<button class="btn edit"  dataid=<s:property value="#articleCat.catId" />><i class="icon-edit" ></i></button>
-                                                            <button class="btn btn-danger remove" dataid=<s:property value="#articleCat.catId" />><i class="icon-remove" ></i></button>
+                                                        	<button class="btn edit"  dataid="${obj.catId}"><i class="icon-edit" ></i></button>
+                                                            <button class="btn btn-danger remove" dataid="${obj.catId}"><i class="icon-remove" ></i></button>
                                                         </td>
                                                     </tr>
-												</s:iterator>
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>

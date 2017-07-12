@@ -1,0 +1,43 @@
+package com.dogiant.cms.web.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.dogiant.cms.domain.website.ArticleCat;
+import com.dogiant.cms.service.ArticleCatService;
+
+@Controller
+public class ArticleWebUIController {
+	
+	protected final Log logger = LogFactory.getLog(getClass());
+	
+	@Autowired
+	private ArticleCatService articleCatService;
+	
+	@RequestMapping(value = "/article_cat_input", method = RequestMethod.GET)
+    public String articleCatInput(Map<String, Object> model) {
+		logger.info("/article_cat_input");
+		
+		List<ArticleCat> articleCats = articleCatService.getArticleCatSortList();
+		model.put("articleCats", articleCats);
+		model.put("menu", "article");
+        return "article_cat_input";
+    }
+	
+	@RequestMapping(value = "/article_cat_list", method = RequestMethod.GET)
+    public String articleCatList(Map<String, Object> model) {
+		logger.info("/article_cat_list");
+		
+		List<ArticleCat> articleCats = articleCatService.getArticleCatSortList();
+		model.put("articleCats", articleCats);
+		model.put("menu", "article");
+        return "article_cat_list";
+    }
+}
