@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dogiant.cms.domain.website.ArticleCat;
 import com.dogiant.cms.service.ArticleCatService;
@@ -39,5 +40,16 @@ public class ArticleWebUIController {
 		model.put("articleCats", articleCats);
 		model.put("menu", "article");
         return "article_cat_list";
+    }
+	
+	@RequestMapping(value = "/article_cat_modify", method = RequestMethod.GET)
+    public String articleCatModify(@RequestParam(value = "catId", required = true) Long catId, Map<String, Object> model) {
+		logger.info("/article_cat_modify");
+		List<ArticleCat> articleCats = articleCatService.getArticleCatSortList();
+		model.put("articleCats", articleCats);
+		ArticleCat articleCat = articleCatService.getArticleCat(catId);
+		model.put("articleCat", articleCat);
+		model.put("menu", "article");
+        return "article_cat_modify";
     }
 }

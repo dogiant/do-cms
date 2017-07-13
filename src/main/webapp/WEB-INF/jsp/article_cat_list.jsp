@@ -57,11 +57,8 @@
                                                     <tr>
                                                     	<th>栏目名称</th>
                                                         <th>栏目代码</th>
-                                                        <!-- 
-                                                        <th>栏目地址</th>
                                                         <th>是否显示</th>
                                                         <th>排序值</th>
-                                                        -->
                                                         <th>创建时间</th>
                                                         <th>修改时间</th>
                                                         <th>操作</th>
@@ -72,6 +69,8 @@
                                                 	<tr dataid="${obj.catId}">
 												    	<td><img src="assets/img/menu_arrow.gif" width="9" height="9" border="0" style="margin-left:${obj.level}em" />&nbsp;${obj.catName}</td>
                                                     	<td>${obj.catCode}</td>
+                                                    	<td>${obj.showInNav}</td>
+                                                    	<td>${obj.sortOrder}</td>
                                                         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.ctime}" /></td>
                                                         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.mtime}" /></td>
                                                         <td>
@@ -133,7 +132,7 @@
                 }); 
             	
                 $('#articleCatDataTable tbody').on( 'click', 'button.edit', function () {
-                    location.href = "article_cat_modify.do?articleCat.catId="+$(this).attr("dataid");
+                    location.href = "article_cat_modify.do?catId="+$(this).attr("dataid");
                 }); 
                 $('#articleCatDataTable tbody').on( 'click', 'button.remove', function () {
                     var idsvalue = $(this).attr("dataid");
@@ -141,7 +140,7 @@
             			if(result){
                         	$.ajax({
                         		type:'post',
-                        		url:'api/article_cat_delete.do',
+                        		url:'api/article/cat/delete',
                         		data:{ids:idsvalue},
                         		dataType:'json',
                         		beforeSend: function(){

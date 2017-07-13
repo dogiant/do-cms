@@ -22,6 +22,8 @@ import javax.persistence.Transient;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 /**
  * ArticleCat entity.
@@ -38,10 +40,6 @@ public class ArticleCat implements java.io.Serializable {
 	 * 栏目ID
 	 */
 	private Long catId;
-	/**
-	 * 栏目首页地址
-	 */
-	private String catUrl;
 	/**
 	 * 栏目代码(英文名)
 	 */
@@ -113,15 +111,6 @@ public class ArticleCat implements java.io.Serializable {
 
 	public void setCatId(Long catId) {
 		this.catId = catId;
-	}
-
-	@Column(name = "cat_url", nullable = true, length = 512)
-	public String getCatUrl() {
-		return catUrl;
-	}
-
-	public void setCatUrl(String catUrl) {
-		this.catUrl = catUrl;
 	}
 
 	@Column(name = "cat_code", nullable = true, length = 128)
@@ -215,6 +204,7 @@ public class ArticleCat implements java.io.Serializable {
 		this.parent = parent;
 	}
 	
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "ctime")
 	public Date getCtime() {
@@ -225,6 +215,7 @@ public class ArticleCat implements java.io.Serializable {
 		this.ctime = ctime;
 	}
 	
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "mtime")
 	public Date getMtime() {

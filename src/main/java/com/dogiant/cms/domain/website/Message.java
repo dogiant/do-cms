@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "message")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -111,7 +113,7 @@ public class Message {
 		}
 	}
 
-
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "ctime")
 	public Date getCtime() {
@@ -122,6 +124,7 @@ public class Message {
 		this.ctime = ctime;
 	}
 
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "mtime")
 	public Date getMtime() {

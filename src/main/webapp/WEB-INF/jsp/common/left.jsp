@@ -29,6 +29,19 @@
     <!-- BEGIN MAIN NAVIGATION -->
     <ul id="menu" class="unstyled accordion collapse in">
 
+
+        <li class="accordion-group ">
+            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#video-nav">
+                <i class="icon-film icon-large"></i> 视频管理 <span
+                    class="label label-inverse pull-right">2</span>
+            </a>
+            <ul class="collapse  <c:if test="${requestScope.menu=='video'}"> in</c:if>"  id="video-nav">
+                <li><a href="video_upload"><i class="icon-angle-right"></i> 视频上传</a></li>
+                
+                <li><a href="video_list.do"><i class="icon-angle-right"></i> 视频列表</a></li>
+            </ul>
+        </li>
+        
         <li class="accordion-group ">
             <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#article-nav">
                 <i class="icon-pencil icon-large"></i> 文章管理 <span
@@ -44,7 +57,6 @@
             	  -->
             </ul>
         </li>
-
         
         <c:if test="${requestScope.userName=='admin'}">
         <li class="accordion-group<c:if test="${requestScope.menu=='admin'}"> active</c:if> ">

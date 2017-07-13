@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * AdminLog entity.
  * 
@@ -55,6 +57,7 @@ public class AdminLog implements java.io.Serializable {
 		this.logId = logId;
 	}
 
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="log_time")
 	public Date getLogTime() {

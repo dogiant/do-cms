@@ -20,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * AdminUser entity.
  * 
@@ -113,6 +115,7 @@ public class AdminUser implements java.io.Serializable {
 		this.password = password;
 	}
 
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCtime() {
 		return ctime;
@@ -122,6 +125,7 @@ public class AdminUser implements java.io.Serializable {
 		this.ctime = ctime;
 	}
 
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getMtime() {
 		return mtime;
@@ -167,6 +171,7 @@ public class AdminUser implements java.io.Serializable {
 		return sdf.format(lastLoginTime);
 	}
 	
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_login_time")
 	public Date getLastLoginTime() {
@@ -176,7 +181,6 @@ public class AdminUser implements java.io.Serializable {
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
-
 
 	@Column(name = "last_login_ip",length=36)
 	public String getLastLoginIp() {

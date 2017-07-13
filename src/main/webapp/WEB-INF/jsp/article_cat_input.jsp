@@ -99,6 +99,20 @@
 														</div>
                                                 </div>
                                                 <div class="control-group">
+														<label class="control-label">是否显示到导航</label>
+														<div class="controls controls-row">
+															<input type="radio" name="showInNav" value="true" checked="checked" class="uniform"/> 是
+															<input type="radio" name="showInNav" value="false" class="uniform"/> 否
+														</div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="sortOrder" class="control-label">排序字段</label>
+                                                    <div class="controls">
+                                                    	<input type="text"  id="sortOrder" name="sortOrder"  class="span6 input-tooltip"
+                                                               data-original-title="请输入排序字段" data-placement="bottom"/>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
                                                     <label for="keywords" class="control-label">关键词</label>
                                                     <div class="controls">
                                                         <input type="text"  id="keywords" name="keywords" class="span6 input-tooltip"
@@ -199,10 +213,10 @@
 				 	if(data.success){
 						bootbox.alert('普通栏目成功录入' ,function(){
 							message_box.show('将跳转到普通栏目列表管理界面!','success');
-							var  page_list = function(){
+							var page_list = function(){
 								location.href="article_cat_list";
 							}
-							window.setTimeout(page_list, 1000); 
+							window.setTimeout(page_list, 500); 
 				 		});
 					}else{
 						alert('发布失败: '+ '\n\n 状态码: \n' + data.resultInfo.returnCode + '\n\n 提示信息: \n' + data.resultInfo.returnMsg +  '.'); 
