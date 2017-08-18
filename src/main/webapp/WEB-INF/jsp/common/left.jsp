@@ -29,7 +29,21 @@
     <!-- BEGIN MAIN NAVIGATION -->
     <ul id="menu" class="unstyled accordion collapse in">
 
-
+        <li class="accordion-group ">
+            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#article-nav">
+                <i class="icon-pencil icon-large"></i> 文章版块管理 <span
+                    class="label label-inverse pull-right">4</span>
+            </a>
+            <ul class="collapse  <c:if test="${requestScope.menu=='article'}"> in</c:if>"  id="article-nav">
+                <li><a href="article_cat_list"><i class="icon-angle-right"></i> 文章栏目管理</a></li>
+                
+                <li><a href="article_list"><i class="icon-angle-right"></i> 文章管理</a></li>
+                
+                <li><a href="section_cat_list"><i class="icon-angle-right"></i> 版块栏目管理</a></li>
+            	<li><a href="section_list"><i class="icon-angle-right"></i> 版块管理</a></li>
+            </ul>
+        </li>
+        
         <li class="accordion-group ">
             <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#video-nav">
                 <i class="icon-film icon-large"></i> 视频管理 <span
@@ -39,22 +53,6 @@
                 <li><a href="video_upload"><i class="icon-angle-right"></i> 视频上传</a></li>
                 
                 <li><a href="video_list.do"><i class="icon-angle-right"></i> 视频列表</a></li>
-            </ul>
-        </li>
-        
-        <li class="accordion-group ">
-            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#article-nav">
-                <i class="icon-pencil icon-large"></i> 文章管理 <span
-                    class="label label-inverse pull-right">2</span>
-            </a>
-            <ul class="collapse  <c:if test="${requestScope.menu=='article'}"> in</c:if>"  id="article-nav">
-                <li><a href="article_cat_list.do"><i class="icon-angle-right"></i> 栏目管理</a></li>
-                
-                <li><a href="article_list.do"><i class="icon-angle-right"></i> 文章管理</a></li>
-                <!--
-                <li><a href="include_cat_list.do"><i class="icon-angle-right"></i> 碎片栏目管理</a></li>
-            	<li><a href="template_list.do"><i class="icon-angle-right"></i> 模板文件管理</a></li>
-            	  -->
             </ul>
         </li>
         

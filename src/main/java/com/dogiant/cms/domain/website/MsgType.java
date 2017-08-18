@@ -2,7 +2,7 @@ package com.dogiant.cms.domain.website;
 
 public enum MsgType {
 
-	EVENT("event"),LOCATION("location"),TEXT("text"), IMAGE("image"), VOICE("voice"), VIDEO("video"),MUSIC("music"), NEWS("news");
+	EVENT("event"), LOCATION("location"), TEXT("text"), IMAGE("image"), VOICE("voice"), VIDEO("video"), MUSIC("music"), NEWS("news");
 
 	private String type;
 

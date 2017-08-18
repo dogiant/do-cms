@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.servlet.ServletContext;
 
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,6 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.context.ServletContextAware;
 
 import com.dogiant.cms.domain.admin.AdminUser;
-import com.dogiant.cms.domain.admin.Role;
 import com.dogiant.cms.service.AdminUserService;
 
 @Component

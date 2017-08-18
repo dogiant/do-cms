@@ -20,7 +20,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 		// excludePathPatterns 用户排除拦截
 		logger.info("Interceptor Config");
 		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/assets/**",
-				"/login", "/**/*.html");
+				"/login**","/api/login**", "/**/*.html");
 		super.addInterceptors(registry);
 	}
 

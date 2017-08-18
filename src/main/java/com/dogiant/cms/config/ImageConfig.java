@@ -10,9 +10,16 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:config/image.properties")
 public class ImageConfig {
 	
+	public static String fileHost;
+	
     public static String imageUrlPrefix;
 	
 	public static String imageLocalPathPrefix;
+	
+	@Value("${image.url.file_host}")
+	public void setFileHost(String fileHost) {
+		ImageConfig.fileHost = fileHost;
+	}
 
 	@Value("${image.url.prefix}")
 	public void setImageUrlPrefix(String imageUrlPrefix) {

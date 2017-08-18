@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dogiant.cms.config.ImageConfig;
 import com.dogiant.cms.domain.website.ArticleCat;
 import com.dogiant.cms.service.ArticleCatService;
 
@@ -51,5 +52,25 @@ public class ArticleWebUIController {
 		model.put("articleCat", articleCat);
 		model.put("menu", "article");
         return "article_cat_modify";
+    }
+	
+	
+	@RequestMapping(value = "/article_input", method = RequestMethod.GET)
+    public String articleInput(Map<String, Object> model) {
+		logger.info("/article_input");
+		model.put("fileHost", ImageConfig.fileHost);
+		
+		List<ArticleCat> articleCats = articleCatService.getArticleCatSortList();
+		model.put("articleCats", articleCats);
+		model.put("menu", "article");
+        return "article_input";
+    }
+	
+	@RequestMapping(value = "/article_list", method = RequestMethod.GET)
+    public String articleList(Map<String, Object> model) {
+		logger.info("/article_list");
+		
+		model.put("menu", "article");
+        return "article_list";
     }
 }

@@ -50,12 +50,16 @@ public class ArticleItem {
 	//450*250
 	//大图片建议尺寸：360像素 * 200像素，小图片建议尺寸：200像素 * 200像素
 	private String coverPicUrl;
-	//文件下载地址
-	private String fileUrl;
+	
+	// 0source 1link 2file
+	private Integer type;
+
 	//原文链接
 	private String sourceUrl;
 	//标题跳转链接
 	private String linkUrl;
+	//文件下载地址
+	private String fileUrl;
 	
 	//是否将封面放到正文中
 	private Boolean coverIntoContent;
@@ -97,6 +101,15 @@ public class ArticleItem {
 
 	public void setArticleCat(ArticleCat articleCat) {
 		this.articleCat = articleCat;
+	}
+
+	@Column(name = "type", nullable = false)
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	@Column(name = "title", nullable = false, length = 64)
@@ -159,7 +172,7 @@ public class ArticleItem {
 	 */
 	@Transient
 	public String getCoverAndContent() {
-		String cover = "<p><img src=\""+ this.getPicUrl() +"\" style=\"float: none;\"><br></p>";
+		String cover = "<p><img src=\""+ this.getCoverPicUrl() +"\" style=\"float: none;\"><br></p>";
 		return cover.concat(content);
 	}
 
@@ -168,12 +181,12 @@ public class ArticleItem {
 	}
 
 	@Column(name = "cover_pic_url", nullable = true)
-	public String getPicUrl() {
+	public String getCoverPicUrl() {
 		return coverPicUrl;
 	}
 
-	public void setPicUrl(String picUrl) {
-		this.coverPicUrl = picUrl;
+	public void setCoverPicUrl(String coverPicUrl) {
+		this.coverPicUrl = coverPicUrl;
 	}
 	
 	/**
@@ -183,8 +196,7 @@ public class ArticleItem {
 	@Transient
 	public String getTopCover(){
 		if(StringUtils.isNotEmpty(coverPicUrl)){
-			return coverPicUrl.replace("/jsf/", "/s360x200/");
-			//return coverPicUrl.substring(0, picUrl.lastIndexOf(".")) + "_360" + picUrl.substring(picUrl.lastIndexOf("."));
+			return coverPicUrl.substring(0, coverPicUrl.lastIndexOf(".")) + "_360" + coverPicUrl.substring(coverPicUrl.lastIndexOf("."));
 		}
 		return coverPicUrl;
 	}
@@ -196,8 +208,7 @@ public class ArticleItem {
 	@Transient
 	public String getNormalThumbnail(){
 		if(StringUtils.isNotEmpty(coverPicUrl)){
-			return coverPicUrl.replace("/jsf/", "/s200x200/");
-			//return coverPicUrl.substring(0, picUrl.lastIndexOf(".")) + "_200" + picUrl.substring(picUrl.lastIndexOf("."));
+			return coverPicUrl.substring(0, coverPicUrl.lastIndexOf(".")) + "_200" + coverPicUrl.substring(coverPicUrl.lastIndexOf("."));
 		}
 		return coverPicUrl;
 	}
