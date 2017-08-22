@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -24,8 +25,8 @@
           
             <div class="span12">
               <div class="page-header">
-                <h4><s:property value="%{resultMap.articleItem.title}"/></h4>
-                <small><s:property value="%{resultMap.articleItem.author}"/></small>
+                <h4>${articleItem.title }</h4>
+                <small>${articleItem.author }</small>
               </div>
             </div>
             
@@ -33,12 +34,15 @@
           
           <div class="row bottom-space">
             <div class="span10 offset1">
-            <s:if test="%{resultMap.articleItem.coverIntoContent}">
+            <c:if test="${articleItem.coverIntoContent && articleItem.coverPicUrl!='' }">
             	<div class="span10 center-align">
-              		<img src="http://file.dogiant.com<s:property value="%{resultMap.articleItem.picUrl}"/>" class="thumbnail cover-snap">            
+              		<img src="${fileHost }${articleItem.coverPicUrl }" class="thumbnail cover-snap">            
             	</div>
-            </s:if>
- 			<s:property value="%{resultMap.articleItem.content}"  escape="false"/>
+            </c:if>
+
+			<div>
+				${articleItem.content }
+			</div>
  				       
             </div>
           </div>
@@ -49,5 +53,6 @@
     <!-- End: Main content -->
 	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
   </body>
 </html>

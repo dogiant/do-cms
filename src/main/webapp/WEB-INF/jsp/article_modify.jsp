@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -30,18 +31,18 @@
                                     <div class="box dark">
                                         <header>
                                             <div class="icons"><i class="icon-edit"></i></div>
-                                            <h5>文章编辑</h5>
+                                            <h5>文章录入</h5>
                                             <!-- .toolbar -->
                                             <div class="toolbar">
                                                 <ul class="nav">
-                                                    <li><a href="article_input.do">文章录入</a></li>
+                                                    <li><a href="article_list">文章列表</a></li>
                                                     <li class="dropdown">
                                                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                                             <i class="icon-th-large"></i>
                                                         </a>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="article_list.do">文章列表</a></li>
-                                                            <li><a href="article_input.do">文章录入</a></li>
+                                                            <li><a href="article_list">文章列表</a></li>
+                                                            <li><a href="article_input">文章录入</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
@@ -58,135 +59,142 @@
                                         	
   												<div class="span7">
   													<div style="display: none;">
-	  												    <form id="uploadPicAjaxForm" action="http://www.agertech.com.cn/upload/upload.do"  enctype="multipart/form-data"  method="post" >
-	                                                    	<input id="uploadPicAjax" name="upload" type="file" onchange="uploadPicAjaxSubmit(this);"/>
+	  												    <form id="uploadPicAjaxForm" action="/upload/api"  enctype="multipart/form-data"  method="post" >
+	                                                    	<input id="uploadPicAjax" name="uploads" type="file" onchange="uploadPicAjaxSubmit(this);"/>
 		                                                </form>
-		                                                <form id="uploadFileAjaxForm" action="http://www.agertech.com.cn/upload/upload.do"  enctype="multipart/form-data"  method="post" >
+		                                                <form id="uploadFileAjaxForm" action="/upload/api"  enctype="multipart/form-data"  method="post" >
 		                                                	<input type="hidden" name="isPic" value="false" />
-	                                                    	<input id="uploadFileAjax" name="upload" type="file" onchange="uploadFileAjaxSubmit(this);"/>
+	                                                    	<input id="uploadFileAjax" name="uploads" type="file" onchange="uploadFileAjaxSubmit(this);"/>
 		                                                </form>
 	                                                </div>
 	  												<div class="form-horizontal">
-	                                                <s:form id="newsForm" namespace="/api" action="article_update" method="post" > 
-	                                                <s:hidden  id="articleId" name="articleItem.id" value="%{resultMap.articleItem.id}"></s:hidden>
+	  												<form id="articleForm" action="api/article/update" method="post" > 
+	  												<input type="hidden" id="id" name="id" value="${articleItem.id}" />
 	                                                <div class="control-group">
-	                                                    <label for="newsTitle" class="control-label">标题</label>
+	                                                    <label for="articleTitle" class="control-label">标题</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <s:textfield id="newsTitle" name="articleItem.title" value="%{resultMap.articleItem.title}"  class="span6 input-tooltip"   data-placement="top" />
+	                                                        <input type="text" id="articleTitle" name="title" class="span6 input-tooltip" data-placement="top" value="${articleItem.title }"/>
 	                                                    </div>
 	                                                </div>
-	                                                <s:if test="%{articleCatList!=null && articleCatList.size()>0}">
+	                                                <c:if test="${articleCats!=null && articleCats.size()>0 }">
 		                                                <div class="control-group">
 		                                                    <label for="name" class="control-label">文章栏目</label>
-		                                                    <div class="controls">
-		                                                    	<s:select name="articleItem.articleCat.catId" headerValue="请选择文章栏目" headerKey="%{null}" list="articleCatList" listKey="catId" listValue="catNameShow" emptyOption="false"  value="%{resultMap.articleItem.articleCat.catId}"></s:select>
-		                                                    </div>
+		                                                    <div class="controls with-tooltip">
+		                                                    <select name="articleCat.catId">
+		                                                    	<c:if test="${articleItem.articleCat==null || articleItem.articleCat.catId==null}"><option value="null" selected="selected"> 请选择栏目</option></c:if>
+			                                                    <c:forEach items="${articleCats}" var ="obj" varStatus="status">
+																	<option value="${obj.catId}" <c:if test="${articleItem.articleCat.catId==obj.catId }"> selected="selected" </c:if>> ${obj.catNameShow }</option>
+																</c:forEach>
+															</select>
+															</div>
 	                                                	</div>
-                                                	</s:if>
+                                                	</c:if>
 	                                                <div class="control-group">
 	                                                    <label for="newsSubtitle" class="control-label">副标题</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <s:textfield id="newsSubtitle" name="articleItem.subtitle" value="%{resultMap.articleItem.subtitle}"  class="span6 input-tooltip"   data-placement="top" />
+	                                                        <input type="text" id="articleSubtitle" name="subtitle" class="span6 input-tooltip" data-placement="top"  value="${articleItem.subtitle }"/>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
 	                                                    <label for="newsAuthor" class="control-label">作者</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <s:textfield id="newsAuthor" name="articleItem.author" value="%{resultMap.articleItem.author}"  class="span6 input-tooltip"   data-placement="top" />（选填）
+	                                                        <input type="text" id="articleAuthor" name="author" class="span6 input-tooltip" data-placement="top"  value="${articleItem.author }"/>（选填）
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
-	                                                    <label for="pass1" class="control-label">封面</label>
+	                                                    <label for="coverPicUrl" class="control-label">封面</label>
 	                                                    <div class="controls with-tooltip">
 	                                                            <div id="uploadTips">
 									
                                                          		</div>
 	                                                             <span class="btn btn-file">
                                                                     <span onclick="uploadPicAjax.click()">选择图片</span>
-                                                                    <s:hidden id="picUrl" type="hidden" name="articleItem.picUrl"  value="%{resultMap.articleItem.picUrl}"  />
+                                                                    <input id="coverPicUrl" type="hidden" name="coverPicUrl" value="${articleItem.coverPicUrl }"/>
                                                                 </span>
 		                                                         
-		                                                         <p class="js_cover upload_preview" ><img id="cover_preview"  src="http://file.agertech.com.cn<s:property value="%{resultMap.articleItem.picUrl}"/>">
+		                                                         <p class="js_cover upload_preview" style="display: none;"><img id="cover_preview"  src="">
 																	<span><a id="removeCover" href="javascript:void(0);" >删除</a></span>
                													 </p>
-               													 <!-- 
+
                													 <p class="frm_tips">
 													                <label for="" class="frm_checkbox_label js_show_cover_pic selected">
 													                    <i class="icon_checkbox"></i>
-													                    <input type="checkbox" class="frm_checkbox" name="articleItem.coverIntoContent" value="true"<s:if test="%{resultMap.articleItem.coverIntoContent==1}"> checked="checked"</s:if>>
+													                    <input type="checkbox" class="frm_checkbox" name="coverIntoContent" value="true" <c:if test="${articleItem.coverIntoContent }"> checked="checked" </c:if>>
 													                   封面图片显示在正文中 
 													                </label>
 													            </p>
-													             -->
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
-	                                                    <label for="newsDigest" class="control-label">摘要</label>
+	                                                    <label for="articleDigest" class="control-label">摘要</label>
 	                                                    <div class="controls">
-	                                                    	<textarea id="newsDigest" name="articleItem.digest" class="span6" ><s:property value="%{resultMap.articleItem.digest}"/></textarea>
+	                                                    	<textarea id="articleDigest" name="digest" class="span6">${articleItem.digest }</textarea>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
-	                                                    <label for="newsContent" class="control-label">正文</label>
+	                                                    <label for="articleContent" class="control-label">正文</label>
 	                                                    <div class="controls">
-	                                                    	<!--  <textarea id="cleditor"></textarea> -->
-	                                                    	<!--  <textarea id="wysihtml5" class="span12"></textarea>-->
-	                                                    	<div id="newsContent" class="summernote"></div>
-	                                                    	<s:hidden id="articleItemContent" name="articleItem.content"  value="%{resultMap.articleItem.content}" />
-	                                                    </div>
+	                                                    	<div id="articleContent" class="summernote">${articleItem.content }</div>
+	                                                    	<input type="hidden" id="articleItemContent" name="content"></input>
+	                                                    </div> 
 	                                                </div>
 	                                                <div class="control-group">
-	                                                    <label for="newsSourceUrl" class="control-label">原文链接</label>
+														<label class="control-label">类型</label>
+														<div class="controls controls-row">
+															<input class="uniform" type="radio" name="type" value="0" <c:if test="${articleItem.type==0 }"> checked="checked" </c:if>>文章
+	                                                        <input class="uniform" type="radio" name="type" value="1" <c:if test="${articleItem.type==1 }"> checked="checked" </c:if>>链接    
+														</div>
+	                                                </div>
+	                                                
+	                                                <div class="control-group">
+	                                                    <label for="articleSourceUrl" class="control-label">原文链接</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <s:textfield id="newsSourceUrl" name="articleItem.sourceUrl"  value="%{resultMap.articleItem.sourceUrl}"  class="span6 input-tooltip"  data-placement="top" />
+	                                                        <input type="text" id="articleSourceUrl" name="sourceUrl" class="span6 input-tooltip" data-placement="top"  value="${articleItem.sourceUrl }" />
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
-	                                                    <label for="url" class="control-label">跳转链接</label>
+	                                                    <label for="linkUrl" class="control-label">链接地址</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <s:textfield id="url" name="articleItem.linkUrl"  value="%{resultMap.articleItem.linkUrl}"  class="span6 input-tooltip"  data-placement="top" />
+	                                                        <input type="text" id="linkUrl" name="linkUrl" class="span6 input-tooltip" data-placement="top" value="${articleItem.linkUrl }" />
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
-	                                                    <label for="url" class="control-label">文件上传</label>
+	                                                    <label for="fileUrl" class="control-label">文件上传</label>
 	                                                    <div class="controls with-tooltip">
 	                                                    	<span class="btn btn-file">
                                                                  <span onclick="uploadFileAjax.click()">选择文件</span>
-                                                                 <s:hidden id="fileUrl" type="hidden" name="articleItem.fileUrl"  value="%{resultMap.articleItem.fileUrl}"  />
+                                                                 <input id="fileUrl" type="hidden" name="fileUrl" value="${articleItem.fileUrl }"/>
                                                             </span>
-	                                                        <s:if test="%{resultMap.articleItem.fileUrl!=null}">
-	                                                    	<span><a href="http://file.agertech.com.cn<s:property value="%{resultMap.articleItem.fileUrl}"/>" id="fileUrlShow">点击下载查看已上传文件</a></span>
-	                                                        </s:if>
-	                                                        <s:else>
-	                                                        	<span><a href="#" id="fileUrlShow"></a></span>
-	                                                        </s:else>
+	                                                    
+	                                                    	<span><a href="#" id="fileUrlShow"></a></span>
+	                                                        
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
-															<label class="control-label">是否推荐到首页</label>
-															<div class="controls controls-row">
-																		<input class="uniform" type="radio" name="articleItem.recommend" value="false" <s:if test="%{!resultMap.articleItem.recommend}"> checked="checked"</s:if>>不推荐
-	                                                                    <input class="uniform" type="radio" name="articleItem.recommend" value="true" <s:if test="%{resultMap.articleItem.recommend}"> checked="checked"</s:if>>推荐        
+														<label class="control-label">是否推荐首页</label>
+														<div class="controls controls-row">
+															<input class="uniform" type="radio" name="recommend" value="true" <c:if test="${articleItem.recommend }"> checked="checked" </c:if>>推荐
+	                                                        <input class="uniform" type="radio" name="recommend" value="false" <c:if test="${!articleItem.recommend }"> checked="checked" </c:if>>不推荐       
 														</div>
-	                                               </div>
-													<div class="form-actions">
-															<input type="submit" value="提交" class="btn btn-primary">
 	                                                </div>
-	                                                </s:form>
+													<div class="form-actions">
+														<input type="submit" value="提交" class="btn btn-primary">
+	                                                </div>
+	                                                </form>
 	                                            </div>
                                             
                                             </div>
                                         	
                                         	<div class="span5">
 	                                        	<div class="thumbnail" id="news_thumbnail">
-	                                        	  <h4 id="news_title" ><s:property value="%{resultMap.articleItem.title}"/></h4>
+	                                        	  <h4 id="news_title" >标题</h4>
 	                                        	  <div id="cover_wrapper">
-								                  	<img src="http://file.agertech.com.cn<s:property value="%{resultMap.articleItem.picUrl}"/>" id="news_cover">
+								                  	<img src="" id="news_cover" style="display:none;">
 								                  	<i>封面图片</i>                           	  
 	                                        	  </div>
 								                  <div class="caption">
 								                    <p id="news_digest" >
-								                    <s:property value="%{resultMap.articleItem.digest}"/>
+								                    	摘要文字
 								                    </p>
 								                  </div>
 								                </div>  
@@ -194,7 +202,6 @@
 
             							</div>
                                         	
-
                                      </div>
                                    </div>
                                 </div>
@@ -222,24 +229,25 @@
 		<%@ include file="common/help_modal.jsp" %>
 
 		<%@ include file="common/footer_script.jsp" %>
+		
 		 
         <script type="text/javascript">
+        
         var maxsize = 2*1024*1024;//2M  
-        var errMsg = "上传的文件不能超过2M！！！"; 
-		var STATIC_FILE_HOST = "http://file.agertech.com.cn";
+        var errMsg = "上传的文件不能超过2M！！！";  
+
+		var STATIC_FILE_HOST = "${fileHost}";
 		function uploadPicAjaxSubmit(o) {
+			var ajaxForm = $('#uploadPicAjaxForm'), $file = $(o).clone();
 			
 			var byteSize = o.files[0].size;
 			if(byteSize>maxsize){
 				return alert(errMsg);
 			}
-			
-			var ajaxForm = $('#uploadPicAjaxForm'), $file = $(o).clone();
-			
-			//ajaxForm.append($file);
+
 			var options = {
 				dataType : "json",
-				data : {returnType:"json","channel":"news",genThumbnails:true,"sizes":"360,null,_360;200,null,_200",upload:$file.val()},
+				data : {type:"json","channel":"news",genThumbnails:true,"sizes":"360,null,_360;200,null,_200",uploads:$file.val()},
 				beforeSubmit : function() {
 					$("#uploadTips").show();
 					$("#uploadTips").html("正在上传封面，请稍候……");
@@ -247,38 +255,11 @@
 				success : function(data) {
 					if (data.success) {
 						$("#uploadTips").hide();
-						$("#picUrl").val(data['fileName']);
-						$("#news_cover").attr("src", STATIC_FILE_HOST + data['fileName']);
+						$("#coverPicUrl").val(data.result[0]);
+						$("#news_cover").attr("src", STATIC_FILE_HOST + data.result[0]);
 						$("#news_cover").css({"display":"block"});
-						$("#cover_preview").attr("src", STATIC_FILE_HOST + data['fileName']);
+						$("#cover_preview").attr("src", STATIC_FILE_HOST + data.result[0]);
 						$(".upload_preview").css({"display":"block"});
-					}
-				},
-				error : function(data) {
-
-				}
-			};
-			ajaxForm.ajaxSubmit(options);
-			return false;
-		}
-		
-		function uploadFileAjaxSubmit(o) {
-			var byteSize = o.files[0].size;
-			if(byteSize>maxsize){
-				return alert(errMsg);
-			}
-			var ajaxForm = $('#uploadFileAjaxForm'), $file = $(o).clone();
-			var options = {
-				dataType : "json",
-				data : {returnType:"json","channel":"news","isPic":false,upload:$file.val()},
-				beforeSubmit : function() {
-					alert("开始上传文件");
-				},
-				success : function(data) {
-					if (data.success) {
-						$("#fileUrl").val(data['fileName']);
-						$("#fileUrlShow").attr("href", STATIC_FILE_HOST + data['fileName']);
-						$("#fileUrlShow").text(data['fileName']);
 					}else{
 						alert(data);
 					}
@@ -291,81 +272,140 @@
 			return false;
 		}
 		
+		function uploadFileAjaxSubmit(o) {
+			var ajaxForm = $('#uploadFileAjaxForm'), $file = $(o).clone();
+			
+			var byteSize = o.files[0].size;
+			if(byteSize>maxsize){
+				return alert(errMsg);
+			}
+			
+			var options = {
+				dataType : "json",
+				data : {returnType:"json","channel":"news","isPic":false,uploads:$file.val()},
+				beforeSubmit : function() {
+					alert("开始上传文件");
+				},
+				success : function(data) {
+					if (data.success) {
+						$("#fileUrl").val(data.result[0]);
+						$("#fileUrlShow").attr("href", STATIC_FILE_HOST + data.result[0]);
+						$("#fileUrlShow").text(data.result[0]);
+					}else{
+						alert(data);
+					}
+				},
+				error : function(data) {
+
+				}
+			};
+			ajaxForm.ajaxSubmit(options);
+			return false;
+		}
+		
+		
 		$().ready(function() {
-			 $('#newsDigest').autosize();
-			 $('#newsContent').summernote({
-				 	oninit: function() {
-					    $("#newsContent").code('<s:property value="%{resultMap.articleItem.content}" escape="false"/>');
-					},
-				 	lang: 'zh-CN',
-		            height: 200,
-		            onImageUpload: function(files, editor, welEditable) {
-		                sendFile(files[0], editor, welEditable);
-		            },
-		            onblur: function(e) {
-		                var sHTML = $("#newsContent").code();
-		                $("#articleItemContent").val(sHTML);
-		            }
-		      });
+			var mCoverPicUrl = $("#coverPicUrl").val();
+			if(mCoverPicUrl!=''){
+				$("#news_cover").attr("src", STATIC_FILE_HOST + mCoverPicUrl);
+				$("#news_cover").css({"display":"block"});
+				$("#cover_preview").attr("src", STATIC_FILE_HOST + mCoverPicUrl);
+				$(".upload_preview").css({"display":"block"});
+			}
+			
+			var mFileUrl = $("#fileUrl").val();
+			if(mFileUrl!=''){
+				$("#fileUrlShow").attr("href", STATIC_FILE_HOST + mFileUrl);
+			}
+			
+			$('#articleDigest').autosize();
+			$('#articleContent').summernote({
+			 	lang: 'zh-CN',
+	            height: 200,
+	            onImageUpload: function(files, editor, welEditable) {
+	                sendFile(files[0], editor, welEditable);
+	            },
+	            onblur: function(e) {
+	                var sHTML = $("#articleContent").code();
+	                $("#articleItemContent").val(sHTML);
+	            }
+		    });
 			//summernote图片上传
 			function sendFile(file, editor, welEditable) {
-		            data = new FormData();
-		            data.append("upload", file);
-		            data.append("returnType","json");
-		            data.append("channel","news");
-		            $.ajax({
-		                data: data,
-		                type: "post",
-		                url: "http://www.agertech.com.cn/upload/upload.do",
-		                cache: false,
-		                contentType: false,
-		                processData: false,
-		                success: function(data) {
-			                if(data.success){
-				               var url = STATIC_FILE_HOST + data['fileName'];
-				               editor.insertImage(welEditable, url);
-				            }
-		                }
-		            });
+				var formData  = new FormData();
+				formData.append("uploads", file);
+				formData.append("type","json");
+				formData.append("channel","news");
+	            $.ajax({
+	                data: formData,
+	                type: "post",
+	                url: "/upload/api",
+	                dataType : "json",
+	                async: false,  
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                success: function(data) {
+		                if(data.success){
+			               var url = STATIC_FILE_HOST + data.result[0];
+			               editor.insertImage(welEditable, url);
+			            }
+	                },  
+	                error: function (returndata) {  
+	                    alert(returndata);  
+	                }  
+	            });
 			}
 
-		$("#newsTitle").keyup(function(){
+		$("#articleTitle").keyup(function(){
 			$("#news_title").html($(this).val());
 		});
-		$("#newsDigest").keyup(function(){
+		$("#articleDigest").keyup(function(){
 			$("#news_digest").html($(this).val());
 		});
 
 
 		$("#removeCover").click(function(){
-			$("#picUrl").val("");
+			$("#coverPicUrl").val("");
 			$("#news_cover").attr("src", "");
 			$("#news_cover").css({"display":"none"});
 			$("#cover_preview").attr("src", "");
 			$(".upload_preview").css({"display":"none"});
 		});
 		  
-		$("#newsForm").validate({
+		$("#articleForm").validate({
 		        rules: {
-		        	"articleItem.title":  {
+		        	"title":  {
 						required: true
 					},
-					"articleItem.picUrl":  {
+					"coverPicUrl":  {
 						required: true
 					},
-					"articleItem.digest":  {
+					"digest":  {
 						required: true
+					},
+					"sourceUrl": {
+						url: true 
+					},
+					"linkUrl": {
+						url: true 
 					}
 				},
 				messages: {
-					"articleItem.title":{
+					"title":{
 						required:"请输入图文消息标题"
 					},
-					"articleItem.picUrl":{
+					"coverPicUrl":{
 						required:"请上传封面"
 					},
-					"articleItem.digest":{
+					"digest":{
 						required:"请输入摘要"
+					},
+					"sourceUrl": {
+						url: "请输入正确的原文链接地址"
+					},
+					"linkUrl": {
+						url: "请输入正确的链接地址"
 					}
 				},
 		        errorClass: 'help-block',
@@ -396,8 +436,8 @@
 			 	if(data.success){
 					bootbox.alert('您的文章已成功录入' ,function(){
 						message_box.show('将跳转到您的文章列表管理界面!','success');
-						var  page_list = function(){
-							location.href="article_list.do";
+						var page_list = function(){
+							location.href="article_list";
 						}
 						window.setTimeout(page_list, 1000); 
 			 		});
@@ -407,6 +447,6 @@
 		 	}
 		});
       </script>
-
+	  <script src="//qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
     </body>
 </html>

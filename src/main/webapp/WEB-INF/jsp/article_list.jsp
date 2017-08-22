@@ -57,6 +57,7 @@
                                                     <tr>
                                                     	<th>序号</th>
                                                         <th>文章条目</th>
+                                                        <th>类型</th>
                                                         <th>创建时间</th>
                                                         <th>修改时间</th>
                                                         <th>状态</th>
@@ -98,10 +99,11 @@
             	$('#articleDataTable').dataTable({
                 	"processing": true,
                     "serverSide": true,
-                    "ajax": "api/article_list",
+                    "ajax": "api/article/list",
                     "columns": [
                         { "data": "id" },
                         { "data": "messageShow"},
+                        { "data": "typeDesc"},
                         { "data": "ctime" },
                         { "data": "mtime" },
                         { "data": "statusDescription" }
@@ -112,13 +114,13 @@
                         	"sWidth": "320px"
                         },
                         //{ "visible": false,  "targets": [2] },
-                        { "targets": [5],
+                        { "targets": [6],
                         "data": "id" ,
                         "render": function(data, type, full) { return "<button class='btn view'  dataid='"+data+"'><i class='icon-search' ></i></button>  <button class='btn edit'  dataid='"+data+"'><i class='icon-edit' ></i></button>  <button class='btn btn-danger remove'  dataid='"+data+"'><i class='icon-remove'></i></button>"; } 
                         } 
                     ],
                    
-                	"aaSorting": [[ 2, "desc" ]] ,
+                	"aaSorting": [[ 3, "desc" ]] ,
                     "sPaginationType": "bootstrap",
                    // "dom": '<"top"i>rt<"bottom"flp><"clear">',
                     "oLanguage": {
@@ -143,13 +145,13 @@
                 /*----------- END articleDataTable CODE -------------------------*/
                 $('#articleDataTable tbody').on( 'click', 'button.view', function () {
                 	var sFeatures = "height=480, width=320, scrollbars=yes, resizable=yes";
-                	var sUrl="article_show?id="+$(this).attr("dataid");
-                	window.open( sUrl, 'show', sFeatures );
+                	var sUrl="article_preview?id="+$(this).attr("dataid");
+                	window.open( sUrl, 'preview', sFeatures );
                 	return false;
                 }); 
             	
                 $('#articleDataTable tbody').on( 'click', 'button.edit', function () {
-                    location.href = "article_modify?articleItem.id="+$(this).attr("dataid");
+                    location.href = "article_modify?id="+$(this).attr("dataid");
                 }); 
                 $('#articleDataTable tbody').on( 'click', 'button.remove', function () {
                     var idsvalue = $(this).attr("dataid");
@@ -157,7 +159,7 @@
             			if(result){
                         	$.ajax({
                         		type:'post',
-                        		url:'api/article_delete',
+                        		url:'api/article/delete',
                         		data:{ids:idsvalue},
                         		dataType:'json',
                         		beforeSend: function(){

@@ -31,7 +31,7 @@
 
         <li class="accordion-group ">
             <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#article-nav">
-                <i class="icon-pencil icon-large"></i> 文章版块管理 <span
+                <i class="icon-pencil icon-large"></i> 内容管理 <span
                     class="label label-inverse pull-right">4</span>
             </a>
             <ul class="collapse  <c:if test="${requestScope.menu=='article'}"> in</c:if>"  id="article-nav">
@@ -39,7 +39,6 @@
                 
                 <li><a href="article_list"><i class="icon-angle-right"></i> 文章管理</a></li>
                 
-                <li><a href="section_cat_list"><i class="icon-angle-right"></i> 版块栏目管理</a></li>
             	<li><a href="section_list"><i class="icon-angle-right"></i> 版块管理</a></li>
             </ul>
         </li>
@@ -61,7 +60,7 @@
             <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle collapsed" data-target="#admin-nav">
                 <i class="icon-cog icon-large"></i> 系统管理<span class="label label-inverse pull-right">1</span>
             </a>
-            <ul class="collapse  <c:if test="${requestScope.menu=='admin'}"> in</c:if>" id="admin-nav">
+            <ul class="collapse <c:if test="${requestScope.menu=='admin'}"> in</c:if>" id="admin-nav">
                 <li><a href="admin_list"><i class="icon-angle-right"></i> 管理员账号列表</a></li>
             </ul>
         </li>

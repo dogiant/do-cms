@@ -54,7 +54,9 @@
 	<script type="text/javascript" src="${contextUrl}/assets/js/jquery.paginate.js"></script>
 	<script type="text/javascript" src="${contextUrl}/assets/js/main.js"></script>   
 	
-
-
+	<!-- dataTables -->
+    <script type="text/javascript" src="${contextUrl}/assets/js/lib/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="${contextUrl}/assets/js/lib/DT_bootstrap.js"></script>
+    <script type="text/javascript" src="${contextUrl}/assets/js/lib/responsive-tables.js"></script>
 
 		

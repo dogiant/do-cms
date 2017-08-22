@@ -93,7 +93,7 @@
         		if(data.url && data.url!=""){
         			window.location.href=data.url;
         		}else{
-        			window.location.href="index";
+        			window.location.href="main";
         		}
         	}else{
         		alert("登录失败！提示信息：" + data.msg);

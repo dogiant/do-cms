@@ -22,12 +22,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.dogiant.cms.config.ImageConfig;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * 图文条目
  * 
- * @author dubiaoqi
+ * @author dogiant
  * 
  */
 @Entity
@@ -320,6 +321,19 @@ public class ArticleItem {
 		this.mtime = mtime;
 	}
 	
+	@Transient
+	public String getTypeDesc(){
+		switch(type){
+		case 0:
+			return "普通文章";
+		case 1:
+			return "外部链接";
+		case 2:
+			return "附件文章";
+		default:
+			return "未知状态";
+	}
+	}
 
 	@Transient
 	public String getMessageShow() {
@@ -327,7 +341,7 @@ public class ArticleItem {
 		sb.append("<div class=\"thumbnail\" id=\"news_thumbnail\">");
 		sb.append("<h4 id=\"news_title\" >"+ getTitle() +"</h4>");
 		sb.append("<div id=\"cover_wrapper\">");
-		sb.append("<img src=\""+getTopCover()+"\" id=\"news_cover\" onerror=\"this.style.display='none'\" />");
+		sb.append("<img src=\""+ImageConfig.imageUrlPrefix + getTopCover()+"\" id=\"news_cover\" onerror=\"this.style.display='none'\" />");
 		sb.append("<i>封面图片</i>");
 		sb.append("</div>");
 		sb.append("<div class=\"caption\">");

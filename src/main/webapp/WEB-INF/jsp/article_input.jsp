@@ -74,26 +74,28 @@
 	                                                        <input type="text" id="articleTitle" name="title" class="span6 input-tooltip" data-placement="top" />
 	                                                    </div>
 	                                                </div>
-	                                                <c:if test="${articleCatList!=null && articleCatList.size()>0 }">
+	                                                <c:if test="${articleCats!=null && articleCats.size()>0 }">
 		                                                <div class="control-group">
 		                                                    <label for="name" class="control-label">文章栏目</label>
-		                                                    <select name="articleCat.catId">
-			                                                    <c:forEach items="${articleCats}" var ="obj" varStatus="status">
-																	<option value="${obj.catId}">${obj.catNameShow }</option>
-																</c:forEach>
-															</select>
+		                                                    <div class="controls with-tooltip">
+			                                                    <select name="articleCat.catId">
+				                                                    <c:forEach items="${articleCats}" var ="obj" varStatus="status">
+																		<option value="${obj.catId}">${obj.catNameShow }</option>
+																	</c:forEach>
+																</select>
+															</div>
 	                                                	</div>
                                                 	</c:if>
 	                                                <div class="control-group">
 	                                                    <label for="newsSubtitle" class="control-label">副标题</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <input type="text" id="articleSubtitle" name="subtitle" class="span6 input-tooltip"   data-placement="top" />
+	                                                        <input type="text" id="articleSubtitle" name="subtitle" class="span6 input-tooltip" data-placement="top" />
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
 	                                                    <label for="newsAuthor" class="control-label">作者</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <input type="text" id="articleAuthor" name="author" class="span6 input-tooltip"   data-placement="top" />（选填）
+	                                                        <input type="text" id="articleAuthor" name="author" class="span6 input-tooltip" data-placement="top" />（选填）
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
@@ -134,6 +136,14 @@
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
+														<label class="control-label">类型</label>
+														<div class="controls controls-row">
+															<input class="uniform" type="radio" name="type" value="0" checked="checked">文章
+	                                                        <input class="uniform" type="radio" name="type" value="1" >链接    
+														</div>
+	                                                </div>
+	                                                
+	                                                <div class="control-group">
 	                                                    <label for="articleSourceUrl" class="control-label">原文链接</label>
 	                                                    <div class="controls with-tooltip">
 	                                                        <input type="text" id="articleSourceUrl" name="sourceUrl" class="span6 input-tooltip" data-placement="top" />
@@ -163,7 +173,7 @@
 															<input class="uniform" type="radio" name="recommend" value="true" checked="checked">推荐
 	                                                        <input class="uniform" type="radio" name="recommend" value="false" >不推荐       
 														</div>
-	                                               </div>
+	                                                </div>
 													<div class="form-actions">
 														<input type="submit" value="提交" class="btn btn-primary">
 	                                                </div>
@@ -181,7 +191,7 @@
 	                                        	  </div>
 								                  <div class="caption">
 								                    <p id="news_digest" >
-								                    摘要文字
+								                    	摘要文字
 								                    </p>
 								                  </div>
 								                </div>  
@@ -189,7 +199,6 @@
 
             							</div>
                                         	
-
                                      </div>
                                    </div>
                                 </div>
@@ -223,49 +232,7 @@
         
         var maxsize = 2*1024*1024;//2M  
         var errMsg = "上传的文件不能超过2M！！！";  
-/*      var tipMsg = "您的浏览器暂不支持计算上传文件的大小，确保上传文件不要超过2M，建议使用IE、FireFox、Chrome浏览器。";  
-        var  browserCfg = {};  
-        var ua = window.navigator.userAgent;  
-        if (ua.indexOf("MSIE")>=1){  
-            browserCfg.ie = true;  
-        }else if(ua.indexOf("Firefox")>=1){  
-            browserCfg.firefox = true;  
-        }else if(ua.indexOf("Chrome")>=1){  
-            browserCfg.chrome = true;  
-        }  
-        function checkfile(){  
-            try{  
-                var obj_file = document.getElementById("fileuploade");  
-                if(obj_file.value==""){  
-                    alert("请先选择上传文件");  
-                    return;  
-                }  
-                var filesize = 0;  
-                if(browserCfg.firefox || browserCfg.chrome ){  
-                    filesize = obj_file.files[0].size;  
-                }else if(browserCfg.ie){  
-                    var obj_img = document.getElementById('tempimg');  
-                    obj_img.dynsrc=obj_file.value;  
-                    filesize = obj_img.fileSize;  
-                }else{  
-                    alert(tipMsg);  
-                return;  
-                }  
-                if(filesize==-1){  
-                    alert(tipMsg);  
-                    return;  
-                }else if(filesize>maxsize){  
-                    alert(errMsg);  
-                    return;  
-                }else{  
-                    alert("文件大小符合要求");  
-                    return;  
-                }  
-            }catch(e){  
-                alert(e);  
-            }  
-        }   */
-        
+
 		var STATIC_FILE_HOST = "${fileHost}";
 		function uploadPicAjaxSubmit(o) {
 			var ajaxForm = $('#uploadPicAjaxForm'), $file = $(o).clone();
@@ -274,8 +241,7 @@
 			if(byteSize>maxsize){
 				return alert(errMsg);
 			}
-			
-			//ajaxForm.append($file);
+
 			var options = {
 				dataType : "json",
 				data : {type:"json","channel":"news",genThumbnails:true,"sizes":"360,null,_360;200,null,_200",uploads:$file.val()},
@@ -338,41 +304,41 @@
 		$().ready(function() {
 			 $('#articleDigest').autosize();
 			 $('#articleContent').summernote({
-				 	lang: 'zh-CN',
-		            height: 200,
-		            onImageUpload: function(files, editor, welEditable) {
-		                sendFile(files[0], editor, welEditable);
-		            },
-		            onblur: function(e) {
-		                var sHTML = $("#articleContent").code();
-		                $("#articleItemContent").val(sHTML);
-		            }
-		      });
+			 	lang: 'zh-CN',
+	            height: 200,
+	            onImageUpload: function(files, editor, welEditable) {
+	                sendFile(files[0], editor, welEditable);
+	            },
+	            onblur: function(e) {
+	                var sHTML = $("#articleContent").code();
+	                $("#articleItemContent").val(sHTML);
+	            }
+		    });
 			//summernote图片上传
 			function sendFile(file, editor, welEditable) {
-					var formData  = new FormData();
-					formData.append("uploads", file);
-					formData.append("type","json");
-					formData.append("channel","news");
-		            $.ajax({
-		                data: formData,
-		                type: "post",
-		                url: "/upload/api",
-		                dataType : "json",
-		                async: false,  
-		                cache: false,
-		                contentType: false,
-		                processData: false,
-		                success: function(data) {
-			                if(data.success){
-				               var url = STATIC_FILE_HOST + data.result[0];
-				               editor.insertImage(welEditable, url);
-				            }
-		                },  
-		                error: function (returndata) {  
-		                    alert(returndata);  
-		                }  
-		            });
+				var formData  = new FormData();
+				formData.append("uploads", file);
+				formData.append("type","json");
+				formData.append("channel","news");
+	            $.ajax({
+	                data: formData,
+	                type: "post",
+	                url: "/upload/api",
+	                dataType : "json",
+	                async: false,  
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                success: function(data) {
+		                if(data.success){
+			               var url = STATIC_FILE_HOST + data.result[0];
+			               editor.insertImage(welEditable, url);
+			            }
+	                },  
+	                error: function (returndata) {  
+	                    alert(returndata);  
+	                }  
+	            });
 			}
 
 		$("#articleTitle").keyup(function(){
@@ -393,25 +359,37 @@
 		  
 		$("#articleForm").validate({
 		        rules: {
-		        	"articleItem.title":  {
+		        	"title":  {
 						required: true
 					},
-					"articleItem.picUrl":  {
+					"coverPicUrl":  {
 						required: true
 					},
-					"articleItem.digest":  {
+					"digest":  {
 						required: true
+					},
+					"sourceUrl": {
+						url: true 
+					},
+					"linkUrl": {
+						url: true 
 					}
 				},
 				messages: {
-					"articleItem.title":{
+					"title":{
 						required:"请输入图文消息标题"
 					},
-					"articleItem.picUrl":{
+					"coverPicUrl":{
 						required:"请上传封面"
 					},
-					"articleItem.digest":{
+					"digest":{
 						required:"请输入摘要"
+					},
+					"sourceUrl": {
+						url: "请输入正确的原文链接地址"
+					},
+					"linkUrl": {
+						url: "请输入正确的链接地址"
 					}
 				},
 		        errorClass: 'help-block',
@@ -442,8 +420,8 @@
 			 	if(data.success){
 					bootbox.alert('您的文章已成功录入' ,function(){
 						message_box.show('将跳转到您的文章列表管理界面!','success');
-						var  page_list = function(){
-							location.href="article_list.do";
+						var page_list = function(){
+							location.href="article_list";
 						}
 						window.setTimeout(page_list, 1000); 
 			 		});
@@ -453,6 +431,6 @@
 		 	}
 		});
       </script>
-
+	  <script src="//qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
     </body>
 </html>

@@ -28,6 +28,10 @@
 	<link type="text/css" rel="stylesheet" href="${contextUrl}/assets/css/jPaginate-style.css" />
 	<link type="text/css" rel="stylesheet" href="${contextUrl}/assets/css/theme.css">
 	
+	<link type="text/css" rel="stylesheet" href="${contextUrl}assets/css/style_singlenews.css">
+	<link type="text/css" rel="stylesheet" href="${contextUrl}assets/css/DT_bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="${contextUrl}assets/css/responsive-tables.css">
+	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>sss
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->

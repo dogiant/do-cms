@@ -1653,6 +1653,19 @@
           .attr('width', '640').attr('height', '360');
       } else {
         // this is not a known video link. Now what, Cat? Now what?
+    	  // 此处插入播放器脚本
+//    	  var someNewScript=document.createElement('script');
+//    	  someNewScript.innerText='console.log("new script");alert("aa")';
+    	  //document.getElementsByTagName('head')[0].appendChild(someNewScript);
+//    	  range.create().insertNode(someNewScript);
+    	  $video = $('<iframe>')
+          .attr('src', 'https://playvideo.qcloud.com/vod/'+ sUrl +'/iplayer.html?appid=1253949274&fileid='+ sUrl +'&autoplay=0&sw=1920&sh=1080')
+          .attr('width', '640').attr('height', '360').attr('frameborder', '0').attr('scrolling', 'no');
+    	  range.create().insertNode($video[0]);
+    	  var oScript = $('script');
+    	  oScript.attr('src','//imgcache.qq.com/open/qcloud/video/h5/fixifmheight.js').attr('charset','utf-8');
+    	  range.create().insertNode($oScript[0]);
+
       }
 
       if ($video) {

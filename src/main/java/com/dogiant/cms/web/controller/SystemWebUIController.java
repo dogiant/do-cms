@@ -27,10 +27,10 @@ public class SystemWebUIController {
         return "login";
     }
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
-		logger.info("index");
-        return "index";
+		logger.info("main");
+        return "main";
     }
 	
 	@RequestMapping(value = "/admin_input", method = RequestMethod.GET)

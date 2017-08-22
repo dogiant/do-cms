@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.dogiant.cms.web.interceptor.LoginInterceptor;
@@ -24,19 +25,19 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 		super.addInterceptors(registry);
 	}
 
-	// /**
-	// * 资源处理器
-	// *
-	// * @param registry
-	// */
-	// @Override
-	// public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	// logger.info("addResourceHandlers");
-	// registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-	// registry.addResourceHandler("/swagger-resources/**").addResourceLocations("classpath:/META-INF/swagger-resources/");
-	// registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-	// registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
-	// registry.addResourceHandler("/html/**").addResourceLocations("classpath:/static/html/");
-	// super.addResourceHandlers(registry);
-	// }
+	 /**
+	 * 资源处理器
+	 *
+	 * @param registry
+	 */
+	 @Override
+	 public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	 logger.info("addResourceHandlers");
+//	 registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+//	 registry.addResourceHandler("/swagger-resources/**").addResourceLocations("classpath:/META-INF/swagger-resources/");
+//	 registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+	 registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
+	 registry.addResourceHandler("/index.html").addResourceLocations("classpath:/static/");
+	 super.addResourceHandlers(registry);
+	 }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.dogiant.cms.dao.ArticleItemDao;
 import com.dogiant.cms.dao.NewsArticleItemDao;
 import com.dogiant.cms.dao.NewsDao;
+import com.dogiant.cms.domain.dto.DataTablesResult;
 import com.dogiant.cms.domain.dto.QueryResult;
 import com.dogiant.cms.domain.website.ArticleItem;
 import com.dogiant.cms.domain.website.MsgType;
@@ -113,9 +114,29 @@ public class MessageServiceImpl implements MessageService{
 	
 
 	@Override
-	public QueryResult<ArticleItem> getArticleItemListForDatatables(
+	public QueryResult<ArticleItem> getArticleItemQueryResult(
 			Integer start, Integer length, String orderName, String orderDir, String searchValue) {
 		return articleItemDao.getArticleItemQueryResult(start,length,orderName,orderDir,searchValue);
 	}
 
+	@Override
+	public DataTablesResult<ArticleItem> getArticleItemDataTablesResult(Integer start, Integer length, String orderName,
+			String orderDir, String searchValue) {
+		
+		QueryResult<ArticleItem> queryResult = this.getArticleItemQueryResult(start, length, orderName, orderDir, searchValue);
+		//此处可处理成无需获取父子目录相关
+		if (queryResult.getResult() != null) {
+			for(ArticleItem articleItem : queryResult.getResult()){
+				articleItem.setArticleCat(null);
+			}
+		}
+		
+		DataTablesResult<ArticleItem> dataTableResult = new DataTablesResult<ArticleItem>();
+		dataTableResult.setData(queryResult.getResult());
+		dataTableResult.setRecordsTotal(queryResult.getRecordnum());
+		dataTableResult.setRecordsFiltered(queryResult.getRecordnum());
+		return dataTableResult;
+	}
+
+	
 }

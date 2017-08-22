@@ -194,7 +194,7 @@ public class ArticleCat implements java.io.Serializable {
 		this.showInNav = showInNav;
 	}
 
-	@ManyToOne(cascade = CascadeType.REFRESH)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "parent_id")
 	public ArticleCat getParent() {
 		return parent;
@@ -235,7 +235,7 @@ public class ArticleCat implements java.io.Serializable {
 		this.childCat = childCat;
 	}
 
-	@OneToMany(cascade = {CascadeType.REFRESH, CascadeType.REMOVE },mappedBy="articleCat",fetch=FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.REFRESH, CascadeType.REMOVE }, mappedBy="articleCat", fetch=FetchType.LAZY)
 	//@JoinColumn(name="cat_id", referencedColumnName = "cat_id")
 	public List<ArticleItem> getArticles() {
 		return articles;
