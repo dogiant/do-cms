@@ -40,6 +40,14 @@ public class SectionHistory implements Serializable {
 	//创建时间
 	private Date ctime;
 
+	public SectionHistory(String code, String name, String content, Date ctime) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.content = content;
+		this.ctime = ctime;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)

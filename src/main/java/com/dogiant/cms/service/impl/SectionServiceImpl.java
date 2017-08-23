@@ -1,43 +1,66 @@
 package com.dogiant.cms.service.impl;
 
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.dogiant.cms.dao.SectionDao;
+import com.dogiant.cms.dao.SectionHistoryDao;
 import com.dogiant.cms.domain.dto.DataTablesResult;
 import com.dogiant.cms.domain.website.Section;
+import com.dogiant.cms.domain.website.SectionHistory;
 import com.dogiant.cms.service.SectionService;
 
 @Service("sectionService")
 public class SectionServiceImpl implements SectionService {
 
+	@Autowired
+	private SectionDao sectionDao;
+
+	@Autowired
+	private SectionHistoryDao sectionHistoryDao;
+
 	@Override
 	public Section getSection(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sectionDao.getSection(id);
 	}
 
 	@Override
 	public void addSection(Section section) {
-		// TODO Auto-generated method stub
-		
+		sectionDao.save(section);
+		SectionHistory sectionHistory = new SectionHistory(section.getCode(), section.getName(), section.getContent(),
+				new Date());
+		sectionHistoryDao.add(sectionHistory);
 	}
 
 	@Override
 	public void deleteSections(Long[] ids) {
-		// TODO Auto-generated method stub
-		
+		for (Long id : ids) {
+			sectionDao.delete(id);
+		}
+
 	}
 
 	@Override
 	public void updateSection(Section section) {
-		// TODO Auto-generated method stub
-		
+		sectionDao.save(section);
+		SectionHistory sectionHistory = new SectionHistory(section.getCode(), section.getName(), section.getContent(),
+				new Date());
+		sectionHistoryDao.add(sectionHistory);
 	}
 
 	@Override
 	public DataTablesResult<Section> getSectionDataTablesResult(Integer start, Integer length, String orderName,
 			String orderDir, String searchValue) {
-		// TODO Auto-generated method stub
-		return null;
+		Page<Section> page = sectionDao.getPagedSection(start, length, orderName, orderDir, searchValue);
+
+		DataTablesResult<Section> dataTablesResult = new DataTablesResult<Section>();
+		dataTablesResult.setData(page.getContent());
+		dataTablesResult.setRecordsTotal(page.getTotalElements());
+		dataTablesResult.setRecordsFiltered(page.getTotalElements());
+		return dataTablesResult;
 	}
 
 }

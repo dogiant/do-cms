@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import com.dogiant.cms.dao.AdminUserDao;
 import com.dogiant.cms.domain.admin.AdminUser;
-import com.dogiant.cms.domain.dto.QueryResult;
 import com.dogiant.cms.repo.AdminUserRepo;
 
 @Service("adminUserDao")
