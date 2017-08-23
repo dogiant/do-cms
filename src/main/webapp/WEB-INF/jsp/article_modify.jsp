@@ -92,13 +92,13 @@
 	                                                <div class="control-group">
 	                                                    <label for="newsSubtitle" class="control-label">副标题</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <input type="text" id="articleSubtitle" name="subtitle" class="span6 input-tooltip" data-placement="top"  value="${articleItem.subtitle }"/>
+	                                                        <input type="text" id="articleSubtitle" name="subtitle" class="span6 input-tooltip" data-placement="top" value="${articleItem.subtitle }"/>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">
 	                                                    <label for="newsAuthor" class="control-label">作者</label>
 	                                                    <div class="controls with-tooltip">
-	                                                        <input type="text" id="articleAuthor" name="author" class="span6 input-tooltip" data-placement="top"  value="${articleItem.author }"/>（选填）
+	                                                        <input type="text" id="articleAuthor" name="author" class="span6 input-tooltip" data-placement="top" value="${articleItem.author }"/>（选填）
 	                                                    </div>
 	                                                </div>
 	                                                <div class="control-group">

@@ -38,7 +38,7 @@
                 <li><a href="article_cat_list"><i class="icon-angle-right"></i> 文章栏目管理</a></li>
                 
                 <li><a href="article_list"><i class="icon-angle-right"></i> 文章管理</a></li>
-                
+               
             	<li><a href="section_list"><i class="icon-angle-right"></i> 版块管理</a></li>
             </ul>
         </li>

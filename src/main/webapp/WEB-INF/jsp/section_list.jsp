@@ -28,18 +28,18 @@
                                     <div class="box dark">
                                         <header>
                                             <div class="icons"><i class="icon-edit"></i></div>
-                                            <h5>微官网碎片栏目列表</h5>
+                                            <h5>版块内容管理</h5>
                                             <!-- .toolbar -->
                                             <div class="toolbar">
                                                 <ul class="nav">
-                                                    <li><a href="include_cat_input.do">微官网碎片栏目录入</a></li>
+                                                    <li><a href="section_input">版块内容录入</a></li>
                                                     <li class="dropdown">
                                                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                                             <i class="icon-th-large"></i>
                                                         </a>
                                                         <ul class="dropdown-menu">
-                                                        	<li><a href="include_cat_input.do">微官网碎片栏目录入</a></li>
-                                                            <li><a href="include_cat_list.do">微官网碎片栏目列表</a></li>
+                                                        	<li><a href="section_input">版块录入</a></li>
+                                                            <li><a href="section_list">版块列表</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
@@ -52,29 +52,19 @@
                                             <!-- /.toolbar -->
                                         </header>
                                         <div  id="div-1"  class="accordion-body collapse in body">
-                                            <table id="includeCatDataTable" class="table table-bordered table-condensed table-hover table-striped">
+                                            <table id="sectionDataTable" class="table table-bordered table-condensed table-hover table-striped">
                                                 <thead>
                                                     <tr>
-                                                    	<th>栏目名称</th>
-                                                        <th>栏目描述</th>
+                                                    	<th>版块代码</th>
+                                                    	<th>版块名称</th>
+                                                        <th>类型</th>
                                                         <th>创建时间</th>
                                                         <th>修改时间</th>
                                                         <th>操作</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <s:iterator value="%{resultMap.resultList}" id="includeCat"> 
-												    <tr dataid=<s:property value="#includeCat.catId" />>
-												    	<td><img src="assets/img/menu_arrow.gif" width="9" height="9" border="0" style="margin-left:<s:property value="#includeCat.level"/>em" />&nbsp;<s:property value="#includeCat.catName" /></td>
-                                                    	<td><s:property value="#includeCat.catDesc" /></td>
-                                                        <td><s:date name="#includeCat.ctime"  format="yy-MM-dd" /></td>
-                                                        <td><s:date name="#includeCat.mtime"  format="yy-MM-dd HH:mm" /></td>
-                                                        <td>
-                                                        	<button class="btn edit"  dataid=<s:property value="#includeCat.catId" />><i class="icon-edit" ></i></button>
-                                                            <button class="btn btn-danger remove" dataid=<s:property value="#includeCat.catId" />><i class="icon-remove" ></i></button>
-                                                        </td>
-                                                    </tr>
-												</s:iterator>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -107,12 +97,57 @@
         
         <script type="text/javascript">
             $(function() {
+            	/*----------- BEGIN articleDataTable CODE -------------------------*/
+            	$('#sectionDataTable').dataTable({
+                	"processing": true,
+                    "serverSide": true,
+                    "ajax": "api/section/list",
+                    "columns": [
+                        { "data": "code" },
+                        { "data": "name"},
+                        { "data": "typeDesc"},
+                        { "data": "ctime" },
+                        { "data": "mtime" }
+                    ],
+                    "columnDefs": [  
+                        { "bSortable": false, 
+                        	"targets": [1],
+                        	"sWidth": "320px"
+                        },
+                        //{ "visible": false,  "targets": [2] },
+                        { "targets": [5],
+                        "data": "id" ,
+                        "render": function(data, type, full) { return "<button class='btn view'  dataid='"+data+"'><i class='icon-search' ></i></button>  <button class='btn edit'  dataid='"+data+"'><i class='icon-edit' ></i></button>  <button class='btn btn-danger remove'  dataid='"+data+"'><i class='icon-remove'></i></button>"; } 
+                        } 
+                    ],
+                   
+                	"aaSorting": [[ 3, "desc" ]] ,
+                    "sPaginationType": "bootstrap",
+                   // "dom": '<"top"i>rt<"bottom"flp><"clear">',
+                    "oLanguage": {
+                    	"sLoadingRecords": "正在加载中......",
+                    	"sProcessing": "正在加载中......",
+                        "sLengthMenu": "每页显示 _MENU_ 条记录",
+                        "sZeroRecords": "没有检索到相关数据",
+                        "sEmptyTable": "数据表中没有相关数据",
+                        "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+                        "sInfoEmpty": "没有相关数据",
+                        "sInfoFiltered": "数据表中共 _MAX_ 条记录",
+                        "sSearch": "检索 ",
+                        "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "上一页",
+                            "sNext": "下一页",
+                            "sLast": "末页"
+                        }
+                    }
+                });
 
-                /*----------- END menuDataTable CODE -------------------------*/
-                $('#includeCatDataTable tbody').on( 'click', 'button.view', function () {
+                /*----------- END articleDataTable CODE -------------------------*/
+                $('#sectionDataTable tbody').on( 'click', 'button.view', function () {
                 	$.ajax({
                 		type:'post',
-                		url:'api/include_cat_get.do',
+                		url:'api/section/view',
                 		data:{id:$(this).attr("dataid")},
                 		dataType:'json',
                 		success:function(data){
@@ -127,16 +162,16 @@
                 	});
                 }); 
             	
-                $('#includeCatDataTable tbody').on( 'click', 'button.edit', function () {
-                    location.href = "include_cat_modify.do?includeCat.catId="+$(this).attr("dataid");
+                $('#sectionDataTable tbody').on( 'click', 'button.edit', function () {
+                    location.href = "section_modify?id="+$(this).attr("dataid");
                 }); 
-                $('#includeCatDataTable tbody').on( 'click', 'button.remove', function () {
+                $('#sectionDataTable tbody').on( 'click', 'button.remove', function () {
                     var idsvalue = $(this).attr("dataid");
         			bootbox.confirm("您确定要删除操作吗?", function(result) {
             			if(result){
                         	$.ajax({
                         		type:'post',
-                        		url:'api/include_cat_delete.do',
+                        		url:'api/section/delete',
                         		data:{ids:idsvalue},
                         		dataType:'json',
                         		beforeSend: function(){

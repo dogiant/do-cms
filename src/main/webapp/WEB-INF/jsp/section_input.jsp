@@ -30,18 +30,18 @@
                                     <div class="box dark">
                                         <header>
                                             <div class="icons"><i class="icon-edit"></i></div>
-                                            <h5>微官网碎片栏目修改</h5>
+                                            <h5>版块内容录入</h5>
                                             <!-- .toolbar -->
                                             <div class="toolbar">
                                                 <ul class="nav">
-                                                    <li><a href="include_cat_list.do">微官网碎片栏目管理</a></li>
+                                                    <li><a href="section_list">版块内容管理</a></li>
                                                     <li class="dropdown">
                                                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                                             <i class="icon-th-large"></i>
                                                         </a>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="include_cat_list.do">微官网碎片栏目列表</a></li>
-                                                            <li><a href="include_cat_input.do">微官网碎片栏目录入</a></li>
+                                                            <li><a href="section_list">版块列表</a></li>
+                                                            <li><a href="section_input">版块录入</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
@@ -57,41 +57,43 @@
                                         	
                                         				
                                         	<div class="form-horizontal">
-                                                <s:form id="includeCatForm" namespace="/api" action="include_cat_update" method="post" > 
-                                                <s:hidden  id="catId" name="includeCat.catId" value="%{resultMap.includeCat.catId}"></s:hidden>
-                                                <div class="control-group">
-                                                    <label for="name" class="control-label">上级栏目</label>
-                                                    <div class="controls">
-                                                    	<s:select name="includeCat.parent.catId" headerValue="顶级栏目" headerKey="%{null}" list="includeCatList" listKey="catId" listValue="catName" emptyOption="false" value="%{resultMap.includeCat.parent.id}"></s:select>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="control-group">
-                                                    <label for="name" class="control-label">栏目名称</label>
-                                                    <div class="controls">
-                                                    	<s:textfield id="name" name="includeCat.catName" value="%{resultMap.includeCat.catName}" class="span6 input-tooltip"
-                                                               data-original-title="请输入栏目名称" data-placement="bottom" ></s:textfield>
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-														<label class="control-label">栏目类型</label>
-														<div class="controls controls-row">
-																	<input class="uniform" type="radio" name="includeCat.catType" value="0"  <s:if test='%{resultMap.includeCat.catType==0}'>checked="checked"</s:if>>自由增设 
-																	<input class="uniform" type="radio" name="includeCat.catType" value="1"  <s:if test='%{resultMap.includeCat.catType==1}'>checked="checked"</s:if>>系统设定
-														</div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label for="sortOrder" class="control-label">描述</label>
-                                                    <div class="controls">
-                                                    	<s:textfield id="catDesc" name="includeCat.catDesc"  value="%{resultMap.includeCat.catDesc}" class="span6 input-tooltip"
-                                                               data-original-title="请输入描述" data-placement="bottom" ></s:textfield>
-                                                    </div>
-                                                </div>
-
-												<div class="form-actions">
+                                                <form id="sectionForm" action="/api/section/add" method="post" > 
+	                                                <div class="control-group" id="keyControl">
+	                                                    <label for="key" class="control-label">版块位置代码(英文名)</label>
+	                                                    <div class="controls">
+	                                                    	<input type="text"  id="code" name="code" class="span6 input-tooltip"
+	                                                               data-original-title="请输入版块位置代码(英文名)" data-placement="bottom"/>
+	                                                    </div>
+	                                                </div>
+	                                               
+	                                                <div class="control-group">
+	                                                    <label for="name" class="control-label">版块位置名称</label>
+	                                                    <div class="controls">
+	                                                    	<input type="text"  id="name" name="name" class="span6 input-tooltip"
+	                                                               data-original-title="请输入版块位置名称" data-placement="bottom"/>
+	                                                    </div>
+	                                                </div>
+	
+	                                                <div class="control-group">
+															<label class="control-label">类型</label>
+															<div class="controls controls-row">
+																<input type="radio" name="type" value="0" checked="checked" class="uniform"/> 系统设定
+																<input type="radio" name="type" value="1" class="uniform"/> 自由增设
+															</div>
+	                                                </div>
+	                                                
+	                                                <div class="control-group">
+	                                                    <label for="articleContent" class="control-label">内容</label>
+	                                                    <div class="controls">
+	                                                    	<div id="sectionContent" class="summernote"></div>
+	                                                    	<input type="hidden" id="content" name="content"></input>
+	                                                    </div>
+		                                            </div>
+	
+													<div class="form-actions">
 														<input type="submit" value="提交" class="btn btn-primary">
-                                                </div>
-                                                </s:form>
+	                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -123,15 +125,59 @@
 		 
         <script type="text/javascript">
 		$().ready(function() {
-			 $("#includeCatForm").validate({
+			 $('#sectionContent').summernote({
+			 	lang: 'zh-CN',
+	            height: 200,
+	            onImageUpload: function(files, editor, welEditable) {
+	                sendFile(files[0], editor, welEditable);
+	            },
+	            onblur: function(e) {
+	                var sHTML = $("#sectionContent").code();
+	                $("#content").val(sHTML);
+	            }
+		    });
+			//summernote图片上传
+			function sendFile(file, editor, welEditable) {
+				var formData  = new FormData();
+				formData.append("uploads", file);
+				formData.append("type","json");
+				formData.append("channel","section");
+	            $.ajax({
+	                data: formData,
+	                type: "post",
+	                url: "/upload/api",
+	                dataType : "json",
+	                async: false,  
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                success: function(data) {
+		                if(data.success){
+			               var url = STATIC_FILE_HOST + data.result[0];
+			               editor.insertImage(welEditable, url);
+			            }
+	                },  
+	                error: function (returndata) {  
+	                    alert(returndata);  
+	                }  
+	            });
+			}
+			
+			$("#sectionForm").validate({
 			        rules: {
-			        	"includeCat.catName":  {
+			        	"code":  {
+							required: true,
+						},
+						"name":  {
 							required: true
 						}
 					},
 					messages: {
-						"includeCat.catName":{
-							required:"请输入栏目名称"
+						"code":{
+							required:"请输入版块位置代码(英文)"
+						},
+						"name":{
+							required:"请输入版块位置名称"
 						}
 					},
 			        errorClass: 'help-block',
@@ -160,10 +206,10 @@
 			 	// post-submit callback 
 			 	function showResponse(data)  { 
 				 	if(data.success){
-						bootbox.alert('碎片栏目成功录入' ,function(){
-							message_box.show('将跳转到碎片栏目列表管理界面!','success');
+						bootbox.alert('版块内容成功录入' ,function(){
+							message_box.show('将跳转到版块列表管理界面!','success');
 							var  page_list = function(){
-								location.href="include_cat_list.do";
+								location.href="section_list";
 							}
 							window.setTimeout(page_list, 1000); 
 				 		});

@@ -1658,6 +1658,10 @@
 //    	  someNewScript.innerText='console.log("new script");alert("aa")';
     	  //document.getElementsByTagName('head')[0].appendChild(someNewScript);
 //    	  range.create().insertNode(someNewScript);
+    	  if(!$.isNumeric(sUrl)){
+    		  return alert("请输入正确的腾讯云视频ID")
+    	  }
+    		  
     	  $video = $('<iframe>')
           .attr('src', 'https://playvideo.qcloud.com/vod/'+ sUrl +'/iplayer.html?appid=1253949274&fileid='+ sUrl +'&autoplay=0&sw=1920&sh=1080')
           .attr('width', '640').attr('height', '360').attr('frameborder', '0').attr('scrolling', 'no');
