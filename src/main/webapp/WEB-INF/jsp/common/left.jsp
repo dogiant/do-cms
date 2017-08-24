@@ -7,10 +7,10 @@
     <!-- .user-media -->
     <div class="media user-media hidden-phone" id="userInfoTablet">
     	<!-- 
-              <a href="" class="user-link">
-                  <img src="assets/img/user.gif" alt="" class="media-object img-polaroid user-img" id="userHeadImg">
-                  <span class="label user-label"></span>
-              </a>
+            <a href="" class="user-link">
+                <img src="assets/img/user.gif" alt="" class="media-object img-polaroid user-img" id="userHeadImg">
+                <span class="label user-label"></span>
+            </a>
 		-->
         <div class="media-body hidden-tablet">
         	<!-- 
@@ -35,7 +35,7 @@
                     class="label label-inverse pull-right">4</span>
             </a>
             <ul class="collapse  <c:if test="${requestScope.menu=='article'}"> in</c:if>"  id="article-nav">
-                <li><a href="article_cat_list"><i class="icon-angle-right"></i> 文章栏目管理</a></li>
+                <li><a href="article_cat_list"><i class="icon-angle-right"></i> 栏目管理</a></li>
                 
                 <li><a href="article_list"><i class="icon-angle-right"></i> 文章管理</a></li>
                
