@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dogiant.cms.config.ImageConfig;
 import com.dogiant.cms.domain.website.Section;
 import com.dogiant.cms.service.SectionService;
 
@@ -24,6 +25,7 @@ public class SectionWebUIController {
 	@RequestMapping(value = "/section_input", method = RequestMethod.GET)
     public String sectionInput(Map<String, Object> model) {
 		logger.info("/section_input");
+		model.put("fileHost", ImageConfig.fileHost);
 		model.put("menu", "article");
         return "section_input";
     }
@@ -39,7 +41,7 @@ public class SectionWebUIController {
 	@RequestMapping(value = "/section_modify", method = RequestMethod.GET)
     public String sectionModify(@RequestParam(value = "id", required = true) Long id, Map<String, Object> model) {
 		logger.info("/section_modify");
-
+		model.put("fileHost", ImageConfig.fileHost);
 		Section section = sectionService.getSection(id);
 		model.put("section", section);
 		model.put("menu", "article");

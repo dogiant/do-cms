@@ -58,7 +58,8 @@
                                         	
                                         				
                                         	<div class="form-horizontal">
-                                                <form id="sectionForm" action="/api/section/update" method="post" > 
+                                                <form id="sectionForm" action="api/section/update" method="post" > 
+                                                	<input type="hidden" id="id" name="id" value="${section.id}" />
 	                                                <div class="control-group" id="keyControl">
 	                                                    <label for="key" class="control-label">版块位置代码(英文名)</label>
 	                                                    <div class="controls">
@@ -87,7 +88,7 @@
 	                                                    <label for="articleContent" class="control-label">内容</label>
 	                                                    <div class="controls">
 	                                                    	<div id="sectionContent" class="summernote">${section.content }</div>
-	                                                    	<input type="hidden" id="content" name="content"></input>
+	                                                    	<input type="hidden" id="icontent" name="content"></input>
 	                                                    </div>
 		                                            </div>
 	
@@ -126,6 +127,8 @@
 		<%@ include file="common/footer_script.jsp" %>
 		 
         <script type="text/javascript">
+		var STATIC_FILE_HOST = "${fileHost}";
+		
 		$().ready(function() {
 			 $('#sectionContent').summernote({
 			 	lang: 'zh-CN',
@@ -135,7 +138,7 @@
 	            },
 	            onblur: function(e) {
 	                var sHTML = $("#sectionContent").code();
-	                $("#content").val(sHTML);
+	                $("#icontent").val(sHTML);
 	            }
 		    });
 			//summernote图片上传

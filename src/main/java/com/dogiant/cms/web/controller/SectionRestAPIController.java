@@ -48,6 +48,7 @@ public class SectionRestAPIController {
 			section.setCtime(now);
 			section.setMtime(now);
 			section.setStatus(0);
+			System.out.println(section.getContent());
 			sectionService.addSection(section);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,6 +97,15 @@ public class SectionRestAPIController {
 			@RequestParam(value = "ids", required = true) Long[] ids) {
 
 		ServiceResponse<List<ArticleCat>> resp = ServiceResponse.successResponse();
+		if(ids!=null && ids.length==1){
+			Section section = sectionService.getSection(ids[0]);
+			if (section.getType() == 0) {
+				resp = resp.setCode(ServiceExInfo.NO_AUTH_EXCEPTION.getCode());
+				resp = resp.setMsg(ServiceExInfo.NO_AUTH_EXCEPTION.getMessage());
+				HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);
+				return result;
+			}
+		}
 		try {
 			sectionService.deleteSections(ids);
 		} catch (Exception e) {

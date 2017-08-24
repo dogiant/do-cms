@@ -117,10 +117,11 @@
                         //{ "visible": false,  "targets": [2] },
                         { "targets": [5],
                         "data": "id" ,
-                        "render": function(data, type, full) { return "<button class='btn view'  dataid='"+data+"'><i class='icon-search' ></i></button>  <button class='btn edit'  dataid='"+data+"'><i class='icon-edit' ></i></button>  <button class='btn btn-danger remove'  dataid='"+data+"'><i class='icon-remove'></i></button>"; } 
+                        //<button class='btn view'  dataid='"+data+"'><i class='icon-search' ></i></button>  
+                        "render": function(data, type, full) { return "<button class='btn edit'  dataid='"+data+"'><i class='icon-edit' ></i></button>  <button class='btn btn-danger remove'  dataid='"+data+"'><i class='icon-remove'></i></button>"; } 
                         } 
                     ],
-                   
+                  
                 	"aaSorting": [[ 3, "desc" ]] ,
                     "sPaginationType": "bootstrap",
                    // "dom": '<"top"i>rt<"bottom"flp><"clear">',
@@ -144,23 +145,6 @@
                 });
 
                 /*----------- END articleDataTable CODE -------------------------*/
-                $('#sectionDataTable tbody').on( 'click', 'button.view', function () {
-                	$.ajax({
-                		type:'post',
-                		url:'api/section/view',
-                		data:{id:$(this).attr("dataid")},
-                		dataType:'json',
-                		success:function(data){
-                			if(data.success){
-                    			//alert(data.text.content);
-                    			bootbox.alert(data.text.content);                   			
-                    		}
-                		},
-                		error:function(){
-                			alert("读取出错!");
-                		}
-                	});
-                }); 
             	
                 $('#sectionDataTable tbody').on( 'click', 'button.edit', function () {
                     location.href = "section_modify?id="+$(this).attr("dataid");
@@ -180,6 +164,12 @@
                         			if(data.success){
                             			alert("删除成功");
                         				window.location.reload(); 
+                            		}else{
+                            			if(data.code==4){
+                            				alert("系统设定的版块不允许删除");
+                            			}else{
+                            				alert(data.msg);
+                            			}
                             		}
                         		},
                         		error:function(){

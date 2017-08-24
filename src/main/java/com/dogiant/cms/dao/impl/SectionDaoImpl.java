@@ -47,7 +47,7 @@ public class SectionDaoImpl implements SectionDao {
 	@Override
 	public void delete(Long id) {
 		Section section = this.getSection(id);
-		if (section != null) {
+		if (section != null && section.getType()!=0) {
 			section.setStatus(-3);
 			section.setMtime(new Date());
 			this.update(section);
