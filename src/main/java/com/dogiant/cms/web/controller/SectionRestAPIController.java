@@ -1,5 +1,7 @@
 package com.dogiant.cms.web.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +63,80 @@ public class SectionRestAPIController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/api/section/checkCodeExists", method = RequestMethod.POST)
+	public String checkCodeExists(@RequestParam(value = "code", required = true) String code,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		// 指定输出内容类型和编码
+		response.setContentType("text/html;charset=utf-8");
+		// 获取输出流，然后使用
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		boolean returnval = true;
+		Section section = null;
+		if (StringUtils.isNotBlank(code)) {
+			section = sectionService.getSectionByCode(code);
+		} else {
+			returnval = false;
+		}
+		try {
+			// 直接进行文本操作
+			if (!returnval || section != null) {
+				out.print("false");
+			} else {
+				out.print("true");
+			}
+			out.flush();
+			out.close();
+		} catch (Exception ex) {
+			out.println(ex.toString());
+		}
+		// 说明:因函数返回类型为void类型,即可不用返回，直接输出；
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/api/section/checkNameExists", method = RequestMethod.POST)
+	public String checkNameExists(@RequestParam(value = "name", required = true) String name,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		// 指定输出内容类型和编码
+		response.setContentType("text/html;charset=utf-8");
+		// 获取输出流，然后使用
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		boolean returnval = true;
+		Section section = null;
+		if (StringUtils.isNotBlank(name)) {
+			section = sectionService.getSectionByName(name);
+		} else {
+			returnval = false;
+		}
+		try {
+			// 直接进行文本操作
+			if (!returnval || section != null) {
+				out.print("false");
+			} else {
+				out.print("true");
+			}
+			out.flush();
+			out.close();
+		} catch (Exception ex) {
+			out.println(ex.toString());
+		}
+		// 说明:因函数返回类型为void类型,即可不用返回，直接输出；
+		return null;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/api/section/update", method = RequestMethod.POST)
 	public HttpResult<?> sectionUpdate(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute Section section) throws CommException {
@@ -99,7 +175,7 @@ public class SectionRestAPIController {
 		ServiceResponse<List<ArticleCat>> resp = ServiceResponse.successResponse();
 		if(ids!=null && ids.length==1){
 			Section section = sectionService.getSection(ids[0]);
-			if (section.getType() == 0) {
+			if (section.getType() == 0 && !"admin".equals(request.getAttribute("userName"))) {
 				resp = resp.setCode(ServiceExInfo.NO_AUTH_EXCEPTION.getCode());
 				resp = resp.setMsg(ServiceExInfo.NO_AUTH_EXCEPTION.getMessage());
 				HttpResult<?> result = ServiceResponse2HttpResult.transfer(resp);

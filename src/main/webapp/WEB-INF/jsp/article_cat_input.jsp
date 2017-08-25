@@ -60,7 +60,7 @@
                                                 <div class="control-group">
                                                     <label for="name" class="control-label">上级栏目</label>
                                                     <div class="controls">
-                                                    	<select name="parent.catId">
+                                                    	<select name="parent.catId" id="parentCatId">
                                                     		<option value="">顶级栏目</option>
                                                     		<c:forEach items="${articleCats}" var ="obj" varStatus="status">
 																<option value="${obj.catId}">${obj.catNameShow }</option>
@@ -86,8 +86,8 @@
                                                 <div class="control-group">
 														<label class="control-label">栏目类型</label>
 														<div class="controls controls-row">
-															<input type="radio" name="catType" value="0"  checked="checked" class="uniform"/> 自由增设 
-															<input type="radio" name="catType" value="1" class="uniform"/> 系统设定
+															<input type="radio" name="catType" value="1"  checked="checked" class="uniform"/> 自由增设 
+															<input type="radio" name="catType" value="0" class="uniform"/> 系统设定
 														</div>
                                                 </div>
                                                 <div class="control-group">
@@ -164,10 +164,42 @@
 			 $("#articleCatForm").validate({
 			        rules: {
 			        	"catName":  {
-							required: true
+							required: true,
+							minlength: 3,
+		    				maxlength: 36,
+		    				remote:{
+	    						url : "api/article/cat/checkSameLevelCatNameExists",
+	    						cache : false,
+	    						type: "post",
+	    				        contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    				        data: {
+	    				        	parentCatId: function() {
+	    				            	return $("#parentCatId").val();
+	    				          	},
+	    				          	catName: function() {
+	    				          		return $("#catName").val();
+	    				          	}
+	    				        }
+		    				}
 						},
 						"catCode":  {
-							required: true
+							required: true,
+							minlength: 3,
+		    				maxlength: 128,
+		    				remote:{
+	    						url : "api/article/cat/checkSameLevelCatCodeExists",
+	    						cache : false,
+	    						type: "post",
+	    				        contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    				        data: {
+	    				        	parentCatId: function() {
+	    				            	return $("#parentCatId").val();
+	    				          	},
+	    				          	catCode: function() {
+	    				          		return $("#catCode").val();
+	    				          	}
+	    				        }
+		    				}
 						},
 						"sortOrder":  {
 							number: true
@@ -175,10 +207,16 @@
 					},
 					messages: {
 						"catName":{
-							required:"请输入栏目名称"
+							required:"请输入栏目名称",
+							minlength: "请输入至少3位字符",
+	    					maxlength: "长度不能超过36字符",
+	    					remote:"此类目名称在相同的层级下已经存在"
 						},
 						"catCode":  {
-							required: "请输入栏目代码(英文名)"
+							required: "请输入栏目代码(英文名)",
+							minlength: "请输入至少3位字符",
+	    					maxlength: "长度不能超过128字符",
+	    					remote:"此类目代号在相同的层级下已经存在"
 						},
 						"sortOrder":  {
 							number: "请输入一个数字排序值"

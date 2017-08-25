@@ -28,6 +28,16 @@ public class SectionServiceImpl implements SectionService {
 	}
 
 	@Override
+	public Section getSectionByCode(String code) {
+		return sectionDao.getSectionByCode(code);
+	}
+
+	@Override
+	public Section getSectionByName(String name) {
+		return sectionDao.getSectionByName(name);
+	}
+
+	@Override
 	public void addSection(Section section) {
 		sectionDao.save(section);
 		SectionHistory sectionHistory = new SectionHistory(section.getCode(), section.getName(), section.getContent(),

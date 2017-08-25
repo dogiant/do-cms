@@ -15,5 +15,7 @@ public interface SectionRepo extends JpaRepository<Section, Long>, JpaSpecificat
 	Section getSectionValidDataById(@Param("id")Long id);
 	
 	Section getSectionByCode(@Param("code")String code);
+	
+	Section getSectionByName(@Param("name")String name);
 
 }

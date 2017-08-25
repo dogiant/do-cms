@@ -56,11 +56,11 @@
                                         				
                                         	<div class="form-horizontal">
                                                 <form id="articleCatForm"  action="api/article/cat/update" method="post" > 
-                                                <input type="hidden"  id="catId" name="catId" value="${articleCat.catId}" />
+                                                <input type="hidden" id="catId" name="catId" value="${articleCat.catId}" />
                                                 <div class="control-group">
                                                     <label for="name" class="control-label">上级栏目</label>
                                                     <div class="controls">
-                                                    	<select name="parent.catId">
+                                                    	<select name="parent.catId" id="parentCatId">
                                                     		<option value="" <c:if test="${articleCat.parent.catId==null}"> selected="selected" </c:if>>顶级栏目</option>
                                                     		<c:forEach items="${articleCats}" var ="obj" varStatus="status">
 																<option value="${obj.catId}" <c:if test="${articleCat.parent.catId==obj.catId}"> selected="selected" </c:if>>${obj.catNameShow }</option>
@@ -86,8 +86,8 @@
                                                 <div class="control-group">
 														<label class="control-label">栏目类型</label>
 														<div class="controls controls-row">
-															<input type="radio" name="catType" value="0"  <c:if test="${articleCat.catType==0}"> checked="checked"  </c:if> class="uniform"/> 自由增设 
-															<input type="radio" name="catType" value="1" <c:if test="${articleCat.catType==1}"> checked="checked"  </c:if> class="uniform"/> 系统设定
+															<input type="radio" name="catType" value="1" <c:if test="${articleCat.catType==0}"> checked="checked" </c:if> class="uniform" readonly="readonly"/> 自由增设 
+															<input type="radio" name="catType" value="0" <c:if test="${articleCat.catType==1}"> checked="checked" </c:if> class="uniform" readonly="readonly"/> 系统设定
 														</div>
                                                 </div>
                                                 <div class="control-group">
@@ -165,10 +165,48 @@
 			 $("#articleCatForm").validate({
 			        rules: {
 			        	"catName":  {
-							required: true
+							required: true,
+							minlength: 3,
+		    				maxlength: 36,
+		    				remote:{
+	    						url : "api/article/cat/checkSameLevelCatNameExists",
+	    						cache : false,
+	    						type: "post",
+	    				        contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    				        data: {
+	    				        	parentCatId: function() {
+	    				            	return $("#parentCatId").val();
+	    				          	},
+	    				          	catId: function(){
+	    				          		return $("#catId").val();
+	    				          	},
+	    				          	catName: function() {
+	    				          		return $("#catName").val();
+	    				          	}
+	    				        }
+		    				}
 						},
 						"catCode":  {
-							required: true
+							required: true,
+							minlength: 3,
+		    				maxlength: 128,
+		    				remote:{
+	    						url : "api/article/cat/checkSameLevelCatCodeExists",
+	    						cache : false,
+	    						type: "post",
+	    				        contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    				        data: {
+	    				        	parentCatId: function() {
+	    				            	return $("#parentCatId").val();
+	    				          	},
+	    				          	catId: function(){
+	    				          		return $("#catId").val();
+	    				          	},
+	    				          	catCode: function() {
+	    				          		return $("#catCode").val();
+	    				          	}
+	    				        }
+		    				}
 						},
 						"sortOrder":  {
 							number: true
@@ -176,10 +214,14 @@
 					},
 					messages: {
 						"catName":{
-							required:"请输入栏目名称"
+							required:"请输入栏目名称",
+							minlength: "请输入至少3位字符",
+	    					maxlength: "长度不能超过36字符"
 						},
 						"catCode":  {
-							required: "请输入栏目代码(英文名)"
+							required: "请输入栏目代码(英文名)",
+							minlength: "请输入至少3位字符",
+	    					maxlength: "长度不能超过128字符"
 						},
 						"sortOrder":  {
 							number: "请输入一个数字排序值"

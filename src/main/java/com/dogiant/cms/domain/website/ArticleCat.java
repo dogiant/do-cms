@@ -148,6 +148,18 @@ public class ArticleCat implements java.io.Serializable {
 	public void setCatType(int catType) {
 		this.catType = catType;
 	}
+	
+	@Transient
+	public String getCatTypeDesc(){
+		switch (catType) {
+		case 0:
+			return "系统设定";
+		case 1:
+			return "自由增设";
+		default:
+			return "未知状态";
+		}
+	}
 
 	@Column(name = "is_text_cat", nullable = true)
 	public Boolean getIsTextCat() {

@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -77,6 +78,7 @@ public class SectionHistory implements Serializable {
 		this.name = name;
 	}
 	
+	@Lob
 	@Column(name = "content")
 	public String getContent() {
 		return content;

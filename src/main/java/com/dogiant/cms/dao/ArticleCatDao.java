@@ -20,4 +20,8 @@ public interface ArticleCatDao {
 
 	ArticleCat getArticleCatByCatCode(String catCode);
 
+	ArticleCat checkSameLevelCatNameExists(Long parentCatId, String catName);
+
+	ArticleCat checkSameLevelCatCodeExists(Long parentCatId, String catCode);
+
 }

@@ -16,4 +16,8 @@ public interface SectionService {
 	public DataTablesResult<Section> getSectionDataTablesResult(Integer start, Integer length, String orderName,
 			String orderDir, String searchValue);
 
+	public Section getSectionByCode(String code);
+
+	public Section getSectionByName(String name);
+
 }

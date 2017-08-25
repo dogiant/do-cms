@@ -94,4 +94,14 @@ public class ArticleCatServiceImpl implements ArticleCatService {
 		return articleCatDao.getArticleCatByCatCode(catCode);
 	}
 
+	@Override
+	public ArticleCat checkSameLevelCatNameExists(Long parentCatId, String catName) {
+		return articleCatDao.checkSameLevelCatNameExists(parentCatId, catName);
+	}
+
+	@Override
+	public ArticleCat checkSameLevelCatCodeExists(Long parentCatId, String catCode) {
+		return articleCatDao.checkSameLevelCatCodeExists(parentCatId, catCode);
+	}
+	
 }

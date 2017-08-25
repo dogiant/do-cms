@@ -57,6 +57,7 @@
                                                     <tr>
                                                     	<th>栏目名称</th>
                                                         <th>栏目代码</th>
+                                                        <th>类型</th>
                                                         <th>是否显示</th>
                                                         <th>排序值</th>
                                                         <th>创建时间</th>
@@ -69,10 +70,11 @@
                                                 	<tr dataid="${obj.catId}">
 												    	<td><img src="assets/img/menu_arrow.gif" width="9" height="9" border="0" style="margin-left:${obj.level}em" />&nbsp;${obj.catName}</td>
                                                     	<td>${obj.catCode}</td>
+                                                    	<td>${obj.catTypeDesc}</td>
                                                     	<td>${obj.showInNav}</td>
                                                     	<td>${obj.sortOrder}</td>
-                                                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.ctime}" /></td>
-                                                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.mtime}" /></td>
+                                                        <td width="200"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.ctime}" /></td>
+                                                        <td width="200"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${obj.mtime}" /></td>
                                                         <td>
                                                         	<button class="btn edit"  dataid="${obj.catId}"><i class="icon-edit" ></i></button>
                                                             <button class="btn btn-danger remove" dataid="${obj.catId}"><i class="icon-remove" ></i></button>
@@ -149,6 +151,12 @@
                         			if(data.success){
                             			alert("删除成功");
                         				window.location.reload(); 
+                            		}else{
+                            			if(data.code==4){
+                            				alert("系统设定的栏目不允许删除");
+                            			}else{
+                            				alert(data.msg);
+                            			}
                             		}
                         		},
                         		error:function(){

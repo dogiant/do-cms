@@ -64,7 +64,7 @@
 	                                                    <label for="key" class="control-label">版块位置代码(英文名)</label>
 	                                                    <div class="controls">
 	                                                    	<input type="text" id="code" name="code" class="span6 input-tooltip" value="${section.code }"
-	                                                               data-original-title="请输入版块位置代码(英文名)" data-placement="bottom"  readonly="readonly"/>
+	                                                               data-original-title="请输入版块位置代码(英文名)" data-placement="bottom" readonly="readonly"/>
 	                                                    </div>
 	                                                </div>
 	                                               
@@ -72,7 +72,7 @@
 	                                                    <label for="name" class="control-label">版块位置名称</label>
 	                                                    <div class="controls">
 	                                                    	<input type="text" id="name" name="name" class="span6 input-tooltip" value="${section.name }"
-	                                                               data-original-title="请输入版块位置名称" data-placement="bottom"  readonly="readonly" />
+	                                                               data-original-title="请输入版块位置名称" data-placement="bottom" readonly="readonly" />
 	                                                    </div>
 	                                                </div>
 	

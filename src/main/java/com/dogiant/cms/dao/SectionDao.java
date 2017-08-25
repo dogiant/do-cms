@@ -15,6 +15,8 @@ public interface SectionDao {
 	void delete(Long id);
 
 	Section getSectionByCode(String code);
+	
+	Section getSectionByName(String name);
 
 	Page<Section> getPagedSection(Integer start,
 			Integer length, String orderName, String orderDir,

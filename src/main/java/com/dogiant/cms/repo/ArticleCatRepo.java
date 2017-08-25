@@ -24,4 +24,20 @@ public interface ArticleCatRepo extends JpaRepository<ArticleCat, Long>, JpaSpec
 	@Query("select o from ArticleCat o where o.catCode =:catCode")
 	ArticleCat getArticleCatByCatCode(@Param("catCode")String catCode);
 
+	@Transactional(readOnly = true)
+	@Query("select o from ArticleCat o where o.parent.catId =:parentCatId and o.catName =:catName")
+	ArticleCat checkSameLevelCatNameExists(@Param("parentCatId")Long parentCatId, @Param("catName")String catName);
+
+	@Transactional(readOnly = true)
+	@Query("select o from ArticleCat o where o.parent.catId =:parentCatId and o.catCode =:catCode")
+	ArticleCat checkSameLevelCatCodeExists(@Param("parentCatId")Long parentCatId, @Param("catCode")String catCode);
+	
+	@Transactional(readOnly = true)
+	@Query("select o from ArticleCat o where o.parent is null and o.catName =:catName")
+	ArticleCat checkTopLevelCatNameExists(@Param("catName")String catName);
+
+	@Transactional(readOnly = true)
+	@Query("select o from ArticleCat o where o.parent is null and o.catCode =:catCode")
+	ArticleCat checkTopLevelCatCodeExists(@Param("catCode")String catCode);
+
 }

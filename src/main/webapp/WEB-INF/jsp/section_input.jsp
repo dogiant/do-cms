@@ -169,17 +169,49 @@
 			        rules: {
 			        	"code":  {
 							required: true,
+							minlength: 3,
+		    				maxlength: 36,
+		    				remote:{
+	    						url : "api/section/checkCodeExists",
+	    						cache : false,
+	    						type: "post",
+	    				        contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    				        data: {
+	    				        	code: function() {
+	    				            	return $("#code").val();
+	    				          	}
+	    				        }
+		    				}
 						},
 						"name":  {
-							required: true
+							required: true,
+							minlength: 3,
+		    				maxlength: 36,
+		    				remote:{
+	    						url : "api/section/checkNameExists",
+	    						cache : false,
+	    						type: "post",
+	    				        contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    				        data: {
+	    				        	name: function() {
+	    				            	return $("#name").val();
+	    				          	}
+	    				        }
+		    				}
 						}
 					},
 					messages: {
 						"code":{
-							required:"请输入版块位置代码(英文)"
+							required:"请输入版块位置代码(英文)",
+							minlength: "请输入至少3位字符",
+	    					maxlength: "长度不能超过36字符",
+	    					remote: "此版块代码已曾存在"
 						},
 						"name":{
-							required:"请输入版块位置名称"
+							required:"请输入版块位置名称",
+							minlength: "请输入至少3位字符",
+	    					maxlength: "长度不能超过36字符",
+	    					remote: "此版块名称已曾存在"
 						}
 					},
 			        errorClass: 'help-block',

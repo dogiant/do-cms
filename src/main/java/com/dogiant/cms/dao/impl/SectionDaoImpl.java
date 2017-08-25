@@ -58,6 +58,11 @@ public class SectionDaoImpl implements SectionDao {
 	public Section getSectionByCode(String code) {
 		return sectionRepo.getSectionByCode(code);
 	}
+	
+	@Override
+	public Section getSectionByName(String name) {
+		return sectionRepo.getSectionByName(name);
+	}
 
 	@Override
 	public Page<Section> getPagedSection(Integer start, Integer length, String orderName, String orderDir,
