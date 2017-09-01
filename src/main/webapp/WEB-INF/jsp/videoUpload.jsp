@@ -71,14 +71,6 @@
 														</p>
 													</div>
 												</div>
-												<div class="control-group">
-													<label for="name" class="control-label">视频栏目</label>
-													<div class="controls">
-														<select name="catId" id="catId">
-															<option value="1">顶级栏目</option>
-														</select>
-													</div>
-												</div>
 
 												<div class="control-group">
 													<label for="name" class="control-label">视频名称</label>
@@ -177,7 +169,6 @@
 	//持久化视频id、url
 	function saveVideoInfo(fileId,url){
 		var video = {
-				catId:$("#catId").val(),
 				videoName:$("#videoName").val(),
 				keywords:$("#keywords").val(),
 				videoDesc:$("#videoDesc").val(),
@@ -228,7 +219,7 @@
 	};
 
 	/** 
-	 * 示例1：直接上传视频
+	 * 直接上传视频
 	**/
 	$('#uploadVideoNow-file').on('change', function (e) {
 		var num = addUploaderMsgBox('hasVideo');
@@ -297,7 +288,7 @@
 
 
 	/** 
-	 * 示例2：上传视频+封面
+	 * 上传视频+封面
 	**/
 	var videoFileList = [];
 	var coverFileList = [];
@@ -389,14 +380,10 @@
 	$('#uploadFile').on('click', function () {
 		var secretId = $('#secretId').val();
 		var secretKey = $('#secretKey').val();
-		var catId = $("#catId").val();
 		var videoName = $("#videoName").val();
 		var keywords = $("#keywords").val();
 		var videoDesc = $("#videoDesc").val();
 		var msg = "";
-		if(catId==null||catId==""){
-			msg+="视频栏目是必选项,";
-		}
 		if(videoName==null||videoName==""){
 			msg+="视频名称是必填项,";
 		}
@@ -416,7 +403,7 @@
 	});
 
 	/** 
-	 * 示例3：直修改封面
+	 * 直修改封面
 	**/
 	$('#changeCover-file').on('change', function (e) {
 		var num = addUploaderMsgBox('hasCover');

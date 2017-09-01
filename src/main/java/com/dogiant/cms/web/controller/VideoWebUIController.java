@@ -69,7 +69,6 @@ public class VideoWebUIController {
 		String url = request.getParameter("url");
 
 		Video video = new Video();
-		video.setCatId(Long.parseLong(catId));
 		video.setVideoName(videoName);
 		video.setKeywords(keywords);
 		video.setVideoDesc(videoDesc);

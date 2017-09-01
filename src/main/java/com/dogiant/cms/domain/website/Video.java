@@ -34,8 +34,6 @@ public class Video implements java.io.Serializable {
 	
 	private String videoDesc;
 	
-	private long catId;
-	
 	private String url;
 	
 	private Date ctime = new Date();
@@ -96,14 +94,6 @@ public class Video implements java.io.Serializable {
 		this.videoDesc = videoDesc;
 	}
 
-	@Column(name = "catId",nullable = false)
-	public long getCatId() {
-		return catId;
-	}
-
-	public void setCatId(long catId) {
-		this.catId = catId;
-	}
 
 	@Column(name = "url",nullable = false)
 	public String getUrl() {
