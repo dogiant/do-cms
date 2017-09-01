@@ -1,0 +1,14 @@
+package com.dogiant.cms.dao;
+
+import java.util.List;
+
+import com.dogiant.cms.domain.website.Video;
+
+public interface VideoDao {
+
+	void save(Video video);
+	
+	void delete(Video video);
+	
+	List<Video> getVideoList(Video video);
+}

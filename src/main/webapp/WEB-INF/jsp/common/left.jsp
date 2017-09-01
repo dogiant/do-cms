@@ -49,9 +49,9 @@
                     class="label label-inverse pull-right">2</span>
             </a>
             <ul class="collapse  <c:if test="${requestScope.menu=='video'}"> in</c:if>"  id="video-nav">
-                <li><a href="video_upload"><i class="icon-angle-right"></i> 视频上传</a></li>
+                <li><a href="uploadVedio"><i class="icon-angle-right"></i> 视频上传</a></li>
                 
-                <li><a href="video_list.do"><i class="icon-angle-right"></i> 视频列表</a></li>
+                <li><a href="videoList"><i class="icon-angle-right"></i> 视频列表</a></li>
             </ul>
         </li>
         
