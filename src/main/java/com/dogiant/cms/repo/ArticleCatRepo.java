@@ -23,6 +23,10 @@ public interface ArticleCatRepo extends JpaRepository<ArticleCat, Long>, JpaSpec
 	@Transactional(readOnly = true)
 	@Query("select o from ArticleCat o where o.catCode =:catCode")
 	ArticleCat getArticleCatByCatCode(@Param("catCode")String catCode);
+	
+	@Transactional(readOnly = true)
+	@Query("select o from ArticleCat o where o.catName =:catName")
+	ArticleCat getArticleCatByCatName(@Param("catName")String catName);
 
 	@Transactional(readOnly = true)
 	@Query("select o from ArticleCat o where o.parent.catId =:parentCatId and o.catName =:catName")

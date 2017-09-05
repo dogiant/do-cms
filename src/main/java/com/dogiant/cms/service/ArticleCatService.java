@@ -48,8 +48,8 @@ public interface ArticleCatService {
 	 */
 	ArticleCat getArticleCatByCatCode(String catCode);
 
-	ArticleCat checkSameLevelCatNameExists(Long parentCatId, String catName);
+	ArticleCat checkAllLevelCatNameExists(Long parentCatId, String catName);
 
-	ArticleCat checkSameLevelCatCodeExists(Long parentCatId, String catCode);
+	ArticleCat checkAllLevelCatCodeExists(Long parentCatId, String catCode);
 
 }

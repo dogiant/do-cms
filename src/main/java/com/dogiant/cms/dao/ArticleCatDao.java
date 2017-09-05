@@ -19,9 +19,11 @@ public interface ArticleCatDao {
 	void delete(Long id);
 
 	ArticleCat getArticleCatByCatCode(String catCode);
+	
+	ArticleCat getArticleCatByCatName(String catName);
 
-	ArticleCat checkSameLevelCatNameExists(Long parentCatId, String catName);
+	ArticleCat checkAllLevelCatNameExists(Long parentCatId, String catName);
 
-	ArticleCat checkSameLevelCatCodeExists(Long parentCatId, String catCode);
+	ArticleCat checkAllLevelCatCodeExists(Long parentCatId, String catCode);
 
 }

@@ -91,7 +91,7 @@ public class ArticleRestAPIController {
 		ArticleCat articleCat = null;
 		if (StringUtils.isNotBlank(catCode)) {
 			try {
-				articleCat = articleCatService.checkSameLevelCatCodeExists(parentCatId, catCode);
+				articleCat = articleCatService.checkAllLevelCatCodeExists(parentCatId, catCode);
 			} catch (Exception e) {
 				e.printStackTrace();
 				returnval = false;
@@ -139,7 +139,7 @@ public class ArticleRestAPIController {
 		ArticleCat articleCat = null;
 		if (StringUtils.isNotBlank(catName)) {
 			try {
-				articleCat = articleCatService.checkSameLevelCatNameExists(parentCatId, catName);
+				articleCat = articleCatService.checkAllLevelCatNameExists(parentCatId, catName);
 			} catch (Exception e) {
 				e.printStackTrace();
 				returnval = false;

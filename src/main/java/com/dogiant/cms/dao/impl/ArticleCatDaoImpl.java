@@ -49,21 +49,32 @@ public class ArticleCatDaoImpl implements ArticleCatDao {
 	public ArticleCat getArticleCatByCatCode(String catCode) {
 		return articleCatRepo.getArticleCatByCatCode(catCode);
 	}
-
+	
 	@Override
-	public ArticleCat checkSameLevelCatNameExists(Long parentCatId, String catName) {
-		if(parentCatId==null){
-			return articleCatRepo.checkTopLevelCatNameExists(catName);
-		}
-		return articleCatRepo.checkSameLevelCatNameExists(parentCatId,catName);
+	public ArticleCat getArticleCatByCatName(String catName) {
+		return articleCatRepo.getArticleCatByCatName(catName);
 	}
 
 	@Override
-	public ArticleCat checkSameLevelCatCodeExists(Long parentCatId, String catCode) {
-		if(parentCatId==null){
-			articleCatRepo.checkTopLevelCatCodeExists(catCode);
-		}
-		return articleCatRepo.checkSameLevelCatCodeExists(parentCatId,catCode);
+	public ArticleCat checkAllLevelCatNameExists(Long parentCatId, String catName) {
+		
+		return this.getArticleCatByCatName(catName);
+		
+//		if(parentCatId==null){
+//			return articleCatRepo.checkTopLevelCatNameExists(catName);
+//		}
+//		return articleCatRepo.checkSameLevelCatNameExists(parentCatId,catName);
+	}
+
+	@Override
+	public ArticleCat checkAllLevelCatCodeExists(Long parentCatId, String catCode) {
+		
+		return this.getArticleCatByCatCode(catCode);
+		
+//		if(parentCatId==null){
+//			articleCatRepo.checkTopLevelCatCodeExists(catCode);
+//		}
+//		return articleCatRepo.checkSameLevelCatCodeExists(parentCatId,catCode);
 	}
 	
 }

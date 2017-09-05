@@ -210,13 +210,13 @@
 							required:"请输入栏目名称",
 							minlength: "请输入至少3位字符",
 	    					maxlength: "长度不能超过36字符",
-	    					remote:"此类目名称在相同的层级下已经存在"
+	    					remote:"此类目名称已经存在"
 						},
 						"catCode":  {
 							required: "请输入栏目代码(英文名)",
 							minlength: "请输入至少3位字符",
 	    					maxlength: "长度不能超过128字符",
-	    					remote:"此类目代号在相同的层级下已经存在"
+	    					remote:"此类目代号已经存在"
 						},
 						"sortOrder":  {
 							number: "请输入一个数字排序值"
