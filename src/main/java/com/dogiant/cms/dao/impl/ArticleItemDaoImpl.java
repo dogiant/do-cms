@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.dogiant.api.dto.ArticleItemDTO;
 import com.dogiant.cms.dao.ArticleItemDao;
 import com.dogiant.cms.domain.dto.QueryResult;
 import com.dogiant.cms.domain.website.ArticleItem;
@@ -121,6 +122,16 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 	@Override
 	public ArticleItem getArticleItemValidDataById(Long id) {
 		return articleItemRepo.getArticleItemValidDataById(id);
+	}
+
+	@Override
+	public ArticleItem getArticleItemByCatCode(String code) {
+		return articleItemRepo.getArticleItemByCatCode(code);
+	}
+
+	@Override
+	public List<ArticleItem> getLatestPost(int number) {
+		return articleItemRepo.getLatestPost(number);
 	}
 
 }

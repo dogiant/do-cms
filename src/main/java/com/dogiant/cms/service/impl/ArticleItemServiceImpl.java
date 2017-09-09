@@ -1,5 +1,7 @@
 package com.dogiant.cms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,16 @@ public class ArticleItemServiceImpl implements ArticleItemService {
 	@Override
 	public ArticleItem getArticleItemValidDataById(Long id) {
 		return articleItemDao.getArticleItemValidDataById(id);
+	}
+
+	@Override
+	public ArticleItem getArticleItemByCatCode(String code) {
+		return articleItemDao.getArticleItemByCatCode(code);
+	}
+
+	@Override
+	public List<ArticleItem> getLatestPost(int number) {
+		return articleItemDao.getLatestPost(number);
 	}
 
 }

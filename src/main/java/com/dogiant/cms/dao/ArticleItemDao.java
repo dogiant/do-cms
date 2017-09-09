@@ -1,7 +1,10 @@
 package com.dogiant.cms.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
+import com.dogiant.api.dto.ArticleItemDTO;
 import com.dogiant.cms.domain.dto.QueryResult;
 import com.dogiant.cms.domain.website.ArticleItem;
 
@@ -17,5 +20,9 @@ public interface ArticleItemDao {
 	Page<ArticleItem> getPagedArticleItem(Integer pageNo, Integer pageRows, String catCode);
 	
 	ArticleItem getArticleItemValidDataById(Long id);
+
+	ArticleItem getArticleItemByCatCode(String code);
+
+	List<ArticleItem> getLatestPost(int number);
 
 }

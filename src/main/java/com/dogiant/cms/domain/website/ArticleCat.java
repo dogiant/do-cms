@@ -102,6 +102,22 @@ public class ArticleCat implements java.io.Serializable {
 		super();
 	}
 	
+	public ArticleCat(String catCode, String catName, int catType, Boolean isTextCat, String keywords, String catDesc,
+			Integer sortOrder, Boolean showInNav, Date ctime, Date mtime) {
+		super();
+		this.catCode = catCode;
+		this.catName = catName;
+		this.catType = catType;
+		this.isTextCat = isTextCat;
+		this.keywords = keywords;
+		this.catDesc = catDesc;
+		this.sortOrder = sortOrder;
+		this.showInNav = showInNav;
+		this.ctime = ctime;
+		this.mtime = mtime;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cat_id", unique = true, nullable = false)

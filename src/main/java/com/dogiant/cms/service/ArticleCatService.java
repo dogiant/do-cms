@@ -52,4 +52,6 @@ public interface ArticleCatService {
 
 	ArticleCat checkAllLevelCatCodeExists(Long parentCatId, String catCode);
 
+	List<ArticleCat> getCrumbsArticleCats(String code);
+
 }

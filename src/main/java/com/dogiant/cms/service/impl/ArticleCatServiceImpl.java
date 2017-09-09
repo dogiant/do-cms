@@ -1,8 +1,10 @@
 package com.dogiant.cms.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -102,6 +104,27 @@ public class ArticleCatServiceImpl implements ArticleCatService {
 	@Override
 	public ArticleCat checkAllLevelCatCodeExists(Long parentCatId, String catCode) {
 		return articleCatDao.checkAllLevelCatCodeExists(parentCatId, catCode);
+	}
+
+	@Override
+	public List<ArticleCat> getCrumbsArticleCats(String code) {
+		ArticleCat articleCat = articleCatDao.getArticleCatByCatCode(code);
+		List<ArticleCat> parents = new ArrayList<ArticleCat>();
+		listParentCats(parents,articleCat);
+		if(CollectionUtils.isNotEmpty(parents)){
+			Collections.reverse(parents); 
+		}
+		return parents;
+	}
+
+	private void listParentCats(List<ArticleCat> parents, ArticleCat articleCat) {
+		if (articleCat != null) {
+			parents.add(articleCat);
+			if (articleCat.getParent() != null) {
+				articleCat = articleCatDao.getArticleCatByCatCode(articleCat.getParent().getCatCode());
+				listParentCats(parents, articleCat);
+			}
+		}
 	}
 	
 }
