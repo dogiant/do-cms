@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,11 @@ public class CmsDataServiceImpl implements CmsDataService {
 		Section section = sectionService.getSectionByCode(code);
 		if (section != null) {
 			SectionDTO dto = new SectionDTO();
-			BeanUtils.copyProperties(section, dto);
+			try {
+				BeanUtils.copyProperties(section, dto);
+			} catch (BeansException e) {
+				e.printStackTrace();
+			}
 			return dto;
 		}
 		return null;
@@ -55,7 +60,11 @@ public class CmsDataServiceImpl implements CmsDataService {
 		ArticleCat articleCat = articleCatService.getArticleCatByCatCode(code);
 		if (articleCat != null) {
 			ArticleCatDTO dto = new ArticleCatDTO();
-			BeanUtils.copyProperties(articleCat, dto);
+			try {
+				BeanUtils.copyProperties(articleCat, dto);
+			} catch (BeansException e) {
+				e.printStackTrace();
+			}
 			return dto;
 		}
 		return null;
@@ -68,7 +77,11 @@ public class CmsDataServiceImpl implements CmsDataService {
 			List<ArticleCatDTO> list = new ArrayList<ArticleCatDTO>();
 			for (ArticleCat articleCat : parents) {
 				ArticleCatDTO dto = new ArticleCatDTO();
-				BeanUtils.copyProperties(articleCat, dto);
+				try {
+					BeanUtils.copyProperties(articleCat, dto);
+				} catch (BeansException e) {
+					e.printStackTrace();
+				}
 				list.add(dto);
 			}
 			return list;
@@ -81,20 +94,28 @@ public class CmsDataServiceImpl implements CmsDataService {
 		ArticleItem articleItem = articleItemService.getArticleItemByCatCode(code);
 		if (articleItem != null) {
 			ArticleItemDTO dto = new ArticleItemDTO();
-			BeanUtils.copyProperties(articleItem, dto);
+			try {
+				BeanUtils.copyProperties(articleItem, dto);
+			} catch (BeansException e) {
+				e.printStackTrace();
+			}
 			return dto;
 		}
 		return null;
 	}
 
 	@Override
-	public List<ArticleItemDTO> getLatestPost(int number) {
-		List<ArticleItem> list = articleItemService.getLatestPost(number);
+	public List<ArticleItemDTO> getLatestPost(int size) {
+		List<ArticleItem> list = articleItemService.getLatestPost(size);
 		if(CollectionUtils.isNotEmpty(list)){
 			List<ArticleItemDTO> dtoList= new ArrayList<ArticleItemDTO>();
 			for(ArticleItem articleItem: list){
 				ArticleItemDTO dto = new ArticleItemDTO();
-				BeanUtils.copyProperties(articleItem, dto);
+				try {
+					BeanUtils.copyProperties(articleItem, dto);
+				} catch (BeansException e) {
+					e.printStackTrace();
+				}
 				dtoList.add(dto);
 			}
 			return dtoList;
@@ -109,7 +130,11 @@ public class CmsDataServiceImpl implements CmsDataService {
 			List<ArticleItemDTO> dtoList = new ArrayList<ArticleItemDTO>();
 			for (ArticleItem articleItem : page.getContent()) {
 				ArticleItemDTO dto = new ArticleItemDTO();
-				BeanUtils.copyProperties(articleItem, dto);
+				try {
+					BeanUtils.copyProperties(articleItem, dto);
+				} catch (BeansException e) {
+					e.printStackTrace();
+				}
 				dtoList.add(dto);
 			}
 			PagedResult<ArticleItemDTO> pagedResult = new PagedResult<ArticleItemDTO>();
@@ -123,7 +148,21 @@ public class CmsDataServiceImpl implements CmsDataService {
 		ArticleItem articleItem = articleItemService.getArticleItemValidDataById(id);
 		if (articleItem != null) {
 			ArticleItemDTO dto = new ArticleItemDTO();
-			BeanUtils.copyProperties(articleItem, dto);
+			try {
+				BeanUtils.copyProperties(articleItem, dto);
+			} catch (BeansException e) {
+				e.printStackTrace();
+			}
+			ArticleCat articleCat = articleItem.getArticleCat();
+			if (articleCat != null) {
+				ArticleCatDTO articleCatDTO = new ArticleCatDTO();
+				try {
+					BeanUtils.copyProperties(articleCat, articleCat);
+				} catch (BeansException e) {
+					e.printStackTrace();
+				}
+				dto.setArticleCatDTO(articleCatDTO);
+			}
 			return dto;
 		}
 		return null;

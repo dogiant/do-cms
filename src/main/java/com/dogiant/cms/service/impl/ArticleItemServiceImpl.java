@@ -29,7 +29,12 @@ public class ArticleItemServiceImpl implements ArticleItemService {
 
 	@Override
 	public ArticleItem getArticleItemByCatCode(String code) {
-		return articleItemDao.getArticleItemByCatCode(code);
+		try {
+			return articleItemDao.getPagedArticleItem(1, 1, code).getContent().get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

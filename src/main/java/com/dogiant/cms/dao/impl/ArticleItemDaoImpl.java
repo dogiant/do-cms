@@ -18,7 +18,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.dogiant.api.dto.ArticleItemDTO;
 import com.dogiant.cms.dao.ArticleItemDao;
 import com.dogiant.cms.domain.dto.QueryResult;
 import com.dogiant.cms.domain.website.ArticleItem;
@@ -118,6 +117,24 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 			}
 		};
 	}
+	
+	private Specification<ArticleItem> getSpecification() {
+		return new Specification<ArticleItem>() {
+			@Override
+			public Predicate toPredicate(Root<ArticleItem> paramRoot,
+					CriteriaQuery<?> paramCriteriaQuery,
+					CriteriaBuilder paramCriteriaBuilder) {
+
+				List<Predicate> list = new ArrayList<Predicate>();
+				list.add(paramCriteriaBuilder.ge(
+						paramRoot.get("status").as(Number.class), 0));
+				
+				Predicate[] p = new Predicate[list.size()];
+				return paramCriteriaBuilder.and(list.toArray(p));
+			}
+		};
+	}
+	
 
 	@Override
 	public ArticleItem getArticleItemValidDataById(Long id) {
@@ -125,13 +142,15 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 	}
 
 	@Override
-	public ArticleItem getArticleItemByCatCode(String code) {
-		return articleItemRepo.getArticleItemByCatCode(code);
-	}
+	public List<ArticleItem> getLatestPost(int size) {
+		
+		Sort sort = new Sort(Direction.DESC, "ctime");
+		Pageable pageable = new PageRequest(1, size, sort);
+		
+		Specification<ArticleItem> spc = this.getSpecification();
+		
+		return articleItemRepo.findAll(spc, pageable).getContent();
 
-	@Override
-	public List<ArticleItem> getLatestPost(int number) {
-		return articleItemRepo.getLatestPost(number);
 	}
 
 }

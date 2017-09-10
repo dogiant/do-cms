@@ -1,7 +1,5 @@
 package com.dogiant.cms.repo;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -15,13 +13,5 @@ public interface ArticleItemRepo extends JpaRepository<ArticleItem, Long>, JpaSp
 	@Transactional(readOnly = true)
 	@Query("select o from ArticleItem o where o.id =:id and o.status>=0")
 	ArticleItem getArticleItemValidDataById(@Param("id")Long id);
-
-	@Transactional(readOnly = true)
-	@Query(value="select o from ArticleItem o where o.articleCat.catCode =:code and o.status>=0 order by o.ctime desc limit 1",nativeQuery=true)
-	ArticleItem getArticleItemByCatCode(@Param("code")String code);
-
-	@Transactional(readOnly = true)
-	@Query(value="select o from ArticleItem o where o.status>=0 order by o.ctme desc limit :number",nativeQuery=true)
-	List<ArticleItem> getLatestPost(@Param("number")int number);
 
 }

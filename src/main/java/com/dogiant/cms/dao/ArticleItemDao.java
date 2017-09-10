@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.dogiant.api.dto.ArticleItemDTO;
 import com.dogiant.cms.domain.dto.QueryResult;
 import com.dogiant.cms.domain.website.ArticleItem;
 
@@ -21,8 +20,6 @@ public interface ArticleItemDao {
 	
 	ArticleItem getArticleItemValidDataById(Long id);
 
-	ArticleItem getArticleItemByCatCode(String code);
-
-	List<ArticleItem> getLatestPost(int number);
+	List<ArticleItem> getLatestPost(int size);
 
 }
