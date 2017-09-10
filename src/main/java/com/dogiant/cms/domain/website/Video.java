@@ -38,6 +38,8 @@ public class Video implements java.io.Serializable {
 	
 	private Date ctime = new Date();
 	
+	private String ctimeStr;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -106,6 +108,14 @@ public class Video implements java.io.Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getCtimeStr() {
+		return ctimeStr;
+	}
+
+	public void setCtimeStr(String ctimeStr) {
+		this.ctimeStr = ctimeStr;
 	}
 
 }
