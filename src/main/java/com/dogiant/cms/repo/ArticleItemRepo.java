@@ -17,11 +17,11 @@ public interface ArticleItemRepo extends JpaRepository<ArticleItem, Long>, JpaSp
 	ArticleItem getArticleItemValidDataById(@Param("id")Long id);
 
 	@Transactional(readOnly = true)
-	@Query("select o from ArticleItem o where o.articleCat.catCode =:code and o.status>=0 order by o.ctme desc limit 1")
+	@Query(value="select o from ArticleItem o where o.articleCat.catCode =:code and o.status>=0 order by o.ctime desc limit 1",nativeQuery=true)
 	ArticleItem getArticleItemByCatCode(@Param("code")String code);
 
 	@Transactional(readOnly = true)
-	@Query("select o from ArticleItem o where o.status>=0 order by o.ctme desc limit :number")
+	@Query(value="select o from ArticleItem o where o.status>=0 order by o.ctme desc limit :number",nativeQuery=true)
 	List<ArticleItem> getLatestPost(@Param("number")int number);
 
 }
