@@ -157,7 +157,7 @@ public class CmsDataServiceImpl implements CmsDataService {
 			if (articleCat != null) {
 				ArticleCatDTO articleCatDTO = new ArticleCatDTO();
 				try {
-					BeanUtils.copyProperties(articleCat, articleCat);
+					BeanUtils.copyProperties(articleCat, articleCatDTO);
 				} catch (BeansException e) {
 					e.printStackTrace();
 				}

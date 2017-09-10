@@ -222,7 +222,7 @@ public class ArticleCat implements java.io.Serializable {
 		this.showInNav = showInNav;
 	}
 
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "parent_id")
 	public ArticleCat getParent() {
 		return parent;

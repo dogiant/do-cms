@@ -121,8 +121,8 @@ public class ArticleCatServiceImpl implements ArticleCatService {
 		if (articleCat != null) {
 			parents.add(articleCat);
 			if (articleCat.getParent() != null) {
-				articleCat = articleCatDao.getArticleCatByCatCode(articleCat.getParent().getCatCode());
-				listParentCats(parents, articleCat);
+				ArticleCat parent = articleCatDao.getArticleCatByCatCode(articleCat.getParent().getCatCode());
+				listParentCats(parents, parent);
 			}
 		}
 	}
