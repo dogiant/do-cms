@@ -167,6 +167,26 @@ public class CmsDataServiceImpl implements CmsDataService {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<ArticleItemDTO> getRecommendItem(int size){
+		List<ArticleItem> list = articleItemService.getLatestPost(size);
+		if(CollectionUtils.isNotEmpty(list)){
+			List<ArticleItemDTO> dtoList= new ArrayList<ArticleItemDTO>();
+			for(ArticleItem articleItem: list){
+				ArticleItemDTO dto = new ArticleItemDTO();
+				try {
+					BeanUtils.copyProperties(articleItem, dto);
+				} catch (BeansException e) {
+					e.printStackTrace();
+				}
+				dtoList.add(dto);
+			}
+			return dtoList;
+		}
+		return null;
+	}
+
 
 	
 }

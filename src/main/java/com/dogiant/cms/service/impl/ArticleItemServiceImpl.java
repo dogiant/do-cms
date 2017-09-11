@@ -41,5 +41,11 @@ public class ArticleItemServiceImpl implements ArticleItemService {
 	public List<ArticleItem> getLatestPost(int number) {
 		return articleItemDao.getLatestPost(number);
 	}
+	
+	@Override
+	public List<ArticleItem> getRecommendItem(int number) {
+		return articleItemDao.getRecommendItem(number);
+	}
 
+	
 }

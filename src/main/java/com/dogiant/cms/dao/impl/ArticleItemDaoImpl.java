@@ -145,12 +145,41 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 	public List<ArticleItem> getLatestPost(int size) {
 		
 		Sort sort = new Sort(Direction.DESC, "ctime");
-		Pageable pageable = new PageRequest(1, size, sort);
+		Pageable pageable = new PageRequest(0, size, sort);
 		
 		Specification<ArticleItem> spc = this.getSpecification();
 		
 		return articleItemRepo.findAll(spc, pageable).getContent();
 
+	}
+	
+	@Override
+	public List<ArticleItem> getRecommendItem(int size){
+		Sort sort = new Sort(Direction.DESC, "ctime");
+		Pageable pageable = new PageRequest(0, size, sort);
+		
+		Specification<ArticleItem> spc = this.getSpecificationRecommendItem();
+		
+		return articleItemRepo.findAll(spc, pageable).getContent();
+
+	}
+
+	
+	private Specification<ArticleItem> getSpecificationRecommendItem() {
+		return new Specification<ArticleItem>() {
+			@Override
+			public Predicate toPredicate(Root<ArticleItem> paramRoot,
+					CriteriaQuery<?> paramCriteriaQuery,
+					CriteriaBuilder paramCriteriaBuilder) {
+
+				List<Predicate> list = new ArrayList<Predicate>();
+				list.add(paramCriteriaBuilder.ge(
+						paramRoot.get("status").as(Number.class), 0));
+				list.add(paramCriteriaBuilder.equal(paramRoot.get("recommend").as(Boolean.class),true));
+				Predicate[] p = new Predicate[list.size()];
+				return paramCriteriaBuilder.and(list.toArray(p));
+			}
+		};
 	}
 
 }

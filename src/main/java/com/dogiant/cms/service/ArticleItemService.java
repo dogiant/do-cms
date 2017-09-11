@@ -16,4 +16,6 @@ public interface ArticleItemService {
 
 	public List<ArticleItem> getLatestPost(int number);
 	
+	public List<ArticleItem> getRecommendItem(int number);
+	
 }

@@ -21,5 +21,7 @@ public interface ArticleItemDao {
 	ArticleItem getArticleItemValidDataById(Long id);
 
 	List<ArticleItem> getLatestPost(int size);
+	
+	List<ArticleItem> getRecommendItem(int size);
 
 }
