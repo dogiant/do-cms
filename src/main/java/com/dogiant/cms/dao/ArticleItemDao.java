@@ -20,8 +20,8 @@ public interface ArticleItemDao {
 	
 	ArticleItem getArticleItemValidDataById(Long id);
 
-	List<ArticleItem> getLatestPost(int size);
+	List<ArticleItem> getLatestPost(List<String> catCodes, int size);
 	
-	List<ArticleItem> getRecommendItem(int size);
+	List<ArticleItem> getRecommendItems(List<String> catCodes, int size);
 
 }

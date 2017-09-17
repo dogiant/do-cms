@@ -28,9 +28,9 @@ public class ArticleItemServiceImpl implements ArticleItemService {
 	}
 
 	@Override
-	public ArticleItem getArticleItemByCatCode(String code) {
+	public ArticleItem getArticleItemByCatCode(String catCode) {
 		try {
-			return articleItemDao.getPagedArticleItem(1, 1, code).getContent().get(0);
+			return articleItemDao.getPagedArticleItem(1, 1, catCode).getContent().get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,13 +38,13 @@ public class ArticleItemServiceImpl implements ArticleItemService {
 	}
 
 	@Override
-	public List<ArticleItem> getLatestPost(int number) {
-		return articleItemDao.getLatestPost(number);
+	public List<ArticleItem> getLatestPost(List<String> catCodes, int size) {
+		return articleItemDao.getLatestPost(catCodes, size);
 	}
 	
 	@Override
-	public List<ArticleItem> getRecommendItem(int number) {
-		return articleItemDao.getRecommendItem(number);
+	public List<ArticleItem> getRecommendItems(List<String> catCodes, int size) {
+		return articleItemDao.getRecommendItems(catCodes, size);
 	}
 
 	

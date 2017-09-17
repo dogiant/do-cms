@@ -105,8 +105,8 @@ public class CmsDataServiceImpl implements CmsDataService {
 	}
 
 	@Override
-	public List<ArticleItemDTO> getLatestPost(int size) {
-		List<ArticleItem> list = articleItemService.getLatestPost(size);
+	public List<ArticleItemDTO> getLatestPost(List<String> catCodes,int size) {
+		List<ArticleItem> list = articleItemService.getLatestPost(catCodes, size);
 		if(CollectionUtils.isNotEmpty(list)){
 			List<ArticleItemDTO> dtoList= new ArrayList<ArticleItemDTO>();
 			for(ArticleItem articleItem: list){
@@ -169,8 +169,8 @@ public class CmsDataServiceImpl implements CmsDataService {
 	}
 	
 	@Override
-	public List<ArticleItemDTO> getRecommendItem(int size){
-		List<ArticleItem> list = articleItemService.getLatestPost(size);
+	public List<ArticleItemDTO> getRecommendItems(List<String> catCodes, int size){
+		List<ArticleItem> list = articleItemService.getRecommendItems(catCodes, size);
 		if(CollectionUtils.isNotEmpty(list)){
 			List<ArticleItemDTO> dtoList= new ArrayList<ArticleItemDTO>();
 			for(ArticleItem articleItem: list){

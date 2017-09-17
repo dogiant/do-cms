@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -118,7 +119,7 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 		};
 	}
 	
-	private Specification<ArticleItem> getSpecification() {
+	private Specification<ArticleItem> getSpecification(final List<String> catCodes) {
 		return new Specification<ArticleItem>() {
 			@Override
 			public Predicate toPredicate(Root<ArticleItem> paramRoot,
@@ -128,6 +129,9 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 				List<Predicate> list = new ArrayList<Predicate>();
 				list.add(paramCriteriaBuilder.ge(
 						paramRoot.get("status").as(Number.class), 0));
+				Expression<String> exp = paramRoot.get("articleCat").get("catCode");
+				Predicate predicate = exp.in(catCodes);
+				list.add(predicate);
 				
 				Predicate[] p = new Predicate[list.size()];
 				return paramCriteriaBuilder.and(list.toArray(p));
@@ -142,30 +146,30 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 	}
 
 	@Override
-	public List<ArticleItem> getLatestPost(int size) {
+	public List<ArticleItem> getLatestPost(List<String> catCodes, int size) {
 		
 		Sort sort = new Sort(Direction.DESC, "ctime");
 		Pageable pageable = new PageRequest(0, size, sort);
 		
-		Specification<ArticleItem> spc = this.getSpecification();
+		Specification<ArticleItem> spc = this.getSpecification(catCodes);
 		
 		return articleItemRepo.findAll(spc, pageable).getContent();
 
 	}
 	
 	@Override
-	public List<ArticleItem> getRecommendItem(int size){
+	public List<ArticleItem> getRecommendItems(List<String> catCodes, int size){
 		Sort sort = new Sort(Direction.DESC, "ctime");
 		Pageable pageable = new PageRequest(0, size, sort);
 		
-		Specification<ArticleItem> spc = this.getSpecificationRecommendItem();
+		Specification<ArticleItem> spc = this.getSpecificationRecommendItems(catCodes);
 		
 		return articleItemRepo.findAll(spc, pageable).getContent();
 
 	}
 
 	
-	private Specification<ArticleItem> getSpecificationRecommendItem() {
+	private Specification<ArticleItem> getSpecificationRecommendItems(final List<String> catCodes) {
 		return new Specification<ArticleItem>() {
 			@Override
 			public Predicate toPredicate(Root<ArticleItem> paramRoot,
@@ -176,6 +180,10 @@ public class ArticleItemDaoImpl implements ArticleItemDao {
 				list.add(paramCriteriaBuilder.ge(
 						paramRoot.get("status").as(Number.class), 0));
 				list.add(paramCriteriaBuilder.equal(paramRoot.get("recommend").as(Boolean.class),true));
+				Expression<String> exp = paramRoot.get("articleCat").get("catCode");
+				Predicate predicate = exp.in(catCodes);
+				list.add(predicate);
+				
 				Predicate[] p = new Predicate[list.size()];
 				return paramCriteriaBuilder.and(list.toArray(p));
 			}

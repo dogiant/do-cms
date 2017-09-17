@@ -12,10 +12,10 @@ public interface ArticleItemService {
 	
 	public ArticleItem getArticleItemValidDataById(Long id);
 
-	public ArticleItem getArticleItemByCatCode(String code);
+	public ArticleItem getArticleItemByCatCode(String catCode);
 
-	public List<ArticleItem> getLatestPost(int number);
+	public List<ArticleItem> getLatestPost(List<String> catCodes, int size);
 	
-	public List<ArticleItem> getRecommendItem(int number);
+	public List<ArticleItem> getRecommendItems(List<String> catCodes,int size);
 	
 }
