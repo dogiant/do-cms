@@ -155,6 +155,7 @@ public class SectionRestAPIController {
 		try {
 			Date now = new Date();
 			section.setCtime(sectionFromDB.getCtime());
+			section.setStatus(0);
 			section.setMtime(now);
 			sectionService.updateSection(section);
 		} catch (Exception e) {
