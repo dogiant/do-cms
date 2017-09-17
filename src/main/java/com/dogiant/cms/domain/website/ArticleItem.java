@@ -197,7 +197,7 @@ public class ArticleItem {
 	@Transient
 	public String getTopCover(){
 		if(StringUtils.isNotEmpty(coverPicUrl)){
-			return coverPicUrl.substring(0, coverPicUrl.lastIndexOf(".")) + "_360" + coverPicUrl.substring(coverPicUrl.lastIndexOf("."));
+			return coverPicUrl.substring(0, coverPicUrl.lastIndexOf(".")) + coverPicUrl.substring(coverPicUrl.lastIndexOf("."));
 		}
 		return coverPicUrl;
 	}
@@ -209,7 +209,7 @@ public class ArticleItem {
 	@Transient
 	public String getNormalThumbnail(){
 		if(StringUtils.isNotEmpty(coverPicUrl)){
-			return coverPicUrl.substring(0, coverPicUrl.lastIndexOf(".")) + "_200" + coverPicUrl.substring(coverPicUrl.lastIndexOf("."));
+			return coverPicUrl.substring(0, coverPicUrl.lastIndexOf(".")) + coverPicUrl.substring(coverPicUrl.lastIndexOf("."));
 		}
 		return coverPicUrl;
 	}
