@@ -6,7 +6,7 @@
 	<groupId>com.dogiant.cms</groupId>
 	<artifactId>do-cms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>do-cms</name>
 	<description>do-cms project by Spring Boot</description>
